@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1358292696 source:c:\users\bruno\desktop\tudo\programacao\c++\codeblocks\sdl\pong\main.cpp
+	"SDL/SDL.h"
+	<cstdlib>
+	<ctime>
+
