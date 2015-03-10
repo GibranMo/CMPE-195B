@@ -11,7 +11,7 @@
 
 #include <vector>
 #include <string>
-#include "SPlayer.h"
+#include "Player.h"
 #include <map>
 
 using namespace std;
@@ -19,15 +19,14 @@ class Team
 {
 private:
     string name;
-    map <string, SPlayer *> listOfPlayers;
+    map <string, Player *> listOfPlayers;
     
 public:
     
-    Team (map<string, SPlayer *> list);
+    Team (map<string, Player *> list);
     Team (){};
-    void initialSetUp433();
     
-    SPlayer * getPlayer(string name);
+    Player * getPlayer(string name);
     
     
 };

@@ -6,28 +6,26 @@
 //  Copyright (c) 2015 Gibran Morales. All rights reserved.
 //
 
-#include "SPlayer.h"
+#include "Player.h"
 #include <vector>
 #include <iostream>
 #include "Team.h"
 
 
-SPlayer::SPlayer(string n)
+Player::Player(string n)
 {
     name = n;
 }
 
-string SPlayer::getName()
+string Player::getName()
 {
     return name;
 }
 
-void SPlayer::setAreaPosition(int w, int x, int y, int z)
+void Player::setAreaPosition(int w, int x, int y, int z)
 {
-
     posUL = w;
     posUR = x;
     posLL = y;
     posLR = z;
-
 }

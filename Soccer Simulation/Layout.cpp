@@ -8,7 +8,7 @@
 
 #include "Layout.h"
 #include "Team.h"
-#include "SPlayer.h"
+#include "Player.h"
 #include <vector>
 
 using namespace std;
@@ -24,5 +24,19 @@ Layout::Layout(Team * homeT, Team * awayT)
     
     cout << "hereererere" << endl;
 }
+
+
+void Layout::initialSetUp433()
+{
+    
+    Player* daniAlves = homeTeam->getPlayer("Dani Alves");
+    
+    daniAlves->setAreaPosition(10, 20, 30, 40);
+    
+}
+
+
+
+
 
 

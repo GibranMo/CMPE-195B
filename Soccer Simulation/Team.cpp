@@ -11,26 +11,19 @@
 
 using namespace std;
 
-Team::Team (map<string, SPlayer*> list)
+Team::Team (map<string, Player*> list)
 {
 
     listOfPlayers = list;
 
 }
 
-SPlayer* Team::getPlayer (string name)
+Player* Team::getPlayer (string name)
 {
     return listOfPlayers[name];
     
 }
 
-void Team::initialSetUp433()
-{
-    
-    SPlayer* daniAlves = Team::getPlayer("Dani Alves");
-    
-    daniAlves->setAreaPosition(10, 20, 30, 40);
-    
-}
+void Team::
 
 

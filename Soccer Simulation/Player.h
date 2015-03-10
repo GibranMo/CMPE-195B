@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Gibran Morales. All rights reserved.
 //
 
-#ifndef Soccer1_SPlayer_h
-#define Soccer1_SPlayer_h
+#ifndef Soccer1_Player_h
+#define Soccer1_Player_h
 
 #include <string>
 using namespace std;
 
-class SPlayer
+class Player
 {
 private:
     string name;
@@ -40,7 +40,7 @@ private:
      */
     
 public:
-    SPlayer(string n);
+    Player(string n);
     void move(int x, int y); //
     void stop();
     void rotate(float degrees);

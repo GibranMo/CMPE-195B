@@ -11,7 +11,7 @@
 
 #include <vector>
 #include <iostream>
-#include "SPlayer.h"
+#include "Player.h"
 #include "Team.h"
 
 using namespace std;
@@ -25,6 +25,8 @@ class Layout
     public:
     
     Layout(Team * homeT, Team * awayT);
+    void initialSetUp433();
+
     //Layout(){};
     
     
