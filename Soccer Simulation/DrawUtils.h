@@ -18,6 +18,8 @@ void glDrawSprite(GLuint tex, int x, int y, int w, int h);
 
 void glDrawSprite2(GLuint tex, int x, int y, int w, int h);
 
+void glDrawSprite3(GLuint tex, int x, int y, int w, int h);
+
 
 
 #endif /* defined(__Soccer_Simulation__DrawUtils__) */

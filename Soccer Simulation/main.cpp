@@ -191,6 +191,7 @@ int main(void)
         
         if (playing){
             // start the game draw graphics (players & ball & gameplay background)
+<<<<<<< Updated upstream
             glDrawSprite(fieldTex, 0, 0, 1150, 700);
             
             map<string, Player*>* map = homeTeam.getPlayers();
@@ -200,6 +201,11 @@ int main(void)
                 glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
                               it->second->getX(), it->second->getY(), 20, 20);
             }
+=======
+            glDrawSprite(fieldTex, 0, 0, screenW, screenH);
+            glDrawSprite2(glTexImageTGAFile("images/1.tga", 0, 0), screenW/2, screenH/2, 100, 100);
+            
+>>>>>>> Stashed changes
         }
         
         //PHYSICS

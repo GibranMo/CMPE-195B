@@ -24,6 +24,7 @@ Player* Team::getPlayer (string name)
     
 }
 
+<<<<<<< Updated upstream
 map<string, Player*>* Team::getPlayers ()
 {
     return &listOfPlayers;
@@ -36,5 +37,7 @@ void Team::setUp()
     
     
 }
+=======
+>>>>>>> Stashed changes
 
 
