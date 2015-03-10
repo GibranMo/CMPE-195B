@@ -36,6 +36,7 @@ int screenH = 700;
 
 int main(void)
 {
+    cout << "DFDFD";
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         return 1;
