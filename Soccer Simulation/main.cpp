@@ -69,11 +69,11 @@ int main(void)
     int quit = 0;
     //Setup teams
     map <string, Player *> listOfPlayers;
-    Player p1("A", 100, screenH/2);
+    Player p1("A", 10, screenH/2);
     listOfPlayers[p1.getName()] = &p1;
-    Player p2("B", 100, screenH/2 + 10);
+    Player p2("B", 100, screenH/2 + 100);
     listOfPlayers[p2.getName()] = &p2;
-    Player p3("C", 100, screenH/2 + 300);
+    Player p3("C", 100, screenH/2 + 200);
     listOfPlayers[p3.getName()] = &p3;
     Player p4("D", 100, screenH/2 - 100);
     listOfPlayers[p4.getName()] = &p4;
@@ -191,7 +191,6 @@ int main(void)
         
         if (playing){
             // start the game draw graphics (players & ball & gameplay background)
-<<<<<<< Updated upstream
             glDrawSprite(fieldTex, 0, 0, 1150, 700);
             
             map<string, Player*>* map = homeTeam.getPlayers();
@@ -201,11 +200,14 @@ int main(void)
                 glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
                               it->second->getX(), it->second->getY(), 20, 20);
             }
-=======
-            glDrawSprite(fieldTex, 0, 0, screenW, screenH);
-            glDrawSprite2(glTexImageTGAFile("images/1.tga", 0, 0), screenW/2, screenH/2, 100, 100);
             
->>>>>>> Stashed changes
+            map = awayTeam.getPlayers();
+            
+            for (std::map<string,Player*>::iterator it=map->begin(); it!=map->end(); ++it){
+                
+                glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
+                             it->second->getX(), it->second->getY(), 20, 20);
+            }
         }
         
         //PHYSICS

@@ -141,30 +141,3 @@ void glDrawSprite2(GLuint tex, int x, int y, int w, int h)
     glRotatef(-30,0,0,1);
     glTranslatef(-x, y, 0);
 }
-
-
-void glDrawSprite3(GLuint tex, int x, int y, int w, int h)
-{
-    
-    glTranslatef(x, -y, 0);
-    glRotatef(30, 0, 0, 1);
-    
-    
-    glBegin(GL_QUADS);
-    {
-        glColor3ub(255, 255, 255);
-        glTexCoord2f(0, 1);
-        glVertex2i(x, y);
-        glTexCoord2f(1, 1);
-        glVertex2i(x + w, y);
-        glTexCoord2f(1, 0);
-        glVertex2i(x + w, y + h);
-        glTexCoord2f(0, 0);
-        glVertex2i(x, y + h);
-    }
-    glEnd();
-    
-    glRotatef(-30,0,0,1);
-    glTranslatef(-x, y, 0);
-}
-
