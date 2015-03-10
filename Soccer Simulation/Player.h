@@ -34,20 +34,23 @@ private:
     int posLL; //lower left
     int posLR; //lower right
     
+    int x;
+    int y;
+    
     /*
      A bunch of other attributs like all the skills from fifa.
      
      */
     
 public:
-    Player(string n);
+    Player(string n, int xp, int yp);
     void move(int x, int y); //
     void stop();
     void rotate(float degrees);
     int getYPos();
     int getXPos();
     
-    int setPos(int x, int y);
+    void setPos(int xp, int yp);
     /*
      For clarity, the use of this method basically indicates that no one is in possesion after the ball.  
      The main function of this method is to use the move() method in Player.
@@ -55,6 +58,8 @@ public:
     void goAfterLooseBall();
     void setAreaPosition(int w, int x, int y, int z);
     string getName();
+    int getX();
+    int getY();
     
     void passBall();
     void shootBall();

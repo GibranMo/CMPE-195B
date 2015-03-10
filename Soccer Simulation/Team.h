@@ -25,8 +25,9 @@ public:
     
     Team (map<string, Player *> list);
     Team (){};
-    
+    void setUp();
     Player * getPlayer(string name);
+    map<string, Player*>* getPlayers();
     
     
 };

@@ -28,10 +28,10 @@ Layout::Layout(Team * homeT, Team * awayT)
 
 void Layout::initialSetUp433()
 {
+    homeTeam->getPlayer("A")->setAreaPosition(10, 20, 30, 40);
+
     
-    Player* daniAlves = homeTeam->getPlayer("Dani Alves");
-    
-    daniAlves->setAreaPosition(10, 20, 30, 40);
+
     
 }
 

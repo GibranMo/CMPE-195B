@@ -24,6 +24,17 @@ Player* Team::getPlayer (string name)
     
 }
 
-void Team::
+map<string, Player*>* Team::getPlayers ()
+{
+    return &listOfPlayers;
+    
+}
+
+void Team::setUp()
+{
+
+    
+    
+}
 
 
