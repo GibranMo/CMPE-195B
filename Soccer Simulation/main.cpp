@@ -36,7 +36,6 @@ int screenH = 700;
 
 int main(void)
 {
-    cout << "DFDFD";
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         return 1;
@@ -70,23 +69,23 @@ int main(void)
     int quit = 0;
     //Setup teams
     map <string, Player *> listOfPlayers;
-    Player p1("A", 10, screenH/2);
+    Player p1("A", 50, screenH/2);
     listOfPlayers[p1.getName()] = &p1;
-    Player p2("B", 100, screenH/2 + 100);
+    Player p2("B", 250, screenH/2 + 100);
     listOfPlayers[p2.getName()] = &p2;
-    Player p3("C", 100, screenH/2 + 200);
+    Player p3("C", 250, screenH/2 + 200);
     listOfPlayers[p3.getName()] = &p3;
-    Player p4("D", 100, screenH/2 - 100);
+    Player p4("D", 250, screenH/2 - 100);
     listOfPlayers[p4.getName()] = &p4;
-    Player p5("E", 100, screenH/2 - 300);
+    Player p5("E", 250, screenH/2 - 200);
     listOfPlayers[p5.getName()] = &p5;
-    Player p6("F", 300, screenH/2 - 100);
+    Player p6("F", 400, screenH/2 - 100);
     listOfPlayers[p6.getName()] = &p6;
-    Player p7("G", 300, screenH/2 + 100);
+    Player p7("G", 400, screenH/2 + 100);
     listOfPlayers[p7.getName()] = &p7;
-    Player p8("H", 300, screenH/2);
+    Player p8("H", 400, screenH/2);
     listOfPlayers[p8.getName()] = &p8;
-    Player p9("I", 500, screenH/2);
+    Player p9("I", 450, screenH/2);
     listOfPlayers[p9.getName()] = &p9;
     Player p10("J", screenW/2, screenH/2 + 10);
     listOfPlayers[p10.getName()] = &p10;
@@ -95,28 +94,28 @@ int main(void)
     Team homeTeam(listOfPlayers);
     
     map <string, Player *> listOfPlayers2;
-    Player p21("Z", screenW - 10, screenH/2);
-    listOfPlayers[p21.getName()] = &p21;
-    Player p22("Y", screenW - 100, screenH/2 + 100);
-    listOfPlayers[p22.getName()] = &p22;
-    Player p23("X", screenW - 100, screenH/2 + 200);
-    listOfPlayers[p23.getName()] = &p23;
-    Player p24("W", screenW - 100, screenH/2 - 100);
-    listOfPlayers[p24.getName()] = &p24;
-    Player p25("V", screenW - 100, screenH/2 - 200);
-    listOfPlayers[p25.getName()] = &p25;
-    Player p26("U", screenW - 300, screenH/2 - 100);
-    listOfPlayers[p26.getName()] = &p26;
-    Player p27("T", screenW - 300, screenH/2 + 200);
-    listOfPlayers[p27.getName()] = &p27;
-    Player p28("S", screenW - 300, screenH/2);
-    listOfPlayers[p28.getName()] = &p28;
+    Player p21("Z", screenW - 50, screenH/2);
+    listOfPlayers2[p21.getName()] = &p21;
+    Player p22("Y", screenW - 250, screenH/2 + 100);
+    listOfPlayers2[p22.getName()] = &p22;
+    Player p23("X", screenW - 250, screenH/2 + 200);
+    listOfPlayers2[p23.getName()] = &p23;
+    Player p24("W", screenW - 250, screenH/2 - 100);
+    listOfPlayers2[p24.getName()] = &p24;
+    Player p25("V", screenW - 250, screenH/2 - 200);
+    listOfPlayers2[p25.getName()] = &p25;
+    Player p26("U", screenW - 400, screenH/2 - 100);
+    listOfPlayers2[p26.getName()] = &p26;
+    Player p27("T", screenW - 400, screenH/2 + 200);
+    listOfPlayers2[p27.getName()] = &p27;
+    Player p28("S", screenW - 400, screenH/2);
+    listOfPlayers2[p28.getName()] = &p28;
     Player p29("R", screenW - 500, screenH/2);
-    listOfPlayers[p29.getName()] = &p29;
+    listOfPlayers2[p29.getName()] = &p29;
     Player p210("Q", screenW - 500, screenH/2 + 200);
-    listOfPlayers[p210.getName()] = &p210;
+    listOfPlayers2[p210.getName()] = &p210;
     Player p211("P", screenW - 500, screenH/2 - 200);
-    listOfPlayers[p11.getName()] = &p211;
+    listOfPlayers2[p11.getName()] = &p211;
     Team awayTeam(listOfPlayers2);
     Layout layout(&homeTeam, &awayTeam);
     layout.initialSetUp433();
@@ -202,13 +201,17 @@ int main(void)
                               it->second->getX(), it->second->getY(), 20, 20);
             }
             
-            map = awayTeam.getPlayers();
+            map<string, Player*>* map2 = awayTeam.getPlayers();
             
-            for (std::map<string,Player*>::iterator it=map->begin(); it!=map->end(); ++it){
+            for (std::map<string,Player*>::iterator it=map2->begin(); it!=map2->end(); ++it){
                 
                 glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
                              it->second->getX(), it->second->getY(), 20, 20);
             }
+
+
+            
+
         }
         
         //PHYSICS
