@@ -30,11 +30,11 @@ using namespace std;
 
 class GamePlay
 {
-
+    
 private: Layout * layout;
     GLuint fieldTex;
- 
-
+    
+    
 public:
     GamePlay(Layout * l, GLuint ft);
     void DrawSprite();

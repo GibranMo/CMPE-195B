@@ -21,13 +21,11 @@ Team::Team (map<string, Player*> list)
 Player* Team::getPlayer (string name)
 {
     return listOfPlayers[name];
-    
 }
 
 map<string, Player*>* Team::getPlayers ()
 {
     return &listOfPlayers;
-    
 }
 
 void Team::setUp()

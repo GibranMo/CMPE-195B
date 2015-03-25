@@ -114,42 +114,6 @@ void glDrawSprite(GLuint tex, int x, int y, int w, int h)
         glVertex2i(x, y + h);
     }
     glEnd();
-    
-    
-    glColor3b(1.0, 1.0, 1.0);
-    glBegin(GL_LINES);
-    
-        //glVertex3f(45, 20, 0.0);
-        //glVertex3f(1105, 20, 0.0);
-    
-        glVertex3f(45, 185, 0.0);
-        glVertex3f(1105, 185, 0.0);
-    
-        glVertex3f(45, 350, 0.0);
-        glVertex3f(1105, 350, 0.0);
-    
-        glVertex3f(45, 515, 0.0);
-        glVertex3f(1105, 515, 0.0);
-    
-        /////
-    
-    glVertex3f(257, 20, 0.0);
-    glVertex3f(257, 680, 0.0);
-    
-    glVertex3f(469, 20, 0.0);
-    glVertex3f(469, 680, 0.0);
-    
-    glVertex3f(681, 20, 0.0);
-    glVertex3f(681, 680, 0.0);
-    
-    glVertex3f(893, 20, 0.0);
-    glVertex3f(893, 680, 0.0);
-    
-    
-    
-    
-    glEnd();
-
 }
 
 void glDrawSprite2(GLuint tex, int x, int y, int w, int h)
@@ -174,8 +138,6 @@ void glDrawSprite2(GLuint tex, int x, int y, int w, int h)
     }
     glEnd();
     
-    
-    
     glRotatef(-30,0,0,1);
     glTranslatef(-x, y, 0);
 }
@@ -186,12 +148,12 @@ void glDrawLines()
     //glClear(GL_COLOR_BUFFER_BIT);
     glColor3b(1.0, 1.0, 1.0);
     glBegin(GL_LINES);
-        glVertex3f(20, 20, 0.0);
-        glVertex3f(40, 40, 0.0);
-        //glVertex3f(0.2, 0.5, 0.0);
-        //glVertex3f(0.8, 0.5, 0.0);
-         //glVertex3f(0.2, 0.8, 0.0);
-         //glVertex3f(0.8, 0.8, 0.0);
+    glVertex3f(20, 20, 0.0);
+    glVertex3f(40, 40, 0.0);
+    //glVertex3f(0.2, 0.5, 0.0);
+    //glVertex3f(0.8, 0.5, 0.0);
+    //glVertex3f(0.2, 0.8, 0.0);
+    //glVertex3f(0.8, 0.8, 0.0);
     glEnd();
     glFlush();
     

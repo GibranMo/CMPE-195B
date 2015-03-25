@@ -11,10 +11,7 @@
 
 #include <string>
 #include <vector>
-#include<SDL2/SDL.h>
-#include<GL/glew.h>
-
-
+#include "DrawUtils.h"
 using namespace std;
 
 class Player
@@ -41,13 +38,11 @@ private:
     
     int x;
     int y;
-    
-    ////
-    
-    /* For drawing
-     */
+    int w;
+    int h;
+    int velX;
+    int velY;
     GLuint tex;
-    
     
     /*
      A bunch of other attributs like all the skills from fifa.
@@ -55,35 +50,34 @@ private:
      */
     
 public:
-    Player(string n, int xp, int yp, GLuint tex);
-    void move(int x, int y); //
-    void stop();
-    void rotate(float degrees);
-    int getYPos();
-    int getXPos();
-    vector <int> getPosArea ();
-    void setPos(int xp, int yp);
-    /*
-     For clarity, the use of this method basically indicates that no one is in possesion after the ball.  
-     The main function of this method is to use the move() method in Player.
-     */
-    void goAfterLooseBall();
-    void setAreaPosition(int w, int x, int y, int z);
-    string getName();
-    int getX();
+    //constructor
+    Player(string n, int xp, int yp, const char* image);
+    //getters / setters
     int getY();
+    int getX();
+    string getName();
+    int getVelX();
+    int getVelY();
+    GLuint getTex();
+    void setVelX(int vx);
+    void setVelY(int vy);
+    void setPos(int xp, int yp);
+    vector <int> getPosArea();
+
     
+    //actions
+    void rotate(float degrees);
+    void goAfterLooseBall();
+    void setAreaPosition(int x1, int x2, int y1, int y2);
     void passBall();
     void shootBall();
     void runWithBall();
-    void jogWithBll();
+    void jogWithBall();
     void dribble();
     void tackle();
-    
     void runBackwards();
-    
-    
-    
+    void stop();
+
 
 };
 

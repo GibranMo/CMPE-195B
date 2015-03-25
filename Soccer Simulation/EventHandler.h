@@ -10,7 +10,7 @@
 #define __Soccer_Simulation__EventHandler__
 
 enum Event_Type{
-    //    ET_BALL_TOPBOTTOM_COLLISION,
+        ET_BALL_TOPBOTTOM_COLLISION,
     
 };
 

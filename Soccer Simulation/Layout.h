@@ -18,13 +18,13 @@ using namespace std;
 
 class Layout
 {
-    private:
+private:
     Team * homeTeam;
     Team * awayTeam;
     Player * playerHasBall;
     
     
-    public:
+public:
     
     Layout(Team * homeT, Team * awayT);
     void initialSetUp433();

@@ -12,14 +12,13 @@
 #include<SDL2/SDL.h>
 #include<GL/glew.h>
 
-GLuint glTexImageTGAFile(const char* filename, int* outWidth, int* outHeight);
+GLuint glTexImageTGAFile(const char* filename, int* outWidth = 0, int* outHeight = 0);
 
 void glDrawSprite(GLuint tex, int x, int y, int w, int h);
 
 void glDrawSprite2(GLuint tex, int x, int y, int w, int h);
 
 void glDrawLines();
-
 
 #endif /* defined(__Soccer_Simulation__DrawUtils__) */
 

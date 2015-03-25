@@ -9,15 +9,15 @@
 #include "Player.h"
 #include <vector>
 #include <iostream>
-#include "Team.h"
 
-
-Player::Player(string n, int xp, int yp, GLuint texture)
+Player::Player(string n, int xp, int yp, const char* image)
 {
     name = n;
     x = xp;
     y = yp;
-    tex = texture;
+    velY = 0;
+    velX = 0;
+    tex = glTexImageTGAFile(image);
 }
 
 string Player::getName()
@@ -25,22 +25,12 @@ string Player::getName()
     return name;
 }
 
-/*
-    x
-    |------------------>
-y   |
-    |
-    |
-    V
-*/
-
-// left most, right most, upper most, lower most
 void Player::setAreaPosition(int x1, int x2, int y1, int y2)
 {
-    posX1 = x1;
-    posX2 = x2;
-    posY1= y1;
-    posY2 = y2;
+//    posX1 = x1;
+//    posX2 = x2;
+//    posY1 = y1;
+//    posY2 = y2;
 }
 
 vector <int> Player:: getPosArea()
@@ -56,8 +46,7 @@ vector <int> Player:: getPosArea()
     
 }
 
-void Player::setPos( int xp, int yp)
-{
+void Player::setPos( int xp, int yp){
     x = xp;
     y = yp;
 }
@@ -69,3 +58,25 @@ int Player::getX(){
 int Player::getY(){
     return y;
 }
+
+int Player::getVelX(){
+    return velX;
+}
+
+int Player::getVelY(){
+    return velY;
+}
+
+void Player::setVelX(int vx){
+    velX = vx;
+}
+
+void Player::setVelY(int vy){
+    velY = vy;
+}
+
+GLuint Player::getTex(){
+    return tex;
+}
+
+
