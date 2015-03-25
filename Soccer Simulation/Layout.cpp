@@ -46,7 +46,28 @@ void Layout::initialSetUp433()
     homeTeam->getPlayer("J")->setAreaPosition(681, 1105, 185, 515 ); // Center Forward (CF)
     homeTeam->getPlayer("K")->setAreaPosition(641, 1105, 350, 680 ); // Right Forward (CF)
     
+   
+    //Away Team
     
+    //Skip goalie, 'Z'
+    
+    //x1, x2, y1, y2 (where x1 is leftmost, y1 uppermost )
+    awayTeam->getPlayer("Y")->setAreaPosition(1105, 681, 20, 350 ); //This guy is the left back (LB), and his team attacks right
+    awayTeam->getPlayer("X")->setAreaPosition(1105, 681, 185, 515 ); //Left Center Back (LCB)
+    awayTeam->getPlayer("W")->setAreaPosition(1105, 681, 185, 515 ); //Right Center Back (RCB)
+    awayTeam->getPlayer("V")->setAreaPosition(1105, 681, 350, 680 );  //Right Back (RB)
+    
+    
+    awayTeam->getPlayer("U")->setAreaPosition(787, 363, 20, 380 ); //Left Midfielder (LM)
+    awayTeam->getPlayer("T")->setAreaPosition(893, 257, 185, 515 ); //Center Midfeidlder (CM)
+    awayTeam->getPlayer("S")->setAreaPosition(787, 363, 320, 680 ); //Right Midfielder
+    
+    // 681 - 40 = 641
+    awayTeam->getPlayer("R")->setAreaPosition(509, 45, 20, 350 ); // Left Forward (LF)
+    awayTeam->getPlayer("Q")->setAreaPosition(469, 45, 185, 515 ); // Center Forward (CF)
+    awayTeam->getPlayer("P")->setAreaPosition(509, 45, 350, 680 ); // Right Forward (CF)
+    
+
     
     
 }
