@@ -36,6 +36,8 @@ int screenH = 700;
 
 int main(void)
 {
+    
+    
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         return 1;
@@ -64,10 +66,9 @@ int main(void)
     glEnable(GL_ALPHA_TEST);
     glAlphaFunc(GL_GREATER, 0.04);
     
-    
-    //Setup
     int quit = 0;
-    //Setup teams
+    //Setup: Creating the Players and setting their initial coordinates
+    
     map <string, Player *> listOfPlayers;
     Player p1("A", 50, screenH/2);
     listOfPlayers[p1.getName()] = &p1;
@@ -124,13 +125,13 @@ int main(void)
     //EventHandling.cpp
     initEventQueue();
     //set up textures and game
-
+    
     GLuint fieldTex;
-
+    
     int outWidth = 0;
     int outHeight = 0;
     fieldTex = glTexImageTGAFile("images/soccer.tga", &outWidth, &outHeight);
-
+    
     
     bool playing = false;
     
@@ -168,7 +169,7 @@ int main(void)
         //Handle game state. Playing, outside, foul. Start the game set up
         if (kbState[SDL_SCANCODE_SPACE]){
             playing = true;
-
+            
         }
         
         
@@ -184,34 +185,36 @@ int main(void)
         
         
         // Game logic
-
+        
         //DRAWING
         glClearColor(0, 0, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT);
         
+        map<string, Player*>* map2 = awayTeam.getPlayers();;
+        map<string, Player*>* map = homeTeam.getPlayers();
         if (playing){
             // start the game draw graphics (players & ball & gameplay background)
             glDrawSprite(fieldTex, 0, 0, 1150, 700);
             
-            map<string, Player*>* map = homeTeam.getPlayers();
+            //map<string, Player*>* map = homeTeam.getPlayers();
             
-            for (std::map<string,Player*>::iterator it=map->begin(); it!=map->end(); ++it){
-
+            for (std::map<string,Player*>::iterator it=map->begin(); it!=map->end(); ++it){ //iterating over the hometeam map
+                
+                
                 glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
-                              it->second->getX(), it->second->getY(), 20, 20);
+                             it->second->getX(), it->second->getY(), 20, 20); //Drawing the palyer
             }
             
-            map<string, Player*>* map2 = awayTeam.getPlayers();
             
             for (std::map<string,Player*>::iterator it=map2->begin(); it!=map2->end(); ++it){
                 
                 glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
                              it->second->getX(), it->second->getY(), 20, 20);
             }
-
-
             
-
+            //glDrawLines();
+            
+            
         }
         
         //PHYSICS
@@ -232,7 +235,7 @@ int main(void)
         //MOVEMENT and ANIMATION
         if (playing){
             //Ball movement & PLAYER movements, update positions
-
+            
             
         }
         

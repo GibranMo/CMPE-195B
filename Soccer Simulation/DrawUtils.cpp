@@ -141,3 +141,21 @@ void glDrawSprite2(GLuint tex, int x, int y, int w, int h)
     glRotatef(-30,0,0,1);
     glTranslatef(-x, y, 0);
 }
+
+void glDrawLines()
+{
+    
+    //glClear(GL_COLOR_BUFFER_BIT);
+    glColor3b(1.0, 1.0, 1.0);
+    glBegin(GL_LINES);
+    glVertex3f(20, 20, 0.0);
+    glVertex3f(40, 40, 0.0);
+    //glVertex3f(0.2, 0.5, 0.0);
+    //glVertex3f(0.8, 0.5, 0.0);
+    //glVertex3f(0.2, 0.8, 0.0);
+    //glVertex3f(0.8, 0.8, 0.0);
+    glEnd();
+    glFlush();
+    
+    
+}
