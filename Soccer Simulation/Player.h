@@ -10,6 +10,7 @@
 #define Soccer1_Player_h
 
 #include <string>
+#include <vector>
 using namespace std;
 
 class Player
@@ -24,15 +25,15 @@ private:
     
     
     /*
-     The following set of 4 points represent a rectangular area, which in turn 
+     The following set of 4 points represent a rectangular area, which in turn
      represents that represents the position of the player.
      He can go outside this area, but spends most of its time inside it
      */
     
-    int posUL; //upper left
-    int posUR; //upper right
-    int posLL; //lower left
-    int posLR; //lower right
+    int posX1; //right most
+    int posX2; //left most
+    int posY1; //upper most
+    int posY2; //lower most
     
     int x;
     int y;
@@ -49,10 +50,10 @@ public:
     void rotate(float degrees);
     int getYPos();
     int getXPos();
-    
+    vector <int> getPosArea ();
     void setPos(int xp, int yp);
     /*
-     For clarity, the use of this method basically indicates that no one is in possesion after the ball.  
+     For clarity, the use of this method basically indicates that no one is in possesion after the ball.
      The main function of this method is to use the move() method in Player.
      */
     void goAfterLooseBall();
@@ -72,7 +73,7 @@ public:
     
     
     
-
+    
 };
 
 #endif
