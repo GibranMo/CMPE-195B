@@ -12,11 +12,12 @@
 #include "Team.h"
 
 
-Player::Player(string n, int xp, int yp)
+Player::Player(string n, int xp, int yp, GLuint texture)
 {
     name = n;
     x = xp;
     y = yp;
+    tex = texture;
 }
 
 string Player::getName()
@@ -25,13 +26,13 @@ string Player::getName()
 }
 
 /*
- x
- |------------------>
- y   |
- |
- |
- V
- */
+    x
+    |------------------>
+y   |
+    |
+    |
+    V
+*/
 
 // left most, right most, upper most, lower most
 void Player::setAreaPosition(int x1, int x2, int y1, int y2)

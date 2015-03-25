@@ -21,7 +21,6 @@ void glDrawSprite2(GLuint tex, int x, int y, int w, int h);
 void glDrawLines();
 
 
-
 #endif /* defined(__Soccer_Simulation__DrawUtils__) */
 
 

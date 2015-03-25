@@ -14,7 +14,7 @@
 using namespace std;
 
 /*Home Team is Real Madrid. Away is Barcelona
- 
+
  
  */
 Layout::Layout(Team * homeT, Team * awayT)
@@ -43,16 +43,26 @@ void Layout::initialSetUp433()
     
     // 681 - 40 = 641
     homeTeam->getPlayer("I")->setAreaPosition(641, 1105, 20, 350 ); // Left Forward (LF)
-    homeTeam->getPlayer("J")->setAreaPosition(681, 1105, 185, 515 ); // Center Forward (CF)
+     homeTeam->getPlayer("J")->setAreaPosition(681, 1105, 185, 515 ); // Center Forward (CF)
     homeTeam->getPlayer("K")->setAreaPosition(641, 1105, 350, 680 ); // Right Forward (CF)
-    
-    
-    
-    
+
+
 }
 
+void Layout::hasBall(Player * p)
+{
+    
+    playerHasBall = p;
+}
 
+Team * Layout::getHomeTeam()
+{
 
+    return homeTeam;
+}
 
-
-
+Team * Layout::getAwayTeam()
+{
+    
+    return awayTeam;
+}

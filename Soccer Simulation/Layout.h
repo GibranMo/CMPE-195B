@@ -21,12 +21,16 @@ class Layout
     private:
     Team * homeTeam;
     Team * awayTeam;
+    Player * playerHasBall;
+    
     
     public:
     
     Layout(Team * homeT, Team * awayT);
     void initialSetUp433();
-
+    void hasBall(Player * p);
+    Team * getHomeTeam();
+    Team * getAwayTeam();
     //Layout(){};
     
     

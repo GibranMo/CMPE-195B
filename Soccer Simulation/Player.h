@@ -11,6 +11,10 @@
 
 #include <string>
 #include <vector>
+#include<SDL2/SDL.h>
+#include<GL/glew.h>
+
+
 using namespace std;
 
 class Player
@@ -25,7 +29,7 @@ private:
     
     
     /*
-     The following set of 4 points represent a rectangular area, which in turn
+     The following set of 4 points represent a rectangular area, which in turn 
      represents that represents the position of the player.
      He can go outside this area, but spends most of its time inside it
      */
@@ -38,13 +42,20 @@ private:
     int x;
     int y;
     
+    ////
+    
+    /* For drawing
+     */
+    GLuint tex;
+    
+    
     /*
      A bunch of other attributs like all the skills from fifa.
      
      */
     
 public:
-    Player(string n, int xp, int yp);
+    Player(string n, int xp, int yp, GLuint tex);
     void move(int x, int y); //
     void stop();
     void rotate(float degrees);
@@ -53,7 +64,7 @@ public:
     vector <int> getPosArea ();
     void setPos(int xp, int yp);
     /*
-     For clarity, the use of this method basically indicates that no one is in possesion after the ball.
+     For clarity, the use of this method basically indicates that no one is in possesion after the ball.  
      The main function of this method is to use the move() method in Player.
      */
     void goAfterLooseBall();
@@ -73,7 +84,7 @@ public:
     
     
     
-    
+
 };
 
 #endif
