@@ -17,11 +17,11 @@ using namespace std;
  
  
  */
-Layout::Layout(Team * homeT, Team * awayT)
+Layout::Layout(Team * homeT, Team * awayT, Ball * b)
 {
     homeTeam = homeT;
     awayTeam = awayT;
-    
+    ball = b;
     cout << "hereererere" << endl;
 }
 
@@ -76,7 +76,6 @@ void Layout::initialSetUp433()
 
 void Layout::hasBall(Player * p)
 {
-    
     playerHasBall = p;
 }
 
@@ -92,5 +91,92 @@ Team * Layout::getAwayTeam()
     return awayTeam;
 }
 
+Ball * Layout::getBall(){
+    return ball;
+}
 
+Player * Layout::hasBall(){
+    return playerHasBall;
+}
 
+vector <Player *> Layout::getTeamMatesWithin40(Player * p) {
+    string team = p->getTeamName();
+    vector<Player*> players;
+    
+    if(team == "homeTeam") {
+        ///map<string, Player *> * list = this->getHomeTeam();
+        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
+             it!=homeTeam->getPlayers()->end(); ++it ){
+            Player * p2 = it->second;
+            if(distance(p, p2) < 40){
+                players.push_back(p2);
+            }
+        }
+    }
+    else if(team == "awayTeam") {
+        ///map<string, Player *> * list = this->getHomeTeam();
+        for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
+             it!=awayTeam->getPlayers()->end(); ++it ){
+            Player * p2 = it->second;
+            if(distance(p, p2) < 40){
+                players.push_back(p2);
+            }
+        }
+    }
+    return players;
+}
+
+vector <Player *> Layout::getAvailablePlayers(Player * p){
+    
+    string team = p->getTeamName();
+    vector<Player*> players;
+    
+    if(team == "homeTeam") {
+        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
+             it!=homeTeam->getPlayers()->end(); ++it ){
+            Player * p1 = it->second;
+            bool available = true;
+            
+            for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
+                 it!=awayTeam->getPlayers()->end(); ++it ){
+                Player * p2 = it->second;
+                
+                if(distance(p1, p2) < 40){
+                    if(p2->getX() < ( ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() ) )
+                    available = false;
+                }
+            }
+            if(available)
+                players.push_back(p1);
+        }
+    }
+    else if(team == "awayTeam") {
+        for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
+             it!=awayTeam->getPlayers()->end(); ++it ){
+            Player * p1 = it->second;
+            bool available = true;
+            
+            for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
+                 it!=homeTeam->getPlayers()->end(); ++it ){
+                Player * p2 = it->second;
+                
+                if(distance(p1, p2) < 40){
+                    if(p2->getX() < ( ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() ) )
+                        available = false;
+                }
+            }
+            if(available)
+                players.push_back(p1);
+        }
+
+    }
+    return players;
+}
+
+int Layout::distance(Player * p1, Player * p2){
+    int x = p1->getX();
+    int y = p1->getY();
+    int p2X = p2->getX();
+    int p2Y = p2->getY();
+    return sqrt( (abs ((x - p2X) * (x - p2X)) + abs( ((y - p2Y) * (y - p2Y)))));
+}

@@ -26,6 +26,7 @@
 #include "Team.h"
 #include "Layout.h"
 #include "Ball.h"
+#include "GamePlay.h"
 #include <map>
 
 
@@ -68,70 +69,70 @@ int main(void)
     
     //Setup
     int quit = 0;
-    
     //Setup actors
     const char* filename = "images/1.tga";
     map <string, Player *> listOfPlayers;
-    Player p1("A", 50, screenH/2, filename);
+    Player p1("A", 50, screenH/2, filename, "homeTeam");
     listOfPlayers[p1.getName()] = &p1;
-    Player p2("B", 250, screenH/2 + 100, filename);
+    Player p2("B", 250, screenH/2 + 100, filename, "homeTeam");
     listOfPlayers[p2.getName()] = &p2;
-    Player p3("C", 250, screenH/2 + 200, filename);
+    Player p3("C", 250, screenH/2 + 200, filename, "homeTeam");
     listOfPlayers[p3.getName()] = &p3;
-    Player p4("D", 250, screenH/2 - 100, filename);
+    Player p4("D", 250, screenH/2 - 100, filename, "homeTeam");
     listOfPlayers[p4.getName()] = &p4;
-    Player p5("E", 250, screenH/2 - 200, filename);
+    Player p5("E", 250, screenH/2 - 200, filename, "homeTeam");
     listOfPlayers[p5.getName()] = &p5;
-    Player p6("F", 400, screenH/2 - 100, filename);
+    Player p6("F", 400, screenH/2 - 100, filename, "homeTeam");
     listOfPlayers[p6.getName()] = &p6;
-    Player p7("G", 400, screenH/2 + 100, filename);
+    Player p7("G", 400, screenH/2 + 100, filename, "homeTeam");
     listOfPlayers[p7.getName()] = &p7;
-    Player p8("H", 400, screenH/2, filename);
+    Player p8("H", 400, screenH/2, filename, "homeTeam");
     listOfPlayers[p8.getName()] = &p8;
-    Player p9("I", 450, screenH/2, filename);
+    Player p9("I", 450, screenH/2, filename, "homeTeam");
     listOfPlayers[p9.getName()] = &p9;
-    Player p10("J", screenW/2, screenH/2 + 10, filename);
+    Player p10("J", screenW/2, screenH/2 + 10, filename, "homeTeam");
     listOfPlayers[p10.getName()] = &p10;
-    Player p11("K", screenW/2, screenH/2, filename);
+    Player p11("K", screenW/2, screenH/2, filename, "homeTeam");
     listOfPlayers[p11.getName()] = &p11;
     Team homeTeam(listOfPlayers);
     
     map <string, Player *> listOfPlayers2;
-    Player p21("Z", screenW - 50, screenH/2, filename);
+    Player p21("Z", screenW - 50, screenH/2, filename, "awayTeam");
     listOfPlayers2[p21.getName()] = &p21;
-    Player p22("Y", screenW - 250, screenH/2 + 100, filename);
+    Player p22("Y", screenW - 250, screenH/2 + 100, filename, "awayTeam");
     listOfPlayers2[p22.getName()] = &p22;
-    Player p23("X", screenW - 250, screenH/2 + 200, filename);
+    Player p23("X", screenW - 250, screenH/2 + 200, filename, "awayTeam");
     listOfPlayers2[p23.getName()] = &p23;
-    Player p24("W", screenW - 250, screenH/2 - 100, filename);
+    Player p24("W", screenW - 250, screenH/2 - 100, filename, "awayTeam");
     listOfPlayers2[p24.getName()] = &p24;
-    Player p25("V", screenW - 250, screenH/2 - 200, filename);
+    Player p25("V", screenW - 250, screenH/2 - 200, filename, "awayTeam");
     listOfPlayers2[p25.getName()] = &p25;
-    Player p26("U", screenW - 400, screenH/2 - 100, filename);
+    Player p26("U", screenW - 400, screenH/2 - 100, filename, "awayTeam");
     listOfPlayers2[p26.getName()] = &p26;
-    Player p27("T", screenW - 400, screenH/2 + 200, filename);
+    Player p27("T", screenW - 400, screenH/2 + 200, filename, "awayTeam");
     listOfPlayers2[p27.getName()] = &p27;
-    Player p28("S", screenW - 400, screenH/2, filename);
+    Player p28("S", screenW - 400, screenH/2, filename, "awayTeam");
     listOfPlayers2[p28.getName()] = &p28;
-    Player p29("R", screenW - 500, screenH/2, filename);
+    Player p29("R", screenW - 500, screenH/2, filename, "awayTeam");
     listOfPlayers2[p29.getName()] = &p29;
-    Player p210("Q", screenW - 500, screenH/2 + 200, filename);
+    Player p210("Q", screenW - 500, screenH/2 + 200, filename, "awayTeam");
     listOfPlayers2[p210.getName()] = &p210;
-    Player p211("P", screenW - 500, screenH/2 - 200, filename);
-    listOfPlayers2[p11.getName()] = &p211;
+    Player p211("P", screenW - 500, screenH/2 - 200, filename, "awayTeam");
+    listOfPlayers2[p211.getName()] = &p211;
     Team awayTeam(listOfPlayers2);
-    Layout layout(&homeTeam, &awayTeam);
-    layout.initialSetUp433();
-    
-    layout.hasBall(&p11);
-    
+
     Ball ball(screenW/2, screenH/2, 10,10, "images/1.tga");
     
+    Layout layout(&homeTeam, &awayTeam, &ball);
+    layout.initialSetUp433();
+    layout.hasBall(&p11);
+
     //EventHandling.cpp
     initEventQueue();
     //set up textures and game
     GLuint fieldTex = glTexImageTGAFile("images/soccer.tga");
 
+    GamePlay gamePlay(&layout, fieldTex);
     
     bool playing = false;
     
@@ -187,28 +188,10 @@ int main(void)
         // Game logic
 
         //DRAWING
-        glClearColor(0, 0, 0, 0);
-        glClear(GL_COLOR_BUFFER_BIT);
+        gamePlay.DrawSprite(playing);
+       
         
-        if (playing){
-            // start the game draw graphics (players & ball & gameplay background)
-            glDrawSprite(fieldTex, 0, 0, 1150, 700);
-            
-            for (std::map<string,Player*>::iterator it=listOfPlayers.begin();
-                 it!=listOfPlayers.end(); ++it){
-
-                glDrawSprite(it->second->getTex(),
-                              it->second->getX(), it->second->getY(), 20, 20);
-            }
-            
-            
-            for (std::map<string,Player*>::iterator it=listOfPlayers2.begin();
-                 it!=listOfPlayers2.end(); ++it){
-                
-                glDrawSprite(it->second->getTex(),
-                             it->second->getX(), it->second->getY(), 20, 20);
-            }
-        }
+        gamePlay.NextMove(true);
         
         
         //PHYSICS
@@ -226,7 +209,7 @@ int main(void)
         //EVENT HANLDLING
         updateEventQueue();
         
-        //MOVEMENT and ANIMATION
+        //MOVEMENT
         if (playing){
             //Ball movement & PLAYER movements, update positions
 

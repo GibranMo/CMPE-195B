@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Gibran Morales. All rights reserved.
 //
 
-
-
 #include "GamePlay.h"
 #include "Layout.h"
 #include "Team.h"
@@ -34,37 +32,59 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
 
 
 
-void GamePlay::DrawSprite()
+void GamePlay::DrawSprite(bool playing)
 {
     
-    
-    map<string, Player*>* map2 = layout->getAwayTeam()->getPlayers();
-    map<string, Player*>* map = layout->getHomeTeam()->getPlayers();
-    
-    
-    // start the game draw graphics (players & ball & gameplay background)
-    glDrawSprite(fieldTex, 0, 0, 1150, 700);
-    
-    
-    //map<string, Player*>* map = homeTeam.getPlayers();
-    
-    //iterate over each player on the home team
-    for (std::map<string,Player*>::iterator it=map->begin(); it!=map->end(); ++it){ //iterating over the hometeam map
+    if(!playing) {
+        glClearColor(0, 0, 0, 0);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+    else {
+        glDrawSprite(fieldTex, 0, 0, 1150, 700);
         
+        map <string, Player *> listOfPlayers = *layout->getHomeTeam()->getPlayers();
         
-        glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
-                     it->second->getX(), it->second->getY(), 20, 20); //Drawing the palyer
+        map <string, Player *> listOfPlayers2 = *layout->getAwayTeam()->getPlayers();
+
+    
+        for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
+            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+        }
+        for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
+        
+            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+        }
+  
+    }
+}
+
+void GamePlay::NextMove(bool kickoff)
+{
+    int x = layout->getBall()->getX();
+    int y = layout->getBall()->getY();
+    Player * player = layout->hasBall();
+    vector<Player *> listOfCloseTeamMates = layout->getTeamMatesWithin40(player);
+    vector<Player *> listOfAvailableTeamMates;
+    if(kickoff){
+        //kick
+    }
+    else{
+        listOfAvailableTeamMates = layout->getAvailablePlayers(player);
+        for(int i = 0; i < listOfCloseTeamMates.size(); i++){
+            listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
+        }
     }
     
-    /*
-     for (std::map<string,Player*>::iterator it=map2->begin(); it!=map2->end(); ++it){
-     
-     glDrawSprite(glTexImageTGAFile("images/1.tga", 0, 0),
-     it->second->getX(), it->second->getY(), 20, 20);
-     }
-     */
     
-    glDrawLines();
     
     
 }
+
+//void GamePlay::CheckCollision()
+//{
+//    
+//}
+//
+//void GamePlay::Move(){
+//    
+//}

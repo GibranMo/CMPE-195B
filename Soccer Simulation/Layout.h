@@ -13,6 +13,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Team.h"
+#include "Ball.h"
 
 using namespace std;
 
@@ -22,15 +23,21 @@ private:
     Team * homeTeam;
     Team * awayTeam;
     Player * playerHasBall;
+    Ball * ball;
     
     
 public:
     
-    Layout(Team * homeT, Team * awayT);
+    Layout(Team * homeT, Team * awayT, Ball * b);
     void initialSetUp433();
     void hasBall(Player * p);
     Team * getHomeTeam();
     Team * getAwayTeam();
+    Ball * getBall();
+    Player * hasBall();
+    vector <Player *> getTeamMatesWithin40(Player * p);
+    int distance(Player * p1, Player * p2);
+    vector <Player *> getAvailablePlayers(Player * p);
     //Layout(){};
     
     

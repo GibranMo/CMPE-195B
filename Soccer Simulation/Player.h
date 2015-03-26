@@ -23,7 +23,7 @@ private:
     bool isAttacking = false;
     bool isStationary = false;
     bool isGauging = false;
-    
+    string teamName;
     
     /*
      The following set of 4 points represent a rectangular area, which in turn 
@@ -51,7 +51,7 @@ private:
     
 public:
     //constructor
-    Player(string n, int xp, int yp, const char* image);
+    Player(string n, int xp, int yp, const char* image, string teamName);
     //getters / setters
     int getY();
     int getX();
@@ -77,6 +77,8 @@ public:
     void tackle();
     void runBackwards();
     void stop();
+    
+    string getTeamName();
 
 
 };

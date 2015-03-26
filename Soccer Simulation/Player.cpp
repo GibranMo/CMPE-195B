@@ -1,4 +1,4 @@
-//
+ //
 //  SPlayer.cpp
 //  Soccer1
 //
@@ -10,7 +10,7 @@
 #include <vector>
 #include <iostream>
 
-Player::Player(string n, int xp, int yp, const char* image)
+Player::Player(string n, int xp, int yp, const char* image, string teamN)
 {
     name = n;
     x = xp;
@@ -18,8 +18,16 @@ Player::Player(string n, int xp, int yp, const char* image)
     velY = 0;
     velX = 0;
     tex = glTexImageTGAFile(image);
+    teamName = teamN;
+    
 }
 
+string Player::getTeamName()
+{
+    
+    return teamName;
+    
+}
 string Player::getName()
 {
     return name;

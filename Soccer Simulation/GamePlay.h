@@ -31,13 +31,16 @@ using namespace std;
 class GamePlay
 {
     
-private: Layout * layout;
+private:
+    Layout * layout;
     GLuint fieldTex;
     
     
 public:
     GamePlay(Layout * l, GLuint ft);
-    void DrawSprite();
+    void DrawSprite(bool playing);
+    void NextMove(bool kickoff);
+    
     
     
 };
