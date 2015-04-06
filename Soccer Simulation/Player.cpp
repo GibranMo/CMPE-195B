@@ -10,7 +10,7 @@
 #include <vector>
 #include <iostream>
 
-Player::Player(string n, int xp, int yp, const char* image, string teamN)
+Player::Player(string n, int xp, int yp, const char* image, string teamN, string faceAngle)
 {
     name = n;
     x = xp;
@@ -19,6 +19,8 @@ Player::Player(string n, int xp, int yp, const char* image, string teamN)
     velX = 0;
     tex = glTexImageTGAFile(image);
     teamName = teamN;
+    
+    Player::setFaceAngle(faceAngle);
     
 }
 
@@ -33,12 +35,57 @@ string Player::getName()
     return name;
 }
 
+void Player::setFaceAngle(string direction)
+{
+    
+    angle = direction;
+    
+    if (angle == "N")
+    {
+        tex = glTexImageTGAFile("images/Nbarca.tga");
+    }
+    else if (angle == "NE")
+    {
+        tex = glTexImageTGAFile( "images/NEbarca.tga");
+    }
+    else if (angle == "E")
+    {
+        tex = glTexImageTGAFile( "images/Ebarca.tga");
+    }
+    else if (angle == "SE")
+    {
+        tex = glTexImageTGAFile( "images/SEbarca.tga");
+    }
+    else if (angle == "S")
+    {
+        tex = glTexImageTGAFile( "images/Sbarca.tga");
+    }
+    else if (angle == "SW")
+    {
+        tex = glTexImageTGAFile( "images/SWbarca.tga");
+    }
+    else if (angle == "W")
+    {
+        tex = glTexImageTGAFile( "images/Wbarca.tga");
+    }
+    else if (angle == "NW")
+    {
+        tex = glTexImageTGAFile( "images/NWbarca.tga");
+    }
+    else
+    {
+        cout << "something went wrong!" << endl;
+    }
+    
+    
+}
+
 void Player::setAreaPosition(int x1, int x2, int y1, int y2)
 {
-//    posX1 = x1;
-//    posX2 = x2;
-//    posY1 = y1;
-//    posY2 = y2;
+    posX1 = x1;
+    posX2 = x2;
+    posY1 = y1;
+    posY2 = y2;
 }
 
 vector <int> Player:: getPosArea()
@@ -83,8 +130,13 @@ void Player::setVelY(int vy){
     velY = vy;
 }
 
-GLuint Player::getTex(){
-    return tex;
+string Player::getAngle()
+{
+    return angle;
 }
 
+GLuint Player::getTex()
+{
+    return tex;
+}
 

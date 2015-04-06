@@ -42,6 +42,15 @@ void Ball::setVel(int xv, int yv){
     velY = yv;
 }
 
+void Ball::setX(int X)
+{
+    x = X;
+}
+
+void Ball::setY(int Y)
+{
+    y = Y;
+}
 GLuint Ball::getTex(){
     return tex;
 }

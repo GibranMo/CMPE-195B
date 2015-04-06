@@ -24,9 +24,11 @@ private:
     bool isStationary = false;
     bool isGauging = false;
     string teamName;
+    enum facingAngle { E,  NE, N, NW, W, SW, S, SE};
+    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect.
     
     /*
-     The following set of 4 points represent a rectangular area, which in turn 
+     The following set of 4 points represent a rectangular area, which in turn
      represents that represents the position of the player.
      He can go outside this area, but spends most of its time inside it
      */
@@ -51,7 +53,7 @@ private:
     
 public:
     //constructor
-    Player(string n, int xp, int yp, const char* image, string teamName);
+    Player(string n, int xp, int yp, const char* image, string teamName, string faceAngle);
     //getters / setters
     int getY();
     int getX();
@@ -63,7 +65,8 @@ public:
     void setVelY(int vy);
     void setPos(int xp, int yp);
     vector <int> getPosArea();
-
+    
+    
     
     //actions
     void rotate(float degrees);
@@ -79,8 +82,12 @@ public:
     void stop();
     
     string getTeamName();
-
-
+    void setFacingAngle(facingAngle); //change the direction a player points
+    void setFaceAngle(string direction); //change the direction a player points (alternative)
+    string getAngle();
+    
+    
 };
+
 
 #endif

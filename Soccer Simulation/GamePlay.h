@@ -26,6 +26,7 @@
 #include<string.h>
 #include<assert.h>
 
+
 using namespace std;
 
 class GamePlay
@@ -35,14 +36,27 @@ private:
     Layout * layout;
     GLuint fieldTex;
     
+    pthread_t playerThreads[2];
+    static void *player_t(void * param);
+    static void *draw_t(void *);
+    static string foo();
+    void playerAction(Player * p);
+    int analyzeFieldInFront(Player * p);        //Calls a bunch of other high level functions
+    int computePositionScore(int countInFront);
+    
+    
+    //Test
+    static void testFoo(GLuint gl, Player * pl);
+    void drawingTest();
     
 public:
     GamePlay(Layout * l, GLuint ft);
     void DrawSprite(bool playing);
-    void NextMove(bool kickoff);
+    void NextMove();
+    void setUpThreads();
+    
     
     
     
 };
-
 #endif

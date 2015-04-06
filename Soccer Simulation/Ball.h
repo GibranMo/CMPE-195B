@@ -12,8 +12,11 @@
 #include <stdio.h>
 #include "DrawUtils.h"
 
-class Ball {
+#include <stdio.h>
+#include "DrawUtils.h"
 
+class Ball {
+    
 private:
     int w;
     int h;
@@ -32,8 +35,13 @@ public:
     int getVelX();
     int getVelY();
     void setVel(int xv, int yv);
+    
+    void setX(int X);
+    void setY(int Y);
+    
     GLuint getTex();
 };
+
 
 
 #endif /* defined(__Soccer_Simulation__Ball__) */

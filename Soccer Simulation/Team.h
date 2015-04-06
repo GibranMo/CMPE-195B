@@ -27,7 +27,7 @@ public:
     Team (){};
     void setUp();
     Player * getPlayer(string name);
-    map<string, Player*>* getPlayers();
+    map<string, Player*>* getPlayers(); //returns a pointer to a  map
     
     
 };
