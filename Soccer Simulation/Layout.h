@@ -31,6 +31,8 @@ private:
     
     void pass(Player * receivingPlayer);
     
+    bool isRectangleAreaInFrontClear(Player * p);
+    
 public:
     
     Layout(Team * homeT, Team * awayT, Ball * b);
@@ -47,6 +49,7 @@ public:
     int countTeamatesInDirection(Player * p); //Takes into consideration what direction player is facing
     void analyzeField(Player * p);
     void setPlayerWithPossBall(Player *p); //Pinpoints the ball at the tip of the Player
+    
     
     
     

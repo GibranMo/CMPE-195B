@@ -9,6 +9,8 @@
 #include "Layout.h"
 #include "Team.h"
 #include "Player.h"
+#include "Ball.h"
+#include <time.h>
 #include <vector>
 
 using namespace std;
@@ -23,6 +25,12 @@ Layout::Layout(Team * homeT, Team * awayT, Ball * b)
     awayTeam = awayT;
     ball = b;
     cout << "hereererere" << endl;
+}
+
+int Layout::testInt()
+{
+    return 1;
+    
 }
 
 
@@ -77,6 +85,36 @@ void Layout::initialSetUp433()
 void Layout::hasBall(Player * p)
 {
     playerHasBall = p;
+    
+    /*   A player having possession of the ball implies a certain position for the ball on the screen(At the tip of the player).
+     */
+    
+    
+    int x = playerHasBall->getX();
+    int y = playerHasBall->getY();
+    string s = playerHasBall->getAngle();
+    
+    int newBallX = 0;
+    int newBallY = 0;
+    
+    if (s == "N")
+    {
+        newBallX = x+5;
+        newBallY = y;
+        
+        ball->setPos(newBallX, newBallY);
+        
+    }
+    else if (s == "S")
+    {
+        newBallX = x+8;
+        newBallY = y+11;
+        
+        ball->setPos(newBallX, newBallY);
+    }
+    
+    
+    
 }
 
 Team * Layout::getHomeTeam()
@@ -99,7 +137,10 @@ Player * Layout::hasBall(){
     return playerHasBall;
 }
 
-vector <Player *> Layout::getTeamMatesWithin40(Player * p) {
+/* Do not care is opposing players are obstructing the teammate. Just scanning for
+ a teammate within specified radius
+ */
+vector <Player *> Layout::getTeamMatesWithin80(Player * p) {
     string team = p->getTeamName();
     vector<Player*> players;
     
@@ -107,8 +148,14 @@ vector <Player *> Layout::getTeamMatesWithin40(Player * p) {
         ///map<string, Player *> * list = this->getHomeTeam();
         for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
              it!=homeTeam->getPlayers()->end(); ++it ){
+            
+            if (it->second->getName() == p->getName() ) // I player does not care about himself
+                continue;
             Player * p2 = it->second;
-            if(distance(p, p2) < 40){
+            
+            if(distance(p, p2) < 80){
+                cout << "YEEEES " << p2->getName() << endl;
+                
                 players.push_back(p2);
             }
         }
@@ -117,8 +164,12 @@ vector <Player *> Layout::getTeamMatesWithin40(Player * p) {
         ///map<string, Player *> * list = this->getHomeTeam();
         for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
              it!=awayTeam->getPlayers()->end(); ++it ){
+            
+            if (it->second->getName() == p->getName() ) // I player does not care about himself
+                continue;
+            
             Player * p2 = it->second;
-            if(distance(p, p2) < 40){
+            if(distance(p, p2) < 80){
                 players.push_back(p2);
             }
         }
@@ -126,24 +177,89 @@ vector <Player *> Layout::getTeamMatesWithin40(Player * p) {
     return players;
 }
 
-vector <Player *> Layout::getAvailablePlayers(Player * p){
+bool Layout::isRectangleAreaInFrontClear(Player *p)
+{
+    
+    int x = p->getX();
+    int y = p->getY();
+    
+    int yPlus = y + 20;
+    int yMinus = y - 20;
+    
+    int XPlus = x + 35;
+    
+    if (XPlus >= 1105 )
+        return false;
+    
+    
+    string nameOfTeam = p->getTeamName();
+    
+    
+    if (nameOfTeam == "homeTeam")
+    {
+        
+        for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin(); it!=awayTeam->getPlayers()->end(); ++it )
+        {
+            
+            Player * opponent = it->second;
+            
+            if (opponent->getY() < yMinus && opponent->getY() > yPlus && opponent->getX() < XPlus)
+            {
+                return false;
+            }
+        }
+        
+    }
+    else
+    {
+        XPlus = x - 35;
+        
+        if (XPlus < 0 )
+            return false;
+        
+        
+        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin(); it!=homeTeam->getPlayers()->end(); ++it )
+        {
+            
+            Player * opponent = it->second;
+            
+            if (opponent->getY() < yMinus && opponent->getY() > yPlus && opponent->getX() < XPlus)
+            {
+                return false;
+            }
+        }
+        
+        
+    }
+    
+    return true;
+    
+}
+
+
+vector <Player *> Layout::getAvailablePlayers(Player * p)
+{
     
     string team = p->getTeamName();
     vector<Player*> players;
     
     if(team == "homeTeam") {
-        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
-             it!=homeTeam->getPlayers()->end(); ++it ){
+        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin(); it!=homeTeam->getPlayers()->end(); ++it )
+        {
             Player * p1 = it->second;
+            
+            if (p1->getName() == p->getName())
+                continue;
+            
             bool available = true;
             
-            for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
-                 it!=awayTeam->getPlayers()->end(); ++it ){
+            for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin(); it!=awayTeam->getPlayers()->end(); ++it )
+            {
                 Player * p2 = it->second;
                 
-                if(distance(p1, p2) < 40){
-                    if(p2->getX() < ( ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() ) )
-                    available = false;
+                if(distance(p1, p2) < 80){
+                    if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() )
+                        available = false;
                 }
             }
             if(available)
@@ -160,7 +276,7 @@ vector <Player *> Layout::getAvailablePlayers(Player * p){
                  it!=homeTeam->getPlayers()->end(); ++it ){
                 Player * p2 = it->second;
                 
-                if(distance(p1, p2) < 40){
+                if(distance(p1, p2) < 80){
                     if(p2->getX() < ( ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() ) )
                         available = false;
                 }
@@ -168,15 +284,115 @@ vector <Player *> Layout::getAvailablePlayers(Player * p){
             if(available)
                 players.push_back(p1);
         }
-
+        
     }
     return players;
 }
 
-int Layout::distance(Player * p1, Player * p2){
+double Layout::distance(Player * p1, Player * p2)
+{
     int x = p1->getX();
     int y = p1->getY();
     int p2X = p2->getX();
     int p2Y = p2->getY();
     return sqrt( (abs ((x - p2X) * (x - p2X)) + abs( ((y - p2Y) * (y - p2Y)))));
 }
+
+void Layout::analyzeField(Player * p)
+{
+    
+    vector<Player *> listOfCloseTeamMates = getTeamMatesWithin80(p);
+    
+    for (int k = 0; k < listOfCloseTeamMates.size(); k++)
+        cout << ">> " << listOfCloseTeamMates.at(k)->getName() << endl;
+    
+    vector<Player *> listOfAvailableTeamMates;
+    srand(time (NULL));
+    
+    int result = countTeammatesInFront(p);
+    
+    if (result == 0)
+    {
+        listOfAvailableTeamMates = getAvailablePlayers(p);
+        
+        //for (int k = 0; k < listOfAvailableTeamMates.size(); k++)
+        //cout << ">> " << listOfAvailableTeamMates.at(k)->getName() << endl;
+        
+        
+        for(int i = 0; i < listOfCloseTeamMates.size(); i++)
+        {
+            listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
+        }
+        
+        
+        
+        unsigned long range = listOfAvailableTeamMates.size();
+        int random = rand() % range;
+        
+        Player * destinationPlayer = listOfAvailableTeamMates.at(random);
+        
+        pass(destinationPlayer);
+        
+        cout << "*****<><><>" << endl;
+        
+    }
+    
+}
+
+void Layout::pass(Player * receivingPlayer)
+{
+    
+    
+}
+
+int Layout::countTeammatesInFront(Player *p)
+{
+    
+    Player * player = p;
+    Team * team = NULL;
+    
+    // count how many opponents in front of him
+    
+    int x = player->getX(); //The x position of the player in question
+    
+    string whatTeam = player->getTeamName();
+    
+    if (whatTeam == "awayTeam")
+    {
+        team = getAwayTeam();
+    }
+    else
+    {
+        team = getHomeTeam();
+    }
+    
+    //First Home Team (Home Team attacks to the right)
+    int count = 0; //For counting how many players are in front of the player in question
+    if (whatTeam == "homeTeam")
+    {
+        map <string, Player *> listOfPlayers = *team->getPlayers();
+        for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
+            
+            int teammateXPos = it->second->getVelX();
+            if (x <= teammateXPos) //Teammate is in front or parallel
+                count++;
+            
+        }
+    }
+    else
+    {
+        map <string, Player *> listOfPlayers = *team->getPlayers();
+        for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
+            
+            int teammateXPos = it->second->getVelX();
+            if (x >= teammateXPos)
+                count++;
+            
+        }
+        
+    }
+    
+    return count;
+    
+}
+

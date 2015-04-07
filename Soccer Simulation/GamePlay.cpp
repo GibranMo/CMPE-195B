@@ -113,34 +113,6 @@ void * GamePlay :: player_t(void * param)
     return NULL;
 }
 
-void * GamePlay:: draw_t(void * param)
-{
-    
-    cout << "****" << endl;
-    GLuint ftex = *((GLuint *) param);
-    
-    while(true)
-    {
-        // glDrawSprite(ftex, 0, 0, 1150, 700);
-        
-        map <string, Player *> listOfPlayers = *expLayout->getHomeTeam()->getPlayers();
-        
-        map <string, Player *> listOfPlayers2 = *expLayout->getAwayTeam()->getPlayers();
-        
-        
-        for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
-            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
-        }
-        for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
-            
-            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
-        }
-        
-        
-    }
-    
-    return NULL;
-}
 
 
 void GamePlay::setUpThreads ()
@@ -231,6 +203,8 @@ void GamePlay::DrawSprite(bool playing)
         
     }
 }
+
+
 
 
 
