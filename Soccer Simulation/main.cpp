@@ -90,13 +90,13 @@ int main(void)
     listOfPlayers[p8.getName()] = &p8;
     Player p9("I", 450, screenH/2, filename, "homeTeam", "E");
     listOfPlayers[p9.getName()] = &p9;
-    Player p10("J", screenW/2 - 7, screenH/2 + 10, filename, "homeTeam", "N");
+    Player p10("J", screenW/2 - 17, screenH/2 + 10 , filename, "homeTeam", "N");
     listOfPlayers[p10.getName()] = &p10;
-    Player p11("K", screenW/2 -7, screenH/2 - 23, filename, "homeTeam", "S");
+    Player p11("K", screenW/2 -17, screenH/2 - 24, filename, "homeTeam", "S");
     listOfPlayers[p11.getName()] = &p11;
     Team homeTeam(listOfPlayers);
     
-    filename = "images/SWbarca.tga";
+    filename = "images/madridPlayer.tga";
     
     map <string, Player *> listOfPlayers2;
     Player p21("Z", screenW - 50, screenH/2, filename, "awayTeam", "W");
@@ -107,7 +107,7 @@ int main(void)
     listOfPlayers2[p23.getName()] = &p23;
     Player p24("W", screenW - 250, screenH/2 - 100, filename, "awayTeam", "W");
     listOfPlayers2[p24.getName()] = &p24;
-    Player p25("V", screenW - 250, screenH/2 - 200, filename, "awayTeam", "W");
+    Player p25("V", screenW - 250, screenH/2 - 200, filename, "awayTeam", "SEE");
     listOfPlayers2[p25.getName()] = &p25;
     Player p26("U", screenW - 400, screenH/2 - 100, filename, "awayTeam", "W");
     listOfPlayers2[p26.getName()] = &p26;
@@ -123,12 +123,15 @@ int main(void)
     listOfPlayers2[p211.getName()] = &p211;
     Team awayTeam(listOfPlayers2);
     
-    //Ball ball(screenW/2 - 2 , screenH/2 - 12, 10,10, "images/ball 2.tga");
-    Ball ball(screenW/2 - 2 , screenH/2 + 10, 10,10, "images/ball 2.tga");
+    Ball ball(100 , 100, 10, 8, "images/ball 2.tga");
+    
+    //good one:
+    //Ball ball(screenW/2 - 12 , screenH/2 - 13, 10, 8, "images/ball 2.tga");
     
     Layout layout(&homeTeam, &awayTeam, &ball);
     layout.initialSetUp433();
-    layout.hasBall(&p10);
+    
+    layout.hasBall(&p11);
     
     //EventHandling.cpp
     initEventQueue();

@@ -42,35 +42,59 @@ void Player::setFaceAngle(string direction)
     
     if (angle == "N")
     {
-        tex = glTexImageTGAFile("images/Nbarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/Nbarca.tga");
+        else
+            tex = glTexImageTGAFile("images/NmadridPlayer3.tga");
     }
     else if (angle == "NE")
     {
-        tex = glTexImageTGAFile( "images/NEbarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/NEbarca.tga");
+        else
+            tex = glTexImageTGAFile("images/NEmadrid.tga");
     }
     else if (angle == "E")
     {
-        tex = glTexImageTGAFile( "images/Ebarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/Ebarca.tga");
+        else
+            tex = glTexImageTGAFile("images/Emadrid.tga");
     }
     else if (angle == "SE")
     {
-        tex = glTexImageTGAFile( "images/SEbarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/SEbarca.tga");
+        else
+            tex = glTexImageTGAFile("images/SEmadrid.tga");
     }
     else if (angle == "S")
     {
-        tex = glTexImageTGAFile( "images/Sbarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/Sbarca.tga");
+        else
+            tex = glTexImageTGAFile("images/Smadrid.tga");
     }
     else if (angle == "SW")
     {
-        tex = glTexImageTGAFile( "images/SWbarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/SWbarca.tga");
+        else
+            tex = glTexImageTGAFile("images/SWmadrid.tga");
     }
     else if (angle == "W")
     {
-        tex = glTexImageTGAFile( "images/Wbarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/Wbarca.tga");
+        else
+            tex = glTexImageTGAFile("images/Wmadrid.tga");
     }
     else if (angle == "NW")
     {
-        tex = glTexImageTGAFile( "images/NWbarca.tga");
+        if (this->getTeamName() == "homeTeam")
+            tex = glTexImageTGAFile("images/NWbarca.tga");
+        else
+            tex = glTexImageTGAFile("images/NWmadrid.tga");
     }
     else
     {
@@ -139,4 +163,4 @@ GLuint Player::getTex()
 {
     return tex;
 }
-
+ 

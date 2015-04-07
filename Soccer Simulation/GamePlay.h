@@ -11,7 +11,6 @@
 #define Soccer1_GamePlay_h
 
 
-
 #include "GamePlay.h"
 #include "Layout.h"
 #include "Team.h"
@@ -41,7 +40,6 @@ private:
     static void *draw_t(void *);
     static string foo();
     void playerAction(Player * p);
-    int analyzeFieldInFront(Player * p);        //Calls a bunch of other high level functions
     int computePositionScore(int countInFront);
     
     
@@ -59,4 +57,5 @@ public:
     
     
 };
+
 #endif

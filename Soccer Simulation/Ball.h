@@ -1,16 +1,13 @@
 //
 //  Ball.h
-//  Soccer Simulation
+//  Soccer1
 //
-//  Created by Carlos Toledo on 3/25/15.
-//  Copyright (c) 2015 Carlos Toledo. All rights reserved.
+//  Created by Gibran Morales on 3/25/15.
+//  Copyright (c) 2015 Gibran Morales. All rights reserved.
 //
 
-#ifndef __Soccer_Simulation__Ball__
-#define __Soccer_Simulation__Ball__
-
-#include <stdio.h>
-#include "DrawUtils.h"
+#ifndef Soccer1_Ball_h
+#define Soccer1_Ball_h
 
 #include <stdio.h>
 #include "DrawUtils.h"
@@ -43,5 +40,4 @@ public:
 };
 
 
-
-#endif /* defined(__Soccer_Simulation__Ball__) */
+#endif

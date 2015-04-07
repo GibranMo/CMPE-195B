@@ -13,9 +13,9 @@ using namespace std;
 
 Team::Team (map<string, Player*> list)
 {
-
+    
     listOfPlayers = list;
-
+    
 }
 
 Player* Team::getPlayer (string name)
@@ -30,7 +30,7 @@ map<string, Player*>* Team::getPlayers ()
 
 void Team::setUp()
 {
-
+    
     
     
 }

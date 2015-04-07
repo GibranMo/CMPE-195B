@@ -20,7 +20,10 @@
 #include <assert.h>
 #include <pthread.h>
 
-using namespace std;
+#include <chrono>
+#include <thread>
+
+//using namespace std;
 
 
 
@@ -126,11 +129,11 @@ void * GamePlay:: draw_t(void * param)
         
         
         for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
-            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
         }
         for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
             
-            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
         }
         
         
@@ -206,14 +209,25 @@ void GamePlay::DrawSprite(bool playing)
         
         
         for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
-            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
         }
         for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
             
-            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
         }
         
         glDrawSprite(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
+        
+        
+        GLuint testTex = glTexImageTGAFile("images/1.tga");
+        GLuint testTex2 = glTexImageTGAFile("images/3.tga");
+        
+        glDrawSprite(testTex2, 0, -10, 30, 50);
+        glDrawSprite(testTex, 0, 50, 30, 50);
+        
+        
+        glDrawLines();
+        glDrawPoint();
         
     }
 }
@@ -236,23 +250,26 @@ void GamePlay::NextMove()
     }
     else
     {
-        //analyzeFieldInFront(player);
-        vector<Player *> listOfCloseTeamMates = layout->getTeamMatesWithin40(player);
-        vector<Player *> listOfAvailableTeamMates;
+        layout->analyzeField(player);
         
-        bool kickoff = false;
-        
-        if(kickoff){
-            //kick
-        }
-        else{
-            listOfAvailableTeamMates = layout->getAvailablePlayers(player);
-            for(int i = 0; i < listOfCloseTeamMates.size(); i++){
-                listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
-            }
-            cout << "*****<><><>" << endl;
-        }
-        
+        /*
+         vector<Player *> listOfCloseTeamMates = layout->getTeamMatesWithin80(player);
+         vector<Player *> listOfAvailableTeamMates;
+         
+         bool kickoff = false;
+         
+         if(kickoff){
+         //kick
+         }
+         else{
+         listOfAvailableTeamMates = layout->getAvailablePlayers(player);
+         for(int i = 0; i < listOfCloseTeamMates.size(); i++){
+         listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
+         }
+         cout << "*****<><><>" << endl;
+         }
+         */
+        //std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     }
     
     

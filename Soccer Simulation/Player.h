@@ -9,11 +9,6 @@
 #ifndef Soccer1_Player_h
 #define Soccer1_Player_h
 
-#include <string>
-#include <vector>
-#include "DrawUtils.h"
-using namespace std;
-
 class Player
 {
 private:
@@ -73,6 +68,7 @@ public:
     void goAfterLooseBall();
     void setAreaPosition(int x1, int x2, int y1, int y2);
     void passBall();
+    
     void shootBall();
     void runWithBall();
     void jogWithBall();
