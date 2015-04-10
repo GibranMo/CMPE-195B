@@ -9,6 +9,11 @@
 #ifndef Soccer1_Player_h
 #define Soccer1_Player_h
 
+#include <vector>
+#include <string>
+#include "DrawUtils.h"
+using namespace std;
+
 class Player
 {
 private:

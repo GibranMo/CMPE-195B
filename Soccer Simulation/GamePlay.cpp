@@ -181,11 +181,11 @@ void GamePlay::DrawSprite(bool playing)
         
         
         for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
-            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
         }
         for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
             
-            glDrawSprite3(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
         }
         
         glDrawSprite(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
@@ -198,8 +198,8 @@ void GamePlay::DrawSprite(bool playing)
         glDrawSprite(testTex, 0, 50, 30, 50);
         
         
-        glDrawLines();
-        glDrawPoint();
+//        glDrawLines();
+//        glDrawPoint();
         
     }
 }

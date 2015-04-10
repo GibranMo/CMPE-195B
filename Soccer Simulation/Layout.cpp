@@ -295,11 +295,37 @@ double Layout::distance(Player * p1, Player * p2)
     int y = p1->getY();
     int p2X = p2->getX();
     int p2Y = p2->getY();
-    return sqrt( (abs ((x - p2X) * (x - p2X)) + abs( ((y - p2Y) * (y - p2Y)))));
+    return sqrt(  ((x - p2X) * (x - p2X)) +  ((y - p2Y) * (y - p2Y)) );
 }
 
 void Layout::analyzeField(Player * p)
 {
+    int x = p->getX();
+    int y = p->getY();
+    
+    if(p->getTeamName() == "homeTeam"){
+        if(p->getX() >= 1005){
+            if(getShootingAngle(p) > 30){
+                int l = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
+
+                //shoot
+            }
+        }
+    }
+    if(p->getTeamName() == "awayTeam"){
+        if(p->getX() <= 100){
+            if(getShootingAngle(p) > 30){
+                
+                //shoot
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    
     
     vector<Player *> listOfCloseTeamMates = getTeamMatesWithin80(p);
     
@@ -337,6 +363,35 @@ void Layout::analyzeField(Player * p)
         
     }
     
+}
+
+int Layout::getShootingAngle(Player * p){
+    int angle = 0;
+    int archLength = 60;
+    
+    int x = p->getX();
+    int y = p->getY();
+    
+    
+    int archX;
+    
+    if(p->getTeamName() == "homeTeam")
+        archX = screenW - 50;
+    else
+        archX = 50;
+
+    
+    int archTopY = screenH / 2 - 30;
+    int archBottomY = archTopY + 60;
+    
+    int side1 = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
+    int side2 = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archBottomY) * (y - archBottomY)))));
+    
+    
+    
+    angle = acos( ( ( (side1)^2 + (side2)^2 - archLength^2) / ( 2 * side1 * side2) ));
+    
+    return angle;
 }
 
 void Layout::pass(Player * receivingPlayer)

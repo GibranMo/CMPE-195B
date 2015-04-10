@@ -20,6 +20,9 @@ using namespace std;
 class Layout
 {
 private:
+    int screenW = 1150;
+    int screenH = 700;
+    
     Team * homeTeam;
     Team * awayTeam;
     Player * playerHasBall;
@@ -49,6 +52,7 @@ public:
     int countTeamatesInDirection(Player * p); //Takes into consideration what direction player is facing
     void analyzeField(Player * p);
     void setPlayerWithPossBall(Player *p); //Pinpoints the ball at the tip of the Player
+    int getShootingAngle(Plaer * p);
     
     
     
