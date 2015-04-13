@@ -41,11 +41,12 @@ private:
     static string foo();
     void playerAction(Player * p);
     int computePositionScore(int countInFront);
-    
+    void MovePlayers();
     
     //Test
     static void testFoo(GLuint gl, Player * pl);
     void drawingTest();
+    void moveTowardsBall(Player * p);
     
 public:
     GamePlay(Layout * l, GLuint ft);

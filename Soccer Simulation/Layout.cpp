@@ -38,21 +38,21 @@ void Layout::initialSetUp433()
 {
     //Skip goalie, 'A'
     
-    //x1, x2, y1, y2 (where x1 is leftmost, y1 uppermost )
-    homeTeam->getPlayer("B")->setAreaPosition(45, 469, 20, 350 ); //This guy is the left back (LB), and his team attacks right
-    homeTeam->getPlayer("C")->setAreaPosition(45, 469, 185, 515 ); //Left Center Back (LCB)
-    homeTeam->getPlayer("D")->setAreaPosition(45, 469, 185, 515 ); //Right Center Back (RCB)
-    homeTeam->getPlayer("E")->setAreaPosition(45, 469, 350, 680 );  //Right Back (RB)
+    //x1, x2, y1, y2 (where x1 = leftmost, x2 = rightmost,  y1 = uppermost, y2 = lowermost )
+    homeTeam->getPlayer("Alba")->setAreaPosition(45, 469, 20, 350 ); //This guy is the left back (LB), and his team attacks to the right
+    homeTeam->getPlayer("Mathieu")->setAreaPosition(45, 469, 185, 515 ); //Left Center Back (LCB)
+    homeTeam->getPlayer("Pique")->setAreaPosition(45, 469, 185, 515 ); //Right Center Back (RCB)
+    homeTeam->getPlayer("Alves")->setAreaPosition(45, 469, 350, 680 );  //Right Back (RB)
     
     
-    homeTeam->getPlayer("F")->setAreaPosition(363, 787, 20, 380 ); //Left Midfielder (LM)
-    homeTeam->getPlayer("G")->setAreaPosition(257, 893, 185, 515 ); //Center Midfeidlder (CM)
-    homeTeam->getPlayer("H")->setAreaPosition(363, 787, 320, 680 ); //Right Midfielder
+    homeTeam->getPlayer("Iniesta")->setAreaPosition(363, 787, 20, 380 ); //Left Midfielder (LM)
+    homeTeam->getPlayer("Busquets")->setAreaPosition(257, 893, 185, 515 ); //Center Midfeidlder (CM)
+    homeTeam->getPlayer("Rakitic")->setAreaPosition(363, 787, 320, 680 ); //Right Midfielder
     
     // 681 - 40 = 641
-    homeTeam->getPlayer("I")->setAreaPosition(641, 1105, 20, 350 ); // Left Forward (LF)
-    homeTeam->getPlayer("J")->setAreaPosition(681, 1105, 185, 515 ); // Center Forward (CF)
-    homeTeam->getPlayer("K")->setAreaPosition(641, 1105, 350, 680 ); // Right Forward (CF)
+    homeTeam->getPlayer("Neymar")->setAreaPosition(641, 1105, 20, 350 ); // Left Forward (LF)
+    homeTeam->getPlayer("Messi")->setAreaPosition(681, 1105, 185, 515 ); // Center Forward (CF)
+    homeTeam->getPlayer("Suarez")->setAreaPosition(641, 1105, 350, 680 ); // Right Forward (CF)
     
     
     //Away Team
@@ -60,20 +60,20 @@ void Layout::initialSetUp433()
     //Skip goalie, 'Z'
     
     //x1, x2, y1, y2 (where x1 is leftmost, y1 uppermost )
-    awayTeam->getPlayer("Y")->setAreaPosition(1105, 681, 20, 350 ); //This guy is the left back (LB), and his team attacks right
-    awayTeam->getPlayer("X")->setAreaPosition(1105, 681, 185, 515 ); //Left Center Back (LCB)
-    awayTeam->getPlayer("W")->setAreaPosition(1105, 681, 185, 515 ); //Right Center Back (RCB)
-    awayTeam->getPlayer("V")->setAreaPosition(1105, 681, 350, 680 );  //Right Back (RB)
+    awayTeam->getPlayer("Marcelo")->setAreaPosition(1105, 681, 20, 350 ); //This guy is the left back (LB), and his team attacks right
+    awayTeam->getPlayer("Ramos")->setAreaPosition(1105, 681, 185, 515 ); //Left Center Back (LCB)
+    awayTeam->getPlayer("Pepe")->setAreaPosition(1105, 681, 185, 515 ); //Right Center Back (RCB)
+    awayTeam->getPlayer("Carvajal")->setAreaPosition(1105, 681, 350, 680 );  //Right Back (RB)
     
     
-    awayTeam->getPlayer("U")->setAreaPosition(787, 363, 20, 380 ); //Left Midfielder (LM)
-    awayTeam->getPlayer("T")->setAreaPosition(893, 257, 185, 515 ); //Center Midfeidlder (CM)
-    awayTeam->getPlayer("S")->setAreaPosition(787, 363, 320, 680 ); //Right Midfielder
+    awayTeam->getPlayer("Modric")->setAreaPosition(787, 363, 20, 380 ); //Left Midfielder (LM)
+    awayTeam->getPlayer("Rodriguez")->setAreaPosition(893, 257, 185, 515 ); //Center Midfeidlder (CM)
+    awayTeam->getPlayer("Kroos")->setAreaPosition(787, 363, 320, 680 ); //Right Midfielder
     
     // 681 - 40 = 641
-    awayTeam->getPlayer("R")->setAreaPosition(509, 45, 20, 350 ); // Left Forward (LF)
-    awayTeam->getPlayer("Q")->setAreaPosition(469, 45, 185, 515 ); // Center Forward (CF)
-    awayTeam->getPlayer("P")->setAreaPosition(509, 45, 350, 680 ); // Right Forward (CF)
+    awayTeam->getPlayer("Ronaldo")->setAreaPosition(509, 45, 20, 350 ); // Left Forward (LF)
+    awayTeam->getPlayer("Benzema")->setAreaPosition(469, 45, 185, 515 ); // Center Forward (CF)
+    awayTeam->getPlayer("Bale")->setAreaPosition(509, 45, 350, 680 ); // Right Forward (CF)
     
     
     
@@ -85,6 +85,8 @@ void Layout::initialSetUp433()
 void Layout::hasBall(Player * p)
 {
     playerHasBall = p;
+    
+    string team = p->getTeamName();
     
     /*   A player having possession of the ball implies a certain position for the ball on the screen(At the tip of the player).
      */
@@ -99,19 +101,138 @@ void Layout::hasBall(Player * p)
     
     if (s == "N")
     {
-        newBallX = x+5;
-        newBallY = y;
         
-        ball->setPos(newBallX, newBallY);
+        if (team == "awayTeam")
+        {
+            newBallX = x+3;
+            newBallY = y-4;
+        }
+        else
+        {
+            newBallX = x+5;
+            newBallY = y;
+        }
+        
+        
         
     }
     else if (s == "S")
     {
-        newBallX = x+8;
-        newBallY = y+11;
         
-        ball->setPos(newBallX, newBallY);
+        if (team == "awayTeam")
+        {
+            newBallX = x+3;
+            newBallY = y+12;
+        }
+        else
+        {
+            newBallX = x+6;
+            newBallY = y+11;
+        }
+        
+        
     }
+    else if (s == "E")
+    {
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x+11;
+            newBallY = y+5;
+        }
+        else
+        {
+            newBallX = x+12;
+            newBallY = y+6;
+        }
+        
+        
+    }
+    else if (s == "W")
+    {
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x-6;
+            newBallY = y+5;
+        }
+        else
+        {
+            newBallX = x-1;
+            newBallY = y+7;
+        }
+        
+        
+    }
+    else if (s == "SE")
+    {
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x+11;
+            newBallY = y+12;
+        }
+        else
+        {
+            newBallX = x+12;
+            newBallY = y+14;
+        }
+        
+        
+    }
+    else if (s == "SW")
+    {
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x-6;
+            newBallY = y+10;
+        }
+        else
+        {
+            newBallX = x-3;
+            newBallY = y+15;
+        }
+        
+        
+    }
+    else if (s == "NE")
+    {
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x+11;
+            newBallY = y-3;
+        }
+        else
+        {
+            newBallX = x+14;
+            newBallY = y-3;
+        }
+        
+    }
+    else if (s == "NW")
+    {
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x-3;
+            newBallY = y-3;
+        }
+        else
+        {
+            newBallX = x-2;
+            newBallY = y-3;
+        }
+        
+        
+    }
+    
+    
+    ball->setPos(newBallX, newBallY);
+    
+    
+    
     
     
     
@@ -289,6 +410,12 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
     return players;
 }
 
+double Layout::getDistance(int x1, int x2, int y1, int y2)
+{
+    return sqrt(  ((x1 - x2) * (x1 - x2)) +  ((y1 - y2) * (y1 - y2)) );
+}
+
+
 double Layout::distance(Player * p1, Player * p2)
 {
     int x = p1->getX();
@@ -296,6 +423,15 @@ double Layout::distance(Player * p1, Player * p2)
     int p2X = p2->getX();
     int p2Y = p2->getY();
     return sqrt(  ((x - p2X) * (x - p2X)) +  ((y - p2Y) * (y - p2Y)) );
+}
+
+double Layout::getDistanceBall(Player * p)
+{
+    int x = p->getX();
+    int y = p->getY();
+    
+    return sqrt(  ((x - ball->getX()) * (x - ball->getX())) +  ((y - ball->getY()) * (y - ball->getY())) );
+    
 }
 
 void Layout::analyzeField(Player * p)
@@ -306,8 +442,8 @@ void Layout::analyzeField(Player * p)
     if(p->getTeamName() == "homeTeam"){
         if(p->getX() >= 1005){
             if(getShootingAngle(p) > 30){
-                int l = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
-
+                //int l = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
+                
                 //shoot
             }
         }
@@ -365,8 +501,8 @@ void Layout::analyzeField(Player * p)
     
 }
 
-int Layout::getShootingAngle(Player * p){
-    int angle = 0;
+double Layout::getShootingAngle(Player * p){
+    double angle = 0;
     int archLength = 60;
     
     int x = p->getX();
@@ -376,17 +512,21 @@ int Layout::getShootingAngle(Player * p){
     int archX;
     
     if(p->getTeamName() == "homeTeam")
-        archX = screenW - 50;
+        archX = screenW - 50;          //This is a point at the center of the goal (it also is where the goalie always is).
     else
         archX = 50;
-
     
-    int archTopY = screenH / 2 - 30;
-    int archBottomY = archTopY + 60;
+    
+    int archTopY = screenH / 2 - 30;      //top goal post
+    int archBottomY = screenH / 2 + 30;  //bottom goal post
     
     int side1 = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
     int side2 = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archBottomY) * (y - archBottomY)))));
     
+    /*
+     int l =    sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
+     
+     */
     
     
     angle = acos( ( ( (side1)^2 + (side2)^2 - archLength^2) / ( 2 * side1 * side2) ));
@@ -448,6 +588,28 @@ int Layout::countTeammatesInFront(Player *p)
     }
     
     return count;
+    
+}
+
+Team * Layout::getDefendingTeam()
+{
+    string team = playerHasBall->getTeamName();
+    
+    if (team == "homeTeam")
+        return awayTeam;
+    else
+        return homeTeam;
+    
+}
+
+Team * Layout::getAttackingTeam()
+{
+    string team = playerHasBall->getTeamName();
+    
+    if (team == "homeTeam")
+        return homeTeam;
+    else
+        return awayTeam;
     
 }
 

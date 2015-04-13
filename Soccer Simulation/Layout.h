@@ -36,23 +36,29 @@ private:
     
     bool isRectangleAreaInFrontClear(Player * p);
     
-public:
     
+public:
+    Player * hasBall();
     Layout(Team * homeT, Team * awayT, Ball * b);
     void initialSetUp433();
     void hasBall(Player * p);
     Team * getHomeTeam();
     Team * getAwayTeam();
     Ball * getBall();
-    Player * hasBall();
+    //Player * hasBall();
     vector <Player *> getTeamMatesWithin80(Player * p);
+    double getDistance(int x1, int x2, int y1, int y2);  //A distance between two specified points
+    double getDistanceBall(Player * p); //A distance with respect to the ball and a speified point
+    
+    Team * getDefendingTeam();
+    Team * getAttackingTeam();
     
     vector <Player *> getAvailablePlayers(Player * p);
     int countTeammatesInFront(Player * p); //Does not matter which direction player is facing
     int countTeamatesInDirection(Player * p); //Takes into consideration what direction player is facing
     void analyzeField(Player * p);
     void setPlayerWithPossBall(Player *p); //Pinpoints the ball at the tip of the Player
-    int getShootingAngle(Plaer * p);
+    double getShootingAngle(Player * p);
     
     
     

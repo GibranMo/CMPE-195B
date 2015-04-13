@@ -72,54 +72,54 @@ int main(void)
     //Setup actors
     const char* filename = "images/dotBlackArrow.tga";
     map <string, Player *> listOfPlayers;
-    Player p1("A", 50, screenH/2, filename, "homeTeam", "E");
+    Player p1("Terstegen", 50, screenH/2, filename, "homeTeam", "E", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers[p1.getName()] = &p1;
-    Player p2("B", 250, screenH/2 + 100, filename, "homeTeam", "E");
+    Player p2("Mathieu", 250, screenH/2 -  100, filename, "homeTeam", "E", 76, 64, 66, 55, 82, 81, 80);
     listOfPlayers[p2.getName()] = &p2;
-    Player p3("C", 250, screenH/2 + 200, filename, "homeTeam", "E");
+    Player p3("Alba", 250, screenH/2 -  200, filename, "homeTeam", "E", 92, 69, 75, 81, 78, 76, 81);
     listOfPlayers[p3.getName()] = &p3;
-    Player p4("D", 250, screenH/2 - 100, filename, "homeTeam", "E");
+    Player p4("Pique", 250, screenH/2 + 100, filename, "homeTeam", "E", 66, 54, 69, 60, 86, 76, 84);
     listOfPlayers[p4.getName()] = &p4;
-    Player p5("E", 250, screenH/2 - 200, filename, "homeTeam", "E");
+    Player p5("Alves", 250, screenH/2 + 200, filename, "homeTeam", "E", 86, 70, 79, 83, 76, 68, 83);
     listOfPlayers[p5.getName()] = &p5;
-    Player p6("F", 400, screenH/2 - 100, filename, "homeTeam", "E");
+    Player p6("Iniesta", 400, screenH/2 - 100, filename, "homeTeam", "E", 75, 72, 89, 91, 59, 63, 89);
     listOfPlayers[p6.getName()] = &p6;
-    Player p7("G", 400, screenH/2 + 100, filename, "homeTeam", "E");
+    Player p7("Rakitic", 400, screenH/2 + 100, filename, "homeTeam", "NW", 69, 82, 87, 81, 55, 67, 83);
     listOfPlayers[p7.getName()] = &p7;
-    Player p8("H", 400, screenH/2, filename, "homeTeam", "E");
+    Player p8("Busquets", 400, screenH/2, filename, "homeTeam", "E", 56, 59, 78, 75, 81, 80, 85);
     listOfPlayers[p8.getName()] = &p8;
-    Player p9("I", 450, screenH/2, filename, "homeTeam", "E");
+    Player p9("Neymar", 450, screenH/2, filename, "homeTeam", "E", 90, 80, 72, 92, 30, 58, 86);
     listOfPlayers[p9.getName()] = &p9;
-    Player p10("J", screenW/2 - 17, screenH/2 + 10 , filename, "homeTeam", "N");
+    Player p10("Messi", screenW/2 - 17, screenH/2 + 10 , filename, "homeTeam", "N", 93, 89, 86, 96, 27, 62, 93);
     listOfPlayers[p10.getName()] = &p10;
-    Player p11("K", screenW/2 -17, screenH/2 - 24, filename, "homeTeam", "S");
+    Player p11("Suarez", screenW/2 -17, screenH/2 - 24, filename, "homeTeam", "S", 83, 87, 79, 88, 42, 79, 89);
     listOfPlayers[p11.getName()] = &p11;
     Team homeTeam(listOfPlayers);
     
     filename = "images/madridPlayer.tga";
     
     map <string, Player *> listOfPlayers2;
-    Player p21("Z", screenW - 50, screenH/2, filename, "awayTeam", "W");
+    Player p21("Casillas", screenW - 50, screenH/2, filename, "awayTeam", "W", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers2[p21.getName()] = &p21;
-    Player p22("Y", screenW - 250, screenH/2 + 100, filename, "awayTeam", "W");
+    Player p22("Ramos", screenW - 250, screenH/2 + 100  , filename, "awayTeam", "W", 79, 60, 71, 66, 87, 82, 87);
     listOfPlayers2[p22.getName()] = &p22;
-    Player p23("X", screenW - 250, screenH/2 + 200, filename, "awayTeam", "W");
+    Player p23("Marcelo", screenW - 250, screenH/2 + 200, filename, "awayTeam", "W", 81, 67, 78, 84, 77, 79, 82);
     listOfPlayers2[p23.getName()] = &p23;
-    Player p24("W", screenW - 250, screenH/2 - 100, filename, "awayTeam", "W");
+    Player p24("Pepe", screenW - 250, screenH/2 - 100, filename, "awayTeam", "W", 73, 50, 58, 59, 84, 83, 83);
     listOfPlayers2[p24.getName()] = &p24;
-    Player p25("V", screenW - 250, screenH/2 - 200, filename, "awayTeam", "SEE");
+    Player p25("Carvajal", screenW - 250, screenH/2 - 200, filename, "awayTeam", "W", 83, 40, 73, 78, 76, 82, 79);
     listOfPlayers2[p25.getName()] = &p25;
-    Player p26("U", screenW - 400, screenH/2 - 100, filename, "awayTeam", "W");
+    Player p26("Kroos", screenW - 400, screenH/2 - 100, filename, "awayTeam", "W", 58, 81, 89, 84, 58, 69, 85);
     listOfPlayers2[p26.getName()] = &p26;
-    Player p27("T", screenW - 400, screenH/2 + 200, filename, "awayTeam", "W");
+    Player p27("Modric", screenW - 400, screenH/2 + 200, filename, "awayTeam", "W", 76, 74, 85, 89, 71, 70, 87);
     listOfPlayers2[p27.getName()] = &p27;
-    Player p28("S", screenW - 400, screenH/2, filename, "awayTeam", "W");
+    Player p28("Rodriguez", screenW - 400, screenH/2, filename, "awayTeam", "W", 80, 80, 84, 85, 40, 72, 86);
     listOfPlayers2[p28.getName()] = &p28;
-    Player p29("R", screenW - 500, screenH/2, filename, "awayTeam", "W");
+    Player p29("Benzema", screenW - 500 + 30, screenH/2, filename, "awayTeam", "NW", 84, 84, 75, 82, 30, 74, 85);
     listOfPlayers2[p29.getName()] = &p29;
-    Player p210("Q", screenW - 500, screenH/2 + 200, filename, "awayTeam", "W");
+    Player p210("Ronaldo", screenW - 500, screenH/2 + 200, filename, "awayTeam", "N", 93, 93, 81, 91, 32, 79, 92);
     listOfPlayers2[p210.getName()] = &p210;
-    Player p211("P", screenW - 500, screenH/2 - 200, filename, "awayTeam", "W");
+    Player p211("Bale", screenW - 500, screenH/2 - 200, filename, "awayTeam", "S", 94, 83, 83, 84, 63, 81, 87);
     listOfPlayers2[p211.getName()] = &p211;
     Team awayTeam(listOfPlayers2);
     
@@ -131,7 +131,12 @@ int main(void)
     Layout layout(&homeTeam, &awayTeam, &ball);
     layout.initialSetUp433();
     
-    layout.hasBall(&p11);
+    layout.hasBall(&p10);
+    
+    
+    int testInt = 1.5;
+    testInt = testInt + 0.5;
+    cout <<  "test int: " << testInt << endl;
     
     //EventHandling.cpp
     initEventQueue();

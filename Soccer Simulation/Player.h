@@ -14,6 +14,7 @@
 #include "DrawUtils.h"
 using namespace std;
 
+
 class Player
 {
 private:
@@ -47,13 +48,22 @@ private:
     GLuint tex;
     
     /*
-     A bunch of other attributs like all the skills from fifa.
+     A bunch of other attributes like all the skills from fifa.
      
      */
     
+    int pace;
+    int shot;
+    int pass;
+    int dribbling;
+    int physical;
+    int defending;
+    int overall;
+    
 public:
     //constructor
-    Player(string n, int xp, int yp, const char* image, string teamName, string faceAngle);
+    Player(string n, int xp, int yp, const char* image, string teamName, string faceAngle,
+           int PAC, int SHO, int PAS, int DRI, int DEF, int PHY, int OVER);
     //getters / setters
     int getY();
     int getX();
@@ -71,6 +81,8 @@ public:
     //actions
     void rotate(float degrees);
     void goAfterLooseBall();
+    void setXPos(int x);
+    void setYPos(int y);
     void setAreaPosition(int x1, int x2, int y1, int y2);
     void passBall();
     
@@ -86,6 +98,20 @@ public:
     void setFacingAngle(facingAngle); //change the direction a player points
     void setFaceAngle(string direction); //change the direction a player points (alternative)
     string getAngle();
+    
+    bool isWithinArea();
+    
+    /*
+     get skill attribures methods
+     */
+    
+    int getPace();
+    int getShot();
+    int getPass();
+    int getDrib();
+    int getDef();
+    int getPhy();
+    int getOverall();
     
     
 };

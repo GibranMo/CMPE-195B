@@ -185,7 +185,7 @@ void GamePlay::DrawSprite(bool playing)
         }
         for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
             
-            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
         }
         
         glDrawSprite(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
@@ -198,15 +198,72 @@ void GamePlay::DrawSprite(bool playing)
         glDrawSprite(testTex, 0, 50, 30, 50);
         
         
-//        glDrawLines();
-//        glDrawPoint();
+        //        glDrawLines();
+        //        glDrawPoint();
         
     }
 }
 
+void GamePlay::moveTowardsBall(Player *p)
+{
+    int ballX = layout->getBall()->getX();
+    int ballY = layout->getBall()->getY();
+    
+    string xdir = "";
+    string ydir = "";
+    
+    if (ballX >= p->getX())
+    {
+        xdir = "right";
+        p->setXPos(p->getX()+ 0.1 + (p->getPace()/1000));
+        
+    }
+    else
+    {
+        xdir = "left";
+        p->setXPos(p->getX() - 0.1 + (p->getPace()/1000) );
+        
+    }
+    
+    if (ballY >= p->getY())
+    {
+        
+        ydir = "down";
+        p->setYPos(p->getY() + 0.1 + (p->getPace()/1000) );
+        
+    }
+    else
+    {
+        
+        ydir = "up";
+        p->setYPos(p->getY() -  0.1 + (p->getPace()/1000)) ;
+        
+    }
+    
+}
 
 
-
+void GamePlay::MovePlayers()
+{
+    
+    Team * defendingTeam = layout->getDefendingTeam();
+    map <string, Player *> defendingPlayers = *defendingTeam->getPlayers();
+    
+    for (std::map<string,Player*>::iterator it = defendingPlayers.begin(); it!= defendingPlayers.end(); ++it)
+    {
+        Player * p = it->second;
+        
+        if (layout->getDistanceBall(p) <= 170)
+        {
+            
+            moveTowardsBall(p);
+            cout << "defending" << endl;
+            
+        }
+    }
+    
+    
+}
 
 
 void GamePlay::NextMove()
@@ -224,7 +281,12 @@ void GamePlay::NextMove()
     }
     else
     {
-        layout->analyzeField(player);
+        GamePlay::MovePlayers();
+        cout << "next move" << endl;
+        
+        
+        
+        //layout->analyzeField(player);
         
         /*
          vector<Player *> listOfCloseTeamMates = layout->getTeamMatesWithin80(player);
