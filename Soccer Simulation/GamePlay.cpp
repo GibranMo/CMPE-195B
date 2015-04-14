@@ -23,6 +23,8 @@
 #include <chrono>
 #include <thread>
 
+#include <unistd.h>
+
 //using namespace std;
 
 
@@ -45,123 +47,55 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
     expFieldTex = ft;
     //***************
 }
+
 /*
- void GamePlay :: playerAction(Player * p)
+ void GamePlay::setUpThreads ()
  {
- cout << "UP HERE" << endl;
- cout << layout->hasBall()->getName();
+ 
+ map <string, Player *> listOfPlayers = *layout->getHomeTeam()->getPlayers();
+ 
+ vector <Player *> list;
+ int r = 1;
+ for (std::map<string,Player*>::iterator it2=listOfPlayers.begin(); it2!=listOfPlayers.end(); ++it2){
+ //glDrawSprite(it2->second->getTex(), it2->second->getX(), it2->second->getY(), 20, 20);
+ //cout << "r" << r << endl;
+ list.push_back(it2->second);
+ r++;
+ 
+ }
+ 
+ for (int i = 0; i <=1; i++)
+ {
+ //int index = i--; //
+ pthread_attr_t playerAttr;
+ pthread_attr_init(&playerAttr);
+ //cout << "main() : creating thread, " << i << endl;
+ cout << ">>: " <<list.at(i)->getName() << endl;
+ int rc = pthread_create(&playerThreads[i], &playerAttr, player_t, list.at(i));
+ if (rc){
+ cout << "Error:unable to create thread," << rc << endl;
+ //exit(-1);
+ }
+ //it++;
+ 
+ }
+ 
+ pthread_attr_t drawAttr;
+ pthread_attr_init(&drawAttr);
+ pthread_t drawThread;
+ 
+ //int t = pthread_create(&drawThread, &drawAttr, draw_t, &fieldTex);
+ 
+ // if (t){
+ //   cout << "TError:unable to create thread," << t << endl;
+ //exit(-1);
+ // }
+ 
+ 
  
  }
  
  */
-
-void GamePlay::testFoo(GLuint gl, Player * pl)
-{
-    cout << "QRS" << endl;
-    glDrawSprite(gl, pl->getX(), pl->getY(), 20, 20);
-    
-}
-void * GamePlay :: player_t(void * param)
-{
-    Player * p = (Player *) param;
-    
-    string name = p->getName();
-    
-    //cout << ">>" << name << endl;
-    //
-    if(name == "A")
-        cout << "*}" << endl;
-    
-    
-    
-    cout << expLayout->testInt() << endl;
-    
-    int t = p->getX();
-    
-    cout << name << "'s current x pos is: " << t << endl;
-    
-    int i = 0;
-    
-    while (true)
-    {
-        //glDrawSprite3(player->getTex(), player->getX(), player->getY(), 20, 20);
-        //glDrawSprite(p->getTex(), i, p->getY(), 20, 20);
-        GLuint textr = glTexImageTGAFile("images/1.tga");
-        cout << t << endl;
-        testFoo(textr, p);
-        
-        //i++;
-    }
-    
-    //string n = p->getName();
-    //cout << ">" << n << endl;
-    
-    /*
-     map <string, Player *> listOfPlayers = *expLayout->getHomeTeam()->getPlayers();
-     for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
-     glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
-     
-     }
-     */
-    
-    //GamePlay::drawingTest();
-    
-    
-    
-    
-    //Layout * l  = layout;
-    return NULL;
-}
-
-
-
-void GamePlay::setUpThreads ()
-{
-    
-    map <string, Player *> listOfPlayers = *layout->getHomeTeam()->getPlayers();
-    
-    vector <Player *> list;
-    int r = 1;
-    for (std::map<string,Player*>::iterator it2=listOfPlayers.begin(); it2!=listOfPlayers.end(); ++it2){
-        //glDrawSprite(it2->second->getTex(), it2->second->getX(), it2->second->getY(), 20, 20);
-        //cout << "r" << r << endl;
-        list.push_back(it2->second);
-        r++;
-        
-    }
-    
-    for (int i = 0; i <=1; i++)
-    {
-        //int index = i--; //
-        pthread_attr_t playerAttr;
-        pthread_attr_init(&playerAttr);
-        //cout << "main() : creating thread, " << i << endl;
-        cout << ">>: " <<list.at(i)->getName() << endl;
-        int rc = pthread_create(&playerThreads[i], &playerAttr, player_t, list.at(i));
-        if (rc){
-            cout << "Error:unable to create thread," << rc << endl;
-            //exit(-1);
-        }
-        //it++;
-        
-    }
-    
-    pthread_attr_t drawAttr;
-    pthread_attr_init(&drawAttr);
-    pthread_t drawThread;
-    
-    //int t = pthread_create(&drawThread, &drawAttr, draw_t, &fieldTex);
-    
-    // if (t){
-    //   cout << "TError:unable to create thread," << t << endl;
-    //exit(-1);
-    // }
-    
-    
-    
-}
-
-
 
 void GamePlay::DrawSprite(bool playing)
 {
@@ -185,10 +119,10 @@ void GamePlay::DrawSprite(bool playing)
         }
         for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
             
-            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
+            glDrawSprite2(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
         }
         
-        glDrawSprite(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
+        glDrawSprite2(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
         
         
         GLuint testTex = glTexImageTGAFile("images/1.tga");
@@ -204,41 +138,142 @@ void GamePlay::DrawSprite(bool playing)
     }
 }
 
+void GamePlay::setPointToBall(Player *p)
+{
+    int ballX = layout->getBall()->getX();
+    int ballY = layout->getBall()->getY();
+    
+    if (ballY > p->getY())
+    {
+        if (ballX < p->getX())
+            p->setFaceAngle("SW");
+        
+        if (ballX == p->getX())
+            p->setFaceAngle("S");
+    }
+    
+}
+
+
+
 void GamePlay::moveTowardsBall(Player *p)
 {
+    static unsigned int functionCallctr = 0;
+    functionCallctr++;
+    
     int ballX = layout->getBall()->getX();
     int ballY = layout->getBall()->getY();
     
     string xdir = "";
     string ydir = "";
     
+    
+    if ( functionCallctr == 1)
+        setPointToBall(p);
+    
+    //setPointToBall(p);
+    //usleep(1500);
+    
+    //setPointToBall(p);
+    
+    //int ratio = abs(p->getX() - layout->getBall()->getX() ) >  (2 *  abs ( (p->getY() -  layout->getBall()->getY() ) )) ;
+    
+    /*
+     
+     if ( deltaX >= deltaY && deltaY != 0)
+     ratio = deltaX/deltaY;
+     else
+     ratio = 1;
+     
+     cout << "RATIO:  " << ratio << endl;
+     // *RIGHT/LEFT* //
+     if (ballX >= p->getX())
+     {
+     
+     p->setXPos(p->getX() + ratio );
+     }
+     else
+     {
+     p->setXPos(p->getX() -  ratio );
+     
+     int deltaY2 = abs ( (p->getY() -  layout->getBall()->getY() ) );
+     
+     int deltaX2 = abs (p->getX() - layout->getBall()->getX());
+     
+     int ratio2;
+     
+     if ( (deltaY2 >= deltaX2) && deltaX2 != 0)
+     ratio2 = deltaY2/deltaX2;
+     else
+     ratio2 = 1;
+     
+     // *UP/DOWN* //
+     cout << "RATIO2:  " << ratio2 << endl;
+     if (ballY >= p->getY())
+     {
+     
+     p->setYPos(p->getY() + ratio2) ;
+     
+     }
+     else
+     p->setYPos(p->getY() - ratio2) ;
+     
+     
+     }
+     
+     */
+    
+    
+    int deltaY = abs ( (p->getY() -  layout->getBall()->getY() ) );
+    
+    int deltaX = abs (p->getX() - layout->getBall()->getX());
+    int ratio;
+    cout << "delta X: " << deltaX << " delta Y: " << deltaY << endl;
+    if ( deltaY != 0 && (deltaX > deltaY))
+        ratio = deltaX/deltaY;
+    else
+        ratio = 1;
+    
+    if (ratio >= 8)
+        ratio = 1;
+    
+    cout << "RATIO:  " << ratio << endl;
+    
+    // *RIGHT/LEFT* //
     if (ballX >= p->getX())
     {
-        xdir = "right";
-        p->setXPos(p->getX()+ 0.1 + (p->getPace()/1000));
-        
+        p->setXPos(p->getX() + ratio );
     }
     else
     {
-        xdir = "left";
-        p->setXPos(p->getX() - 0.1 + (p->getPace()/1000) );
-        
+        p->setXPos(p->getX() - ratio );
     }
+    
+    // *UP/DOWN* //
+    int deltaY2 = abs ( (p->getY() -  layout->getBall()->getY() ) );
+    
+    int deltaX2 = abs (p->getX() - layout->getBall()->getX());
+    
+    int ratio2;
+    
+    if (deltaX2 != 0 && (deltaY> deltaX))
+        ratio2 = deltaY2/deltaX2;
+    else
+        ratio2 = 1;
+    
+    if (ratio2 >= 8)
+        ratio2 = 1;
+    
+    cout << "RATIO2:  " << ratio2 << endl;
     
     if (ballY >= p->getY())
     {
-        
-        ydir = "down";
-        p->setYPos(p->getY() + 0.1 + (p->getPace()/1000) );
-        
+        p->setYPos(p->getY() + ratio2) ;
     }
     else
-    {
-        
-        ydir = "up";
-        p->setYPos(p->getY() -  0.1 + (p->getPace()/1000)) ;
-        
-    }
+        p->setYPos(p->getY() - ratio2) ;
+    
+    
     
 }
 
@@ -253,11 +288,13 @@ void GamePlay::MovePlayers()
     {
         Player * p = it->second;
         
-        if (layout->getDistanceBall(p) <= 170)
+        if (layout->getDistanceBall(p) <= 1100)
         {
-            
-            moveTowardsBall(p);
-            cout << "defending" << endl;
+            if (p->getName() == "Bale")
+            {
+                moveTowardsBall(p);
+                cout << "defending" << endl;
+            }
             
         }
     }

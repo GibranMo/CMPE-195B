@@ -39,8 +39,8 @@ private:
     int posY1; //upper most
     int posY2; //lower most
     
-    int x;
-    int y;
+    double x;
+    double y;
     int w;
     int h;
     int velX;

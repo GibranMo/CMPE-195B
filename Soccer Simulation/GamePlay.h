@@ -53,7 +53,7 @@ public:
     void DrawSprite(bool playing);
     void NextMove();
     void setUpThreads();
-    
+    void setPointToBall(Player * p);
     
     
     

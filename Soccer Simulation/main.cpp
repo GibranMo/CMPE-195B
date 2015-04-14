@@ -90,7 +90,7 @@ int main(void)
     listOfPlayers[p8.getName()] = &p8;
     Player p9("Neymar", 450, screenH/2, filename, "homeTeam", "E", 90, 80, 72, 92, 30, 58, 86);
     listOfPlayers[p9.getName()] = &p9;
-    Player p10("Messi", screenW/2 - 17, screenH/2 + 10 , filename, "homeTeam", "N", 93, 89, 86, 96, 27, 62, 93);
+    Player p10("Messi", screenW/2 - 300, screenH/2 , filename, "homeTeam", "N", 93, 89, 86, 96, 27, 62, 93);
     listOfPlayers[p10.getName()] = &p10;
     Player p11("Suarez", screenW/2 -17, screenH/2 - 24, filename, "homeTeam", "S", 83, 87, 79, 88, 42, 79, 89);
     listOfPlayers[p11.getName()] = &p11;
@@ -119,7 +119,7 @@ int main(void)
     listOfPlayers2[p29.getName()] = &p29;
     Player p210("Ronaldo", screenW - 500, screenH/2 + 200, filename, "awayTeam", "N", 93, 93, 81, 91, 32, 79, 92);
     listOfPlayers2[p210.getName()] = &p210;
-    Player p211("Bale", screenW - 500, screenH/2 - 200, filename, "awayTeam", "S", 94, 83, 83, 84, 63, 81, 87);
+    Player p211("Bale", screenW/2  - 320 , screenH/2 - 200 , filename, "awayTeam", "W", 94, 83, 83, 84, 63, 81, 87);
     listOfPlayers2[p211.getName()] = &p211;
     Team awayTeam(listOfPlayers2);
     
@@ -134,10 +134,11 @@ int main(void)
     layout.hasBall(&p10);
     
     
-    int testInt = 1.5;
-    testInt = testInt + 0.5;
-    cout <<  "test int: " << testInt << endl;
     
+    int testInt = 0.9;
+    //testInt = testInt + 0.5;
+    cout <<  "test int: " << testInt << endl;
+    //cin >> testInt;
     //EventHandling.cpp
     initEventQueue();
     //set up textures and game
@@ -164,7 +165,9 @@ int main(void)
     
     //gamePlay.setUpThreads();
     
-    
+    int wait;
+    //cout << "input something to continue " << endl;
+    //cin >> wait;
     
     
     while (!quit) {
