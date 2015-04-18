@@ -10,14 +10,12 @@
 #include <vector>
 #include <iostream>
 
-Player::Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamN, string faceAngle,
+Player::Player(string n, int xp, int yp, const char* image, string teamN, string faceAngle,
                int PAC, int SHO, int PAS, int DRI, int PHY, int DEF, int OVR)
 {
     name = n;
     x = xp;
     y = yp;
-    w = wp;
-    h = hp;
     velY = 0;
     velX = 0;
     tex = glTexImageTGAFile(image);
@@ -172,14 +170,6 @@ int Player::getX(){
 
 int Player::getY(){
     return y;
-}
-
-int Player::getH(){
-    return h;
-}
-
-int Player::getW(){
-    return w;
 }
 
 int Player::getVelX(){

@@ -39,8 +39,8 @@ private:
     int posY1; //upper most
     int posY2; //lower most
     
-    int x;
-    int y;
+    double x;
+    double y;
     int w;
     int h;
     int velX;
@@ -64,7 +64,7 @@ private:
     
 public:
     //constructor
-    Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamName, string faceAngle,
+    Player(string n, int xp, int yp, const char* image, string teamName, string faceAngle,
            int PAC, int SHO, int PAS, int DRI, int DEF, int PHY, int OVER);
     //getters / setters
     int getY();
@@ -72,21 +72,14 @@ public:
     string getName();
     int getVelX();
     int getVelY();
-    int getH();
-    int getW();
     GLuint getTex();
     void setVelX(int vx);
     void setVelY(int vy);
     void setPos(int xp, int yp);
     vector <int> getPosArea();
-<<<<<<< HEAD:Soccer1/Player.h
     
     void incrementCounter();
     int getCounter();
-=======
-    string getTeamName();
-
->>>>>>> Gibran1:Soccer Simulation/Player.h
     
     
     //actions
@@ -105,6 +98,7 @@ public:
     void runBackwards();
     void stop();
     
+    string getTeamName();
     void setFacingAngle(facingAngle); //change the direction a player points
     void setFaceAngle(string direction); //change the direction a player points (alternative)
     string getAngle();
