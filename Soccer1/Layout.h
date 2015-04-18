@@ -34,7 +34,7 @@ private:
     
     void pass(Player * receivingPlayer);
     
-    bool isRectangleAreaInFrontClear(Player * p);
+    bool isRectangleAreaInFrontClear(Player * p, Player * p2);
     
     
 public:
@@ -47,7 +47,7 @@ public:
     Team * getAwayTeam();
     Ball * getBall();
     //Player * hasBall();
-    vector <Player *> getTeamMatesWithin80(Player * p);
+    vector <Player *> getTeamMatesWithin(Player * p, int range);
     double getDistance(int x1, int x2, int y1, int y2);  //A distance between two specified points
     double getDistanceBall(Player * p); //A distance with respect to the ball and a specified Player
     double distanceBetweenPlayers(Player * p1, Player * p2);

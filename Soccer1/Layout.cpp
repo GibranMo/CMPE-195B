@@ -84,16 +84,24 @@ void Layout::initialSetUp433()
 
 void Layout::hasBall(Player * p)
 {
+    if(p == NULL){
+        playerHasBall = NULL;
+        return;
+    }
+    
     playerHasBall = p;
-    
-    string team = p->getTeamName();
-    
+
     /*   A player having possession of the ball implies a certain position for the ball on the screen(At the tip of the player).
      */
     
     
     int x = playerHasBall->getX();
     int y = playerHasBall->getY();
+    int w = playerHasBall->getW();
+    int h = playerHasBall->getH();
+    int bw = ball->getW();
+    int bh = ball->getH();
+    
     string s = playerHasBall->getAngle();
     
     int newBallX = 0;
@@ -101,103 +109,38 @@ void Layout::hasBall(Player * p)
     
     if (s == "N")
     {
-        
-        if (team == "awayTeam")
-        {
-            newBallX = x+3;
-            newBallY = y-4;
-        }
-        else
-        {
-            newBallX = x+5;
-            newBallY = y;
-        }
-        
-        
-        
+        newBallX = x + (w/2);
+        newBallY = y - bh - 1;
     }
     else if (s == "S")
     {
-        
-        if (team == "awayTeam")
-        {
-            newBallX = x+3;
-            newBallY = y+12;
-        }
-        else
-        {
-            newBallX = x+6;
-            newBallY = y+11;
-        }
-        
-        
+        newBallX = x + (w/2);
+        newBallY = y + h + 1;
     }
     else if (s == "E")
     {
-        
-        if (team == "awayTeam")
-        {
-            newBallX = x+11;
-            newBallY = y+5;
-        }
-        else
-        {
-            newBallX = x+12;
-            newBallY = y+6;
-        }
-        
-        
+        newBallX = x + w + 1;
+        newBallY = y + (h/2);
+
     }
     else if (s == "W")
     {
-        
-        if (team == "awayTeam")
-        {
-            newBallX = x-6;
-            newBallY = y+5;
-        }
-        else
-        {
-            newBallX = x-1;
-            newBallY = y+7;
-        }
-        
-        
+        newBallX = x - bw - 1;
+        newBallY = y + (h/2);
     }
     else if (s == "SE")
     {
-        
-        if (team == "awayTeam")
-        {
-            newBallX = x+11;
-            newBallY = y+12;
-        }
-        else
-        {
-            newBallX = x+12;
-            newBallY = y+14;
-        }
-        
-        
+        newBallX = x + w + 1;
+        newBallY = y + h + 1;
     }
     else if (s == "SW")
     {
-        
-        if (team == "awayTeam")
-        {
-            newBallX = x-6;
-            newBallY = y+10;
-        }
-        else
-        {
-            newBallX = x-3;
-            newBallY = y+15;
-        }
-        
-        
+        newBallX = x - bw - 1;
+        newBallY = y + h + 1;
     }
     else if (s == "NE")
     {
+<<<<<<< HEAD:Soccer1/Layout.cpp
         
         if (team == "awayTeam")
         {
@@ -236,6 +179,17 @@ void Layout::hasBall(Player * p)
     
     
     
+=======
+        newBallX = x + w + 1;
+        newBallY = y - bh - 1;
+    }
+    else if (s == "NW")
+    {
+        newBallX = x - bw - 1;
+        newBallY = y - bh - 1;
+    }
+    ball->setPos(newBallX, newBallY);
+>>>>>>> Gibran1:Soccer Simulation/Layout.cpp
 }
 
 Team * Layout::getHomeTeam()
@@ -261,7 +215,7 @@ Player * Layout::hasBall(){
 /* Do not care is opposing players are obstructing the teammate. Just scanning for
  a teammate within specified radius
  */
-vector <Player *> Layout::getTeamMatesWithin80(Player * p) {
+vector <Player *> Layout::getTeamMatesWithin(Player * p, int range) {
     string team = p->getTeamName();
     vector<Player*> players;
     
@@ -273,10 +227,7 @@ vector <Player *> Layout::getTeamMatesWithin80(Player * p) {
             if (it->second->getName() == p->getName() ) // I player does not care about himself
                 continue;
             Player * p2 = it->second;
-            
-            if(distance(p, p2) < 80){
-                cout << "YEEEES " << p2->getName() << endl;
-                
+            if(distance(p, p2) < range){
                 players.push_back(p2);
             }
         }
@@ -290,7 +241,7 @@ vector <Player *> Layout::getTeamMatesWithin80(Player * p) {
                 continue;
             
             Player * p2 = it->second;
-            if(distance(p, p2) < 80){
+            if(distance(p, p2) < range){
                 players.push_back(p2);
             }
         }
@@ -298,8 +249,7 @@ vector <Player *> Layout::getTeamMatesWithin80(Player * p) {
     return players;
 }
 
-bool Layout::isRectangleAreaInFrontClear(Player *p)
-{
+bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2) {
     
     int x = p->getX();
     int y = p->getY();
@@ -365,8 +315,8 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
     vector<Player*> players;
     
     if(team == "homeTeam") {
-        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin(); it!=homeTeam->getPlayers()->end(); ++it )
-        {
+        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
+             it!=homeTeam->getPlayers()->end(); ++it ) {
             Player * p1 = it->second;
             
             if (p1->getName() == p->getName())
@@ -382,6 +332,12 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
                     if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() )
                         available = false;
                 }
+                
+                
+//                if(){}
+                
+                   
+                   
             }
             if(available)
                 players.push_back(p1);
@@ -391,6 +347,10 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
         for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
              it!=awayTeam->getPlayers()->end(); ++it ){
             Player * p1 = it->second;
+            
+            if (p1->getName() == p->getName())
+                continue;
+            
             bool available = true;
             
             for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
@@ -486,7 +446,7 @@ void Layout::analyzeField(Player * p)
     
     
     
-    vector<Player *> listOfCloseTeamMates = getTeamMatesWithin80(p);
+    vector<Player *> listOfCloseTeamMates = getTeamMatesWithin(p, 80);
     
     for (int k = 0; k < listOfCloseTeamMates.size(); k++)
         cout << ">> " << listOfCloseTeamMates.at(k)->getName() << endl;
