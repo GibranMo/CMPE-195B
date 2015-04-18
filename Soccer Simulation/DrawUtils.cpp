@@ -1,4 +1,4 @@
-  //
+//
 //  DrawUtils.cpp
 //  Soccer Simulation
 //
@@ -116,32 +116,13 @@ void glDrawSprite(GLuint tex, int x, int y, int w, int h)
     glEnd();
 }
 
-void glDrawSprite3(GLuint tex, int x, int y, int w, int h)
-{
-    glBindTexture(GL_TEXTURE_2D, tex);
-    glBegin(GL_QUADS);
-    {
-        glColor3ub(255, 255, 255);
-        glTexCoord2f(0, 1);
-        glVertex2i(x, y);
-        glTexCoord2f(1, 1);
-        glVertex2i(x + w, y);
-        glTexCoord2f(1, 0);
-        glVertex2i(x + w, y + h);
-        glTexCoord2f(0, 0);
-        glVertex2i(x, y + h);
-    }
-    glEnd();
-}
-
-void glDrawSprite2(GLuint tex, double x, double y, int w, int h)
+void glDrawSprite2(GLuint tex, int x, int y, int w, int h)
 {
     glBindTexture(GL_TEXTURE_2D, tex);
     
-    /*
     glTranslatef(x, -y, 0);
     glRotatef(30, 0, 0, 1);
-    */
+    
     
     glBegin(GL_QUADS);
     {
@@ -157,42 +138,24 @@ void glDrawSprite2(GLuint tex, double x, double y, int w, int h)
     }
     glEnd();
     
-    /*
     glRotatef(-30,0,0,1);
     glTranslatef(-x, y, 0);
-     */
 }
 
 void glDrawLines()
 {
-    /*
+    
     //glClear(GL_COLOR_BUFFER_BIT);
-    glLineWidth(2.5);
-    glColor3b(9.0, 5.0, 6.0);
+    glColor3b(1.0, 1.0, 1.0);
     glBegin(GL_LINES);
-    {
-        glVertex2f(0.2, 0.5);
-        glVertex2f(.9, .9);
-         //glVertex3f(0.2, 0.5, 0.0);
-         //glVertex3f(0.8, 0.5, 0.0);
-         //glVertex3f(0.2, 0.8, 0.0);
-         //glVertex3f(0.8, 0.8, 0.0);
-    }
+    glVertex3f(20, 20, 0.0);
+    glVertex3f(40, 40, 0.0);
+    //glVertex3f(0.2, 0.5, 0.0);
+    //glVertex3f(0.8, 0.5, 0.0);
+    //glVertex3f(0.2, 0.8, 0.0);
+    //glVertex3f(0.8, 0.8, 0.0);
     glEnd();
     glFlush();
-     */
-    
-    glBegin(GL_LINES);
-    glVertex3f(100.0f, 100.0f, 0.0f); // origin of the line
-    glVertex3f(200.0f, 140.0f, 5.0f); // ending point of the line
-    glEnd( );
     
     
-}
-
-void glDrawPoint()
-{
-    glBegin(GL_POINTS);
-    glVertex2f(100.0f, 100.0f);
-    glEnd( );
 }

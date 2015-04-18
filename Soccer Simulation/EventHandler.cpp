@@ -34,9 +34,9 @@ void queueEvent(Event* ev){
 
 void handleEvent(Event* ev){
     switch (ev->et) {
-            //		case ET_BALL_TOPBOTTOM_COLLISION:
+        case ET_BALL_TOPBOTTOM_COLLISION:
             //			ev->actor1->velY *= -1;
-            //			break;
+            break;
     }
 }
 

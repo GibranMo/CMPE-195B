@@ -42,15 +42,11 @@ private:
     void playerAction(Player * p);
     int computePositionScore(int countInFront);
     void MovePlayers();
-    void MoveDefendingPlayer(Player *p);
     
     //Test
     static void testFoo(GLuint gl, Player * pl);
     void drawingTest();
     void moveTowardsBall(Player * p);
-    int getAdjustSpeed(int speed);
-    void defend(Player * p);
-    void defend2(Player * p);
     
 public:
     GamePlay(Layout * l, GLuint ft);
