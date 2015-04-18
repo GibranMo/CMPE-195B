@@ -26,7 +26,7 @@ private:
     bool isGauging = false;
     string teamName;
     enum facingAngle { E,  NE, N, NW, W, SW, S, SE};
-    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect.
+    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect. 
     
     /*
      The following set of 4 points represent a rectangular area, which in turn
@@ -46,6 +46,8 @@ private:
     int velX;
     int velY;
     GLuint tex;
+    
+    int counter;
     
     /*
      A bunch of other attributes like all the skills from fifa.
@@ -77,12 +79,18 @@ public:
     void setVelY(int vy);
     void setPos(int xp, int yp);
     vector <int> getPosArea();
+<<<<<<< HEAD
     string getTeamName();
 
+=======
+    
+    void incrementCounter();
+    int getCounter();
+>>>>>>> master
     
     
     //actions
-    void rotate(float degrees);
+    //void rotate(float degrees);
     void goAfterLooseBall();
     void setXPos(int x);
     void setYPos(int y);

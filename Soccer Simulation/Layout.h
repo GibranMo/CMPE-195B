@@ -30,7 +30,7 @@ private:
     bool someoneHasBall;
     
     void setSomeoneHasBall();
-    double distance(Player * p1, Player * p2);
+    
     
     void pass(Player * receivingPlayer);
     
@@ -42,14 +42,15 @@ public:
     Layout(Team * homeT, Team * awayT, Ball * b);
     void initialSetUp433();
     void hasBall(Player * p);
+    
     Team * getHomeTeam();
     Team * getAwayTeam();
     Ball * getBall();
     //Player * hasBall();
     vector <Player *> getTeamMatesWithin(Player * p, int range);
     double getDistance(int x1, int x2, int y1, int y2);  //A distance between two specified points
-    double getDistanceBall(Player * p); //A distance with respect to the ball and a speified point
-    
+    double getDistanceBall(Player * p); //A distance with respect to the ball and a specified Player
+    double distanceBetweenPlayers(Player * p1, Player * p2);
     Team * getDefendingTeam();
     Team * getAttackingTeam();
     
@@ -59,6 +60,8 @@ public:
     void analyzeField(Player * p);
     void setPlayerWithPossBall(Player *p); //Pinpoints the ball at the tip of the Player
     double getShootingAngle(Player * p);
+    
+    Player * getClosestDefenderToBall();
     
     
     

@@ -140,6 +140,7 @@ void Layout::hasBall(Player * p)
     }
     else if (s == "NE")
     {
+<<<<<<< HEAD
         newBallX = x + w + 1;
         newBallY = y - bh - 1;
     }
@@ -149,6 +150,46 @@ void Layout::hasBall(Player * p)
         newBallY = y - bh - 1;
     }
     ball->setPos(newBallX, newBallY);
+=======
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x+11;
+            newBallY = y-3;
+        }
+        else
+        {
+            newBallX = x+14;
+            newBallY = y-3;
+        }
+      
+    }
+    else if (s == "NW")
+    {
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x-3;
+            newBallY = y-3;
+        }
+        else
+        {
+            newBallX = x-2;
+            newBallY = y-3;
+        }
+        
+       
+    }
+
+
+    ball->setPos(newBallX, newBallY);
+
+
+        
+    
+    
+    
+>>>>>>> master
 }
 
 Team * Layout::getHomeTeam()
@@ -335,7 +376,7 @@ double Layout::getDistance(int x1, int x2, int y1, int y2)
 }
 
 
-double Layout::distance(Player * p1, Player * p2)
+double Layout::distanceBetweenPlayers(Player * p1, Player * p2)
 {
     int x = p1->getX();
     int y = p1->getY();
@@ -350,6 +391,29 @@ double Layout::getDistanceBall(Player * p)
     int y = p->getY();
     
     return sqrt(  ((x - ball->getX()) * (x - ball->getX())) +  ((y - ball->getY()) * (y - ball->getY())) );
+    
+}
+
+Player * Layout :: getClosestDefenderToBall()
+{
+    Team * team = getDefendingTeam();
+    map <string, Player *> listOfPlayers = *team->getPlayers();
+    Player * closest = NULL;
+    
+    double minDistance = 10000000; // infinity
+    for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it)
+    {
+        
+        Player * p = it->second;
+        double distance = getDistanceBall(p);
+        if (distance < minDistance)
+        {
+            minDistance = distance;
+            closest = p;
+        }
+        
+    }
+    return closest;
     
 }
 
@@ -388,6 +452,7 @@ void Layout::analyzeField(Player * p)
         cout << ">> " << listOfCloseTeamMates.at(k)->getName() << endl;
     
     vector<Player *> listOfAvailableTeamMates;
+    
     srand(time (NULL));
     
     int result = countTeammatesInFront(p);
@@ -444,7 +509,7 @@ double Layout::getShootingAngle(Player * p){
     
     /*
      int l =    sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
-     
+
      */
     
     
