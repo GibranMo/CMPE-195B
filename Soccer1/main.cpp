@@ -21,7 +21,7 @@
 #include <iterator>
 #include <iostream>
 #include "DrawUtils.h"
-#include "EventHandler.h"
+#include "EventHandler.h"   
 #include "Player.h"
 #include "Team.h"
 #include "Layout.h"
@@ -74,23 +74,23 @@ int main(void)
     map <string, Player *> listOfPlayers;
     Player p1("Terstegen", 50, screenH/2, filename, "homeTeam", "E", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers[p1.getName()] = &p1;
-    Player p2("Mathieu", 250, screenH/2 -  100, filename, "homeTeam", "E", 76, 64, 66, 55, 82, 81, 80);
+    Player p2("Mathieu", 250, screenH/2 -  100, filename, "homeTeam", "E", 89, 64, 66, 55, 82, 81, 80);
     listOfPlayers[p2.getName()] = &p2;
     Player p3("Alba", 250, screenH/2 -  200, filename, "homeTeam", "E", 92, 69, 75, 81, 78, 76, 81);
     listOfPlayers[p3.getName()] = &p3;
-    Player p4("Pique", 250, screenH/2 + 100, filename, "homeTeam", "E", 66, 54, 69, 60, 86, 76, 84);
+    Player p4("Pique", 250, screenH/2 + 100, filename, "homeTeam", "E", 89, 54, 69, 60, 86, 76, 84);
     listOfPlayers[p4.getName()] = &p4;
-    Player p5("Alves", 250, screenH/2 + 200, filename, "homeTeam", "E", 86, 70, 79, 83, 76, 68, 83);
+    Player p5("Alves", 250, screenH/2 + 200, filename, "homeTeam", "E", 88, 70, 79, 83, 76, 68, 83);
     listOfPlayers[p5.getName()] = &p5;
-    Player p6("Iniesta", 400, screenH/2 - 100, filename, "homeTeam", "E", 75, 72, 89, 91, 59, 63, 89);
+    Player p6("Iniesta", 400, screenH/2 - 100, filename, "homeTeam", "E", 88, 72, 89, 91, 59, 63, 89);
     listOfPlayers[p6.getName()] = &p6;
-    Player p7("Rakitic", 400, screenH/2 + 100, filename, "homeTeam", "NW", 69, 82, 87, 81, 55, 67, 83);
+    Player p7("Rakitic", 400, screenH/2 + 100, filename, "homeTeam", "NW", 90, 82, 87, 81, 55, 67, 83);
     listOfPlayers[p7.getName()] = &p7;
-    Player p8("Busquets", 400, screenH/2, filename, "homeTeam", "E", 56, 59, 78, 75, 81, 80, 85);
+    Player p8("Busquets", 400, screenH/2, filename, "homeTeam", "E", 90, 59, 78, 75, 81, 80, 85);
     listOfPlayers[p8.getName()] = &p8;
     Player p9("Neymar", 450, screenH/2, filename, "homeTeam", "E", 90, 80, 72, 92, 30, 58, 86);
     listOfPlayers[p9.getName()] = &p9;
-    Player p10("Messi", screenW/2 - 300, screenH/2 , filename, "homeTeam", "N", 93, 89, 86, 96, 27, 62, 93);
+    Player p10("Messi", screenW/2 - 19, screenH/2 , filename, "homeTeam", "N", 93, 89, 86, 96, 27, 62, 93);
     listOfPlayers[p10.getName()] = &p10;
     Player p11("Suarez", screenW/2 -17, screenH/2 - 24, filename, "homeTeam", "S", 83, 87, 79, 88, 42, 79, 89);
     listOfPlayers[p11.getName()] = &p11;
@@ -101,43 +101,44 @@ int main(void)
     map <string, Player *> listOfPlayers2;
     Player p21("Casillas", screenW - 50, screenH/2, filename, "awayTeam", "W", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers2[p21.getName()] = &p21;
-    Player p22("Ramos", screenW - 250, screenH/2 + 100  , filename, "awayTeam", "W", 79, 60, 71, 66, 87, 82, 87);
+    Player p22("Ramos", screenW - 250, screenH/2 + 100  , filename, "awayTeam", "W", 89, 60, 71, 66, 87, 82, 87);
     listOfPlayers2[p22.getName()] = &p22;
-    Player p23("Marcelo", screenW - 250, screenH/2 + 200, filename, "awayTeam", "W", 81, 67, 78, 84, 77, 79, 82);
+    Player p23("Marcelo", screenW - 250, screenH/2 + 200, filename, "awayTeam", "W", 89, 67, 78, 84, 77, 79, 82);
     listOfPlayers2[p23.getName()] = &p23;
-    Player p24("Pepe", screenW - 250, screenH/2 - 100, filename, "awayTeam", "W", 73, 50, 58, 59, 84, 83, 83);
+    Player p24("Pepe", screenW - 250, screenH/2 - 100, filename, "awayTeam", "W", 88, 50, 58, 59, 84, 83, 83);
     listOfPlayers2[p24.getName()] = &p24;
-    Player p25("Carvajal", screenW - 250, screenH/2 - 200, filename, "awayTeam", "W", 83, 40, 73, 78, 76, 82, 79);
+    Player p25("Carvajal", screenW - 250, screenH/2 - 200, filename, "awayTeam", "W", 90, 40, 73, 78, 76, 82, 79);
     listOfPlayers2[p25.getName()] = &p25;
-    Player p26("Kroos", screenW - 400, screenH/2 - 100, filename, "awayTeam", "W", 58, 81, 89, 84, 58, 69, 85);
+    Player p26("Kroos", screenW - 400, screenH/2 - 100, filename, "awayTeam", "W", 90, 81, 89, 84, 58, 69, 85);
     listOfPlayers2[p26.getName()] = &p26;
-    Player p27("Modric", screenW - 400, screenH/2 + 200, filename, "awayTeam", "W", 76, 74, 85, 89, 71, 70, 87);
+    Player p27("Modric", screenW - 400, screenH/2 + 200, filename, "awayTeam", "W", 87, 74, 85, 89, 71, 70, 87);
     listOfPlayers2[p27.getName()] = &p27;
-    Player p28("Rodriguez", screenW - 400, screenH/2, filename, "awayTeam", "W", 80, 80, 84, 85, 40, 72, 86);
+    Player p28("Rodriguez", screenW - 400, screenH/2, filename, "awayTeam", "W", 88, 80, 84, 85, 40, 72, 86);
     listOfPlayers2[p28.getName()] = &p28;
-    Player p29("Benzema", screenW - 500 + 30, screenH/2, filename, "awayTeam", "NW", 84, 84, 75, 82, 30, 74, 85);
+    Player p29("Benzema", screenW/2 + 40, screenH/2 + 120, filename, "awayTeam", "N", 89, 84, 75, 82, 30, 74, 85);
     listOfPlayers2[p29.getName()] = &p29;
-    Player p210("Ronaldo", screenW - 500, screenH/2 + 200, filename, "awayTeam", "N", 93, 93, 81, 91, 32, 79, 92);
+    Player p210("Ronaldo", screenW/2-19 - 20, screenH/2 + 295, filename, "awayTeam", "N", 91, 93, 81, 91, 32, 79, 92);
     listOfPlayers2[p210.getName()] = &p210;
-    Player p211("Bale", screenW/2  - 320 , screenH/2 - 200 , filename, "awayTeam", "W", 94, 83, 83, 84, 63, 81, 87);
+    Player p211("Bale", screenW/2-19 + 20   , screenH/2 + 295   , filename, "awayTeam", "N", 92, 83, 83, 84, 63, 81, 87);
     listOfPlayers2[p211.getName()] = &p211;
     Team awayTeam(listOfPlayers2);
     
     Ball ball(100 , 100, 10, 8, "images/ball 2.tga");
-    
+   
     //good one:
     //Ball ball(screenW/2 - 12 , screenH/2 - 13, 10, 8, "images/ball 2.tga");
     
     Layout layout(&homeTeam, &awayTeam, &ball);
-    layout.initialSetUp433();
+     layout.initialSetUp433();
     
     layout.hasBall(&p10);
     
     
     
-    int testInt = 0.9;
+    int testInt = -15;
+    int s = -1;
     //testInt = testInt + 0.5;
-    cout <<  "test int: " << testInt << endl;
+    cout <<  "test int: " << testInt - s << endl;
     //cin >> testInt;
     //EventHandling.cpp
     initEventQueue();
@@ -146,7 +147,7 @@ int main(void)
     
     GamePlay gamePlay(&layout, fieldTex);
     
-    bool playing = false;
+    bool playing = true;
     
     
     //Frame handling
@@ -212,7 +213,8 @@ int main(void)
         
         gamePlay.NextMove();
         
-        
+        //quit = true;
+        //cout << "jfdkjfdljfsllsfjls" << endl;
         
         
         //PHYSICS
@@ -241,8 +243,8 @@ int main(void)
         
         SDL_GL_SwapWindow(window);
     }
-    
-    
+     
+     
     
     
     SDL_Quit();

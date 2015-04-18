@@ -16,9 +16,14 @@ GLuint glTexImageTGAFile(const char* filename, int* outWidth = 0, int* outHeight
 
 void glDrawSprite(GLuint tex, int x, int y, int w, int h);
 
-void glDrawSprite2(GLuint tex, int x, int y, int w, int h);
+void glDrawSprite2(GLuint tex, double x, double y, int w, int h);
+
+void glDrawSprite3(GLuint tex, int x, int y, int w, int h);
 
 void glDrawLines();
+
+void glDrawPoint();
+
 
 #endif /* defined(__Soccer_Simulation__DrawUtils__) */
 

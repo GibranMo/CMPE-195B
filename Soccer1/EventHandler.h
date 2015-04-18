@@ -10,14 +10,14 @@
 #define __Soccer_Simulation__EventHandler__
 
 enum Event_Type{
-        ET_BALL_TOPBOTTOM_COLLISION,
+    ET_BALL_TOPBOTTOM_COLLISION,
     
 };
 
 struct Event{
     Event_Type et;
-//    ActorData* actor1;
-//    ActorData* actor2;
+    //    ActorData* actor1;
+    //    ActorData* actor2;
 };
 
 void initEventQueue(void);
