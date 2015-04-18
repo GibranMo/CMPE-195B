@@ -21,7 +21,11 @@ private:
     int y;
     int velX;
     int velY;
+    int destX;
+    int destY;
     GLuint tex;
+    int speed;
+    int n;
     
     
 public:
@@ -31,10 +35,17 @@ public:
     int getY();
     int getVelX();
     int getVelY();
+    int getH();
+    int getW();
     void setVel(int xv, int yv);
+    void kick(int vel, int xp, int yp);
     
-    void setX(int X);
-    void setY(int Y);
+    void setX(int x);
+    void setY(int y);
+    void setVelX(int xv);
+    void setVelY(int yv);
+    void updatePos();
+    void resetDest(int x, int y);
     
     GLuint getTex();
 };
