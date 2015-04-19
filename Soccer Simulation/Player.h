@@ -26,7 +26,7 @@ private:
     bool isGauging = false;
     string teamName;
     enum facingAngle { E,  NE, N, NW, W, SW, S, SE};
-    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect. 
+    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect.
     
     /*
      The following set of 4 points represent a rectangular area, which in turn
@@ -64,14 +64,16 @@ private:
     
 public:
     //constructor
-    Player(string n, int xp, int yp, const char* image, string teamName, string faceAngle,
-           int PAC, int SHO, int PAS, int DRI, int DEF, int PHY, int OVER);
+    Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamN, string faceAngle,
+           int PAC, int SHO, int PAS, int DRI, int PHY, int DEF, int OVR);
     //getters / setters
     int getY();
     int getX();
     string getName();
     int getVelX();
     int getVelY();
+    int getH();
+    int getW();
     GLuint getTex();
     void setVelX(int vx);
     void setVelY(int vy);

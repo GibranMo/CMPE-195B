@@ -52,6 +52,9 @@ private:
     void defend(Player * p);
     void defend2(Player * p);
     
+    
+    
+    
 public:
     GamePlay(Layout * l, GLuint ft);
     void DrawSprite(bool playing);
@@ -59,7 +62,9 @@ public:
     void setUpThreads();
     void setPointToBall(Player * p);
     
-    
+    void move();
+    bool checkCollision(Ball * ball, Player * player);
+    void setPointToPlayer(Player * p, Player * p2);
     
 };
 

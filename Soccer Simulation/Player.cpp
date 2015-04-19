@@ -1,4 +1,4 @@
-  //
+//
 //  SPlayer.cpp
 //  Soccer1
 //
@@ -10,12 +10,14 @@
 #include <vector>
 #include <iostream>
 
-Player::Player(string n, int xp, int yp, const char* image, string teamN, string faceAngle,
+Player::Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamN, string faceAngle,
                int PAC, int SHO, int PAS, int DRI, int PHY, int DEF, int OVR)
 {
     name = n;
     x = xp;
     y = yp;
+    w = wp;
+    h = hp;
     velY = 0;
     velX = 0;
     tex = glTexImageTGAFile(image);
@@ -33,7 +35,7 @@ Player::Player(string n, int xp, int yp, const char* image, string teamN, string
     Player::setFaceAngle(faceAngle);
     
     counter = 0;
-  
+    
 }
 
 int Player::getCounter()
@@ -122,8 +124,8 @@ void Player::setFaceAngle(string direction)
     {
         cout << "something went wrong!" << endl;
     }
-
-
+    
+    
 }
 
 void Player::setXPos(int newX)
@@ -139,11 +141,11 @@ void Player::setYPos(int newY)
 void Player::setAreaPosition(int x1, int x2, int y1, int y2)
 {
     
-        cout << "NAME: " << name << endl;
-        posX1 = x1;
-        posX2 = x2;
-        posY1 = y1;
-        posY2 = y2;
+    cout << "NAME: " << name << endl;
+    posX1 = x1;
+    posX2 = x2;
+    posY1 = y1;
+    posY2 = y2;
 }
 
 vector <int> Player:: getPosArea()
@@ -170,6 +172,14 @@ int Player::getX(){
 
 int Player::getY(){
     return y;
+}
+
+int Player::getH(){
+    return h;
+}
+
+int Player::getW(){
+    return w;
 }
 
 int Player::getVelX(){
