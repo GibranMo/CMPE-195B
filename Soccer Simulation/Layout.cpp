@@ -27,11 +27,6 @@ Layout::Layout(Team * homeT, Team * awayT, Ball * b)
     cout << "hereererere" << endl;
 }
 
-int Layout::testInt()
-{
-    return 1;
-    
-}
 
 
 void Layout::initialSetUp433()
@@ -210,57 +205,47 @@ vector <Player *> Layout::getTeamMatesWithin(Player * p, int range) {
 
 bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2) {
     
-    int x = p->getX();
-    int y = p->getY();
+    int p1x = p->getX();
+    int p1y = p->getY();
+    int p2x = p2->getX();
+    int p2y = p2->getY();
     
-    int yPlus = y + 20;
-    int yMinus = y - 20;
-    
-    int XPlus = x + 35;
-    
-    if (XPlus >= 1105 )
-        return false;
-    
-    
-    string nameOfTeam = p->getTeamName();
-    
-    
-    if (nameOfTeam == "homeTeam")
-    {
-        
-        for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin(); it!=awayTeam->getPlayers()->end(); ++it )
-        {
-            
-            Player * opponent = it->second;
-            
-            if (opponent->getY() < yMinus && opponent->getY() > yPlus && opponent->getX() < XPlus)
-            {
-                return false;
-            }
-        }
-        
-    }
+    map<string, Player*> * players;
+    if (p->getTeamName() == "homeTeam")
+        players = awayTeam->getPlayers();
     else
-    {
-        XPlus = x - 35;
+        players = homeTeam->getPlayers();
+    
+    for (std::map<string,Player*>::iterator it=players->begin(); it!=players->end(); ++it ) {
         
-        if (XPlus < 0 )
-            return false;
+        Player * opponent = it->second;
+        int opx = opponent->getX();
+        int opy = opponent->getY();
         
-        
-        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin(); it!=homeTeam->getPlayers()->end(); ++it )
-        {
-            
-            Player * opponent = it->second;
-            
-            if (opponent->getY() < yMinus && opponent->getY() > yPlus && opponent->getX() < XPlus)
-            {
-                return false;
+        //between x's
+        if(opx > p1x && opx < p2x) {
+            //player1 below player2
+            if(p1y >= p2y){
+                if (opy > p2y - 10 && opy < p1y + 10) {
+                    int ypt = ( ( (p2y - p1y)/(p2x - p1x) ) * (opx - p1x) ) + p1y;
+                    if(opy >ypt - 10 && opy < ypt + 10){
+                        return false;
+                    }
+                }
+            }
+            //player2 below player1
+            else {
+                if (opy > p1y - 10 && opy < p2y + 10) {
+                    int ypt = ( ( (p2y - p1y)/(p2x - p1x) ) * (opx - p1x) ) + p1y;
+                    if(opy >ypt - 10 && opy < ypt + 10){
+                        return false;
+                    }
+                }
             }
         }
-        
-        
     }
+    
+    
     
     return true;
     
@@ -353,73 +338,10 @@ double Layout::getDistanceBall(Player * p)
     
 }
 
-void Layout::analyzeField(Player * p)
-{
-    int x = p->getX();
-    int y = p->getY();
-    
-    if(p->getTeamName() == "homeTeam"){
-        if(p->getX() >= 1005){
-            if(getShootingAngle(p) > 30){
-                //int l = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
-                
-                //shoot
-            }
-        }
-    }
-    if(p->getTeamName() == "awayTeam"){
-        if(p->getX() <= 100){
-            if(getShootingAngle(p) > 30){
-                
-                //shoot
-            }
-            
-        }
-        
-    }
     
     
     
     
-    
-    vector<Player *> listOfCloseTeamMates = getTeamMatesWithin(p, 80);
-    
-    for (int k = 0; k < listOfCloseTeamMates.size(); k++)
-        cout << ">> " << listOfCloseTeamMates.at(k)->getName() << endl;
-    
-    vector<Player *> listOfAvailableTeamMates;
-    srand(time (NULL));
-    
-    int result = countTeammatesInFront(p);
-    
-    if (result == 0)
-    {
-        listOfAvailableTeamMates = getAvailablePlayers(p);
-        
-        //for (int k = 0; k < listOfAvailableTeamMates.size(); k++)
-        //cout << ">> " << listOfAvailableTeamMates.at(k)->getName() << endl;
-        
-        
-        for(int i = 0; i < listOfCloseTeamMates.size(); i++)
-        {
-            listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
-        }
-        
-        
-        
-        unsigned long range = listOfAvailableTeamMates.size();
-        int random = rand() % range;
-        
-        Player * destinationPlayer = listOfAvailableTeamMates.at(random);
-        
-        pass(destinationPlayer);
-        
-        cout << "*****<><><>" << endl;
-        
-    }
-    
-}
-
 double Layout::getShootingAngle(Player * p){
     double angle = 0;
     int archLength = 60;
