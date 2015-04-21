@@ -35,11 +35,8 @@ private:
     void pass(Player * receivingPlayer);
     
     bool isRectangleAreaInFrontClear(Player * p, Player * p2);
-<<<<<<< Updated upstream
     
     string teamWhoHasBall;
-=======
->>>>>>> Stashed changes
     
     
 public:
@@ -60,22 +57,28 @@ public:
     Team * getAttackingTeam();
     
     vector <Player *> getAvailablePlayers(Player * p);
+    vector <Player *> getAvailablePlayers2(Player * p, int RANGE);
+    
     int countTeammatesInFront(Player * p); //Does not matter which direction player is facing
     int countTeamatesInDirection(Player * p); //Takes into consideration what direction player is facing
     void analyzeField(Player * p);
     void setPlayerWithPossBall(Player *p); //Pinpoints the ball at the tip of the Player
     double getShootingAngle(Player * p);
     double distance(Player * p1, Player * p2);
-    
+
     
     Player * getClosestDefenderToBall();
     string getTeamWhoHasBall();
     
+    bool isRectangleAreaInFrontClear2(Player * ballPlayer, Player * teammate);
     
+    int figureOutYIntercept(int rise, int run, int x, int b);
     
+    double getB(double slope, int x, int y);
+    double mxPlusbOutput(double slope, int x, int b);
     
-    //Test
-    int testInt();
+    double getSlope (int y1, int y2, int x1, int x2);
+    
     
     
     

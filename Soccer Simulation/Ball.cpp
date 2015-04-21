@@ -118,15 +118,8 @@ void Ball::updatePos(){
         setVelY(-vel);
     else
         setVelY(vel);
-<<<<<<< Updated upstream
     
     x += velX;
     y += velY;
     
-=======
-
-    x += velX;
-    y += velY;
-
->>>>>>> Stashed changes
 }

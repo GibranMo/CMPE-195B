@@ -26,7 +26,7 @@ private:
     bool isGauging = false;
     string teamName;
     enum facingAngle { E,  NE, N, NW, W, SW, S, SE};
-    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect.
+    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect. 
     
     /*
      The following set of 4 points represent a rectangular area, which in turn
@@ -39,8 +39,8 @@ private:
     int posY1; //upper most
     int posY2; //lower most
     
-    int x;
-    int y;
+    double x;
+    double y;
     int w;
     int h;
     int velX;
@@ -48,6 +48,10 @@ private:
     GLuint tex;
     
     int counter;
+    
+    //These is the exact positon within the 'square area' each player is assigned. This is their default positions. 
+    int fieldX;
+    int fieldY;
     
     /*
      A bunch of other attributes like all the skills from fifa.
@@ -64,13 +68,8 @@ private:
     
 public:
     //constructor
-<<<<<<< Updated upstream
     Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamN, string faceAngle,
            int PAC, int SHO, int PAS, int DRI, int PHY, int DEF, int OVR);
-=======
-    Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamName, string faceAngle,
-           int PAC, int SHO, int PAS, int DRI, int DEF, int PHY, int OVER);
->>>>>>> Stashed changes
     //getters / setters
     int getY();
     int getX();
@@ -84,14 +83,9 @@ public:
     void setVelY(int vy);
     void setPos(int xp, int yp);
     vector <int> getPosArea();
-<<<<<<< HEAD
     
     void incrementCounter();
     int getCounter();
-=======
-    string getTeamName();
-
->>>>>>> Gibran1
     
     
     //actions
@@ -110,9 +104,12 @@ public:
     void runBackwards();
     void stop();
     
+    string getTeamName();
     void setFacingAngle(facingAngle); //change the direction a player points
     void setFaceAngle(string direction); //change the direction a player points (alternative)
     string getAngle();
+    
+    void setFieldPosition(int x, int y);
     
     bool isWithinArea();
     

@@ -35,40 +35,86 @@ void Layout::initialSetUp433()
     
     //x1, x2, y1, y2 (where x1 = leftmost, x2 = rightmost,  y1 = uppermost, y2 = lowermost )
     homeTeam->getPlayer("Alba")->setAreaPosition(45, 469, 20, 350 ); //This guy is the left back (LB), and his team attacks to the right
+    homeTeam->getPlayer("Alba")->setFieldPosition( 250 , screenH/2 -  200);
+    
     homeTeam->getPlayer("Mathieu")->setAreaPosition(45, 469, 185, 515 ); //Left Center Back (LCB)
+    homeTeam->getPlayer("Mathieu")->setFieldPosition(250, screenH/2 - 100 + 25);
+    
+    
     homeTeam->getPlayer("Pique")->setAreaPosition(45, 469, 185, 515 ); //Right Center Back (RCB)
+    homeTeam->getPlayer("Pique")->setFieldPosition(250, screenH/2 + 100 - 25);
+    
+    
     homeTeam->getPlayer("Alves")->setAreaPosition(45, 469, 350, 680 );  //Right Back (RB)
+    homeTeam->getPlayer("Alves")->setFieldPosition(250, screenH/2 + 200);
+    
+    
+    
     
     
     homeTeam->getPlayer("Iniesta")->setAreaPosition(363, 787, 20, 380 ); //Left Midfielder (LM)
+    homeTeam->getPlayer("Iniesta")->setFieldPosition(400 + 185, screenH/2 - 100 - 63);
+    
     homeTeam->getPlayer("Busquets")->setAreaPosition(257, 893, 185, 515 ); //Center Midfeidlder (CM)
+    homeTeam->getPlayer("Busquets")->setFieldPosition(400 + 190, screenH/2);
+    
+    
+    
     homeTeam->getPlayer("Rakitic")->setAreaPosition(363, 787, 320, 680 ); //Right Midfielder
+    homeTeam->getPlayer("Rakitic")->setFieldPosition(400 + 185, screenH/2 + 163); //Right Midfielder
+    
+    
     
     // 681 - 40 = 641
     homeTeam->getPlayer("Neymar")->setAreaPosition(641, 1105, 20, 350 ); // Left Forward (LF)
-    homeTeam->getPlayer("Messi")->setAreaPosition(681, 1105, 185, 515 ); // Center Forward (CF)
-    homeTeam->getPlayer("Suarez")->setAreaPosition(641, 1105, 350, 680 ); // Right Forward (CF)
+    homeTeam->getPlayer("Neymar")->setFieldPosition( ((1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 20);
     
+    
+    homeTeam->getPlayer("Messi")->setAreaPosition(681, 1105, 185, 515 ); // Center Forward (CF)
+    homeTeam->getPlayer("Messi")->setFieldPosition(((1105 - 681)/2) + 681, ((515 - 185) / 2) + 185);
+    
+    
+    homeTeam->getPlayer("Suarez")->setAreaPosition(641, 1105, 350, 680 ); // Right Forward (CF)
+    homeTeam->getPlayer("Suarez")->setFieldPosition( ((1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 340);
     
     //Away Team
     
     //Skip goalie, 'Z'
     
-    //x1, x2, y1, y2 (where x1 is leftmost, y1 uppermost )
-    awayTeam->getPlayer("Marcelo")->setAreaPosition(1105, 681, 20, 350 ); //This guy is the left back (LB), and his team attacks right
-    awayTeam->getPlayer("Ramos")->setAreaPosition(1105, 681, 185, 515 ); //Left Center Back (LCB)
-    awayTeam->getPlayer("Pepe")->setAreaPosition(1105, 681, 185, 515 ); //Right Center Back (RCB)
-    awayTeam->getPlayer("Carvajal")->setAreaPosition(1105, 681, 350, 680 );  //Right Back (RB)
+    //x1, x2, y1, y2 (where x1 = leftmost, x2 = rightmost,  y1 = upper most, y2 = lower most )
+    awayTeam->getPlayer("Marcelo")->setAreaPosition(681, 1105, 350, 680 ); //This guy is the left back (LB), and his team attacks right
+    awayTeam->getPlayer("Marcelo")->setFieldPosition( screenW - 258, screenH/2 + 200);
+    
+    awayTeam->getPlayer("Ramos")->setAreaPosition(681, 1105, 185, 515 ); //Left Center Back (LCB)
+    awayTeam->getPlayer("Ramos")->setFieldPosition(screenW - 258, screenH/2 + 100 - 45 + 15  );
+    
+    awayTeam->getPlayer("Pepe")->setAreaPosition(681, 1105, 185, 515 ); //Right Center Back (RCB)
+    awayTeam->getPlayer("Pepe")->setFieldPosition(screenW - 258, screenH/2 - 100 + 45 - 15);
     
     
-    awayTeam->getPlayer("Modric")->setAreaPosition(787, 363, 20, 380 ); //Left Midfielder (LM)
-    awayTeam->getPlayer("Rodriguez")->setAreaPosition(893, 257, 185, 515 ); //Center Midfeidlder (CM)
-    awayTeam->getPlayer("Kroos")->setAreaPosition(787, 363, 320, 680 ); //Right Midfielder
+    awayTeam->getPlayer("Carvajal")->setAreaPosition(681, 1105, 20, 350);  //Right Back (RB)
+    awayTeam->getPlayer("Carvajal")->setFieldPosition(screenW - 258, screenH/2 - 200);
+    
+    
+    awayTeam->getPlayer("Modric")->setAreaPosition(363, 787, 320, 680); //Left Midfielder (LM)
+    awayTeam->getPlayer("Modric")->setFieldPosition( 530, screenH/2 + 110);
+    
+    awayTeam->getPlayer("Rodriguez")->setAreaPosition(257, 893, 185, 515); //Center Midfeidlder (CM)
+    awayTeam->getPlayer("Rodriguez")->setFieldPosition( 530 , screenH/2); //Left Midfielder (LM)
+    
+    awayTeam->getPlayer("Kroos")->setAreaPosition(363, 787, 20, 380); //Right Midfielder (RM)
+    awayTeam->getPlayer("Kroos")->setFieldPosition(530 , screenH/2-110); //Left Midfielder (LM)
     
     // 681 - 40 = 641
-    awayTeam->getPlayer("Ronaldo")->setAreaPosition(509, 45, 20, 350 ); // Left Forward (LF)
-    awayTeam->getPlayer("Benzema")->setAreaPosition(469, 45, 185, 515 ); // Center Forward (CF)
-    awayTeam->getPlayer("Bale")->setAreaPosition(509, 45, 350, 680 ); // Right Forward (CF)
+    awayTeam->getPlayer("Ronaldo")->setAreaPosition(45, 509, 350, 680 ); // Left Forward (LF)
+    awayTeam->getPlayer("Ronaldo")->setFieldPosition( (509 - 45)/2 + 45, (680 - 350)/ 2 + 350 );
+    
+    
+    awayTeam->getPlayer("Benzema")->setAreaPosition(45, 469, 185, 515 ); // Center Forward (CF)
+    awayTeam->getPlayer("Benzema")->setFieldPosition( (460 - 45)/2 + 45, (515 - 185)/ 2 + 185 );
+    
+    awayTeam->getPlayer("Bale")->setAreaPosition(45, 509, 20, 350 ); // Right Forward (CF)
+    awayTeam->getPlayer("Bale")->setFieldPosition( (509 - 45)/2 + 45, (350 - 20)/ 2 + 20 );
     
     
     
@@ -82,14 +128,9 @@ void Layout::hasBall(Player * p)
         playerHasBall = NULL;
         return;
     }
-<<<<<<< Updated upstream
     
     playerHasBall = p;
-=======
->>>>>>> Stashed changes
     
-    playerHasBall = p;
-
     /*   A player having possession of the ball implies a certain position for the ball on the screen(At the tip of the player).
      */
     
@@ -120,11 +161,7 @@ void Layout::hasBall(Player * p)
     {
         newBallX = x + w + 1;
         newBallY = y + (h/2);
-<<<<<<< Updated upstream
         
-=======
-
->>>>>>> Stashed changes
     }
     else if (s == "W")
     {
@@ -143,24 +180,8 @@ void Layout::hasBall(Player * p)
     }
     else if (s == "NE")
     {
-<<<<<<< Updated upstream
         newBallX = x + w + 1;
         newBallY = y - bh - 1;
-=======
-<<<<<<< HEAD
-        
-        if (team == "awayTeam")
-        {
-            newBallX = x+11;
-            newBallY = y-3;
-        }
-        else
-        {
-            newBallX = x+14;
-            newBallY = y-3;
-        }
-      
->>>>>>> Stashed changes
     }
     else if (s == "NW")
     {
@@ -175,21 +196,7 @@ void Layout::hasBall(Player * p)
 string Layout::getTeamWhoHasBall()
 {
     
-<<<<<<< Updated upstream
     return teamWhoHasBall;
-=======
-=======
-        newBallX = x + w + 1;
-        newBallY = y - bh - 1;
-    }
-    else if (s == "NW")
-    {
-        newBallX = x - bw - 1;
-        newBallY = y - bh - 1;
-    }
-    ball->setPos(newBallX, newBallY);
->>>>>>> Gibran1
->>>>>>> Stashed changes
 }
 
 
@@ -213,12 +220,6 @@ Player * Layout::hasBall(){
     return playerHasBall;
 }
 
-<<<<<<< Updated upstream
-=======
-/* Do not care is opposing players are obstructing the teammate. Just scanning for
- a teammate within specified radius
- */
->>>>>>> Stashed changes
 vector <Player *> Layout::getTeamMatesWithin(Player * p, int range) {
     string team = p->getTeamName();
     vector<Player*> players;
@@ -253,12 +254,8 @@ vector <Player *> Layout::getTeamMatesWithin(Player * p, int range) {
     return players;
 }
 
-<<<<<<< Updated upstream
 bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2)
 {
-=======
-bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2) {
->>>>>>> Stashed changes
     
     int p1x = p->getX();
     int p1y = p->getY();
@@ -277,10 +274,10 @@ bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2) {
         int opx = opponent->getX();
         int opy = opponent->getY();
         
-        //between x's
+        //check if opponent X position is between p1 and p2
         if(opx > p1x && opx < p2x) {
-            //player1 below player2
-            if(p1y >= p2y){
+           
+            if(p1y >= p2y){ //player1 below player2 (teammates) p1 has the ball
                 if (opy > p2y - 10 && opy < p1y + 10) {
                     int ypt = ( ( (p2y - p1y)/(p2x - p1x) ) * (opx - p1x) ) + p1y;
                     if(opy >ypt - 10 && opy < ypt + 10){
@@ -305,6 +302,419 @@ bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2) {
     
 }
 
+bool Layout::isRectangleAreaInFrontClear2(Player * ballPlayer, Player * teammate)
+{
+    
+    int RANGE = 10;
+    
+    map<string, Player*> * players;
+    if (ballPlayer->getTeamName() == "homeTeam")
+        players = awayTeam->getPlayers();
+    else
+        players = homeTeam->getPlayers();
+    
+    for (std::map<string,Player*>::iterator it=players->begin(); it!=players->end(); ++it ) {
+        
+        Player * opponent = it->second;
+        
+        
+        // *Down*
+        //
+        //  ballPlayer       |------>x
+        //      |            |
+        //      |            |
+        //      opp          |
+        //      |            |
+        //      V            Vy
+        //  teammate
+        //
+        // (same X)
+        if ( teammate->getX() == ballPlayer->getX())
+        {
+            if (ballPlayer->getY() < teammate->getY() )
+            {
+                if (opponent->getY() > ballPlayer->getY() && opponent->getY() < teammate->getY())
+                {
+                    if ( (opponent->getX() < ballPlayer->getX() && opponent->getX() > ballPlayer->getX()- RANGE) || (opponent->getX() > ballPlayer->getX() && opponent->getX() <
+                                                                                                                     ballPlayer->getX() + RANGE ))
+                    {
+                        return false;
+                    }
+                }
+            }
+            // *UP*
+            //  teammate
+            //   ^
+            //   |
+            //   |
+            //  oop
+            //   |
+            //  ballPlayer
+            
+            else if ( ballPlayer->getY() > teammate->getY() )
+            {
+                
+                if (ballPlayer->getY() > teammate->getY() )
+                {
+                    if (opponent->getY() < ballPlayer->getY() && opponent->getY() > teammate->getY())
+                    {
+                        if ( (opponent->getX() < ballPlayer->getX() && opponent->getX() > ballPlayer->getX()- RANGE) || (opponent->getX() > ballPlayer->getX() && opponent->getX() <
+                                                                                                                         ballPlayer->getX() + RANGE ))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        
+        //
+        //
+        //
+        //
+        // ballPlayer ---- opp ------> teammate
+        // (straight; no slope)
+        
+        if (ballPlayer->getY() == teammate->getY())
+        {
+            
+            if (ballPlayer->getX() < teammate->getX())
+            {
+                if (ballPlayer->getX() < opponent->getX() && opponent->getX() < teammate->getX()) //check if opponent is in between the X's
+                {
+                    if ( (opponent->getY() < ballPlayer->getY() && opponent->getY() > ballPlayer->getY() - RANGE )  || (opponent->getY() > ballPlayer->getY() && opponent->getY()
+                                                                                                                        < ballPlayer->getY() + RANGE))
+                        return false;
+                }
+               
+            }
+            /// teammate <----- opp --------- ballPlayer
+            else if (ballPlayer->getX() > teammate->getX())
+            {
+                if (ballPlayer->getX() > opponent->getX() && opponent->getX() > teammate->getX()) //check if opponent is in between the X's
+                {
+                    if ( (opponent->getY() < ballPlayer->getY() && opponent->getY() > ballPlayer->getY() - RANGE )  || (opponent->getY() > ballPlayer->getY() && opponent->getY()
+                                                                                                                        < ballPlayer->getY() + RANGE))
+                        return false;
+                }
+            }
+            
+        }
+       
+        
+        
+        
+        //check if opponent X position is between ballPlayer's X and teammate's X
+        // teammate  ----->   opponent  ------> ballPlayer
+        //
+        if(opponent->getX() > ballPlayer->getX() && opponent->getX() < teammate->getX())
+        {
+            
+           // *NORTH EAST * //
+            
+           //check if ballPlayer is below teammate
+            if(ballPlayer->getY() > teammate->getY())
+            {
+               //check if they Y position of the opponent is between ballPlayer's Y and teammate's Y
+                if (opponent->getY() > teammate->getY() && opponent->getY() < ballPlayer->getY())
+                {
+                     //get slope of line (should increase in North East direction)
+                    double slope = (teammate->getY() - ballPlayer->getY()) / (teammate->getX() - ballPlayer->getX()); // slope could be a neg. value
+                    
+                    //get '+ b' part of the equation y = mx + b
+                    
+                    double b = getB(slope, teammate->getX(), teammate->getY()); //chose to use the teammates coordinates. Could have also used ballPlayers's
+                    
+                    double resultY = mxPlusbOutput(slope, opponent->getX(), b);
+                    
+                    //check if this resultY is ON the line traced by y = mx + b
+                    
+                    
+                    if ( (opponent->getY() >= resultY && opponent->getY() <= resultY + RANGE ) ||  (opponent->getY() >= resultY - RANGE  && opponent->getY() <= resultY) )
+                            return false;
+                    
+                }
+            }
+            /*
+                *SOUTH EAST*
+             */
+            else  // maybe don't need 'else if'; just 'else' At this juncture, it would imply a South East pass
+            {
+                // check if the Y of opponent is within right range
+                if (opponent->getY() > ballPlayer->getY() && opponent->getY() < teammate->getY())
+                {
+                    //get slope of line (should increase in North East direction)
+                    double slope = (teammate->getY() - ballPlayer->getY()) / (teammate->getX() - ballPlayer->getX()); // slope could be a neg. value
+                    
+                    //get '+ b' part of the equation y = mx + b
+                    
+                    double b = getB(slope, teammate->getX(), teammate->getY()); //chose to use the teammates coordinates. Could have also used ballPlayers's
+                    
+                    double resultY = mxPlusbOutput(slope, opponent->getX(), b);
+                    
+                    //check if this resultY is ON the line traced by y = mx + b
+                    
+                    
+                    if ( (opponent->getY() >= resultY && opponent->getY() <= resultY + RANGE ) ||  (opponent->getY() >= resultY - RANGE  && opponent->getY() <= resultY) )
+                        return false;
+
+                    
+                }
+                    
+            }
+        }
+        //   |------> x
+        //   |
+        //   |
+        //   V
+        //    y
+        //
+        // The following 'else if' is for:
+        //  teammate  <-----   opponent  <------  ballPlayer
+        //   (checking for a potential  pass from right to left
+        //
+        else if (teammate->getX() < opponent->getX() && opponent->getX() < ballPlayer->getX())// ** maybe don't need the if clause; just else;
+        {
+            //check if ballPlayer is below teammate
+            if (ballPlayer->getY() > teammate->getY() )
+            {
+               /*
+                    *NORTH WEST*
+                //   teammate
+                //         *
+                //          *
+                //           *
+                //            *   ballPlayer
+                //  (temmate is above ballPlayer)
+                //   (At this point, checking for a potential North West pas
+                */
+                
+                //check if the Y position of opponeent is between the Y of teammate and Y of ballPlayer
+                if (opponent->getY() > teammate->getY() && opponent->getY() < ballPlayer->getY())
+                {
+                    //get the slope in  North West direction
+                    double slope = (ballPlayer->getY() - teammate->getY()) / (ballPlayer->getX() - teammate->getX());
+                    
+                    //get '+ b' part of the equation y = mx + b
+                    
+                    double b = getB(slope, teammate->getX(), teammate->getY()); //chose to use the teammates coordinates. Could have also used ballPlayers's
+                    
+                    double resultY = mxPlusbOutput(slope, opponent->getX(), b);
+                    
+                    //check if this resultY is ON the line traced by y = mx + b
+                    
+                    
+                    if ( (opponent->getY() <= resultY && opponent->getY() >= resultY - RANGE)  || (opponent->getY() <= resultY + RANGE  && opponent->getY() >= resultY) )
+                        return false;
+                }
+               
+            }
+            //  *South West Pass*
+            //  (At this point, it's already knonwn that opponent X positoin is between X position of teammate and ballPlayer)
+            //
+            //              ballPlayer
+            //             *
+            //            *
+            //           *
+            //          *
+            //  teammate
+            else if (teammate->getY() > ballPlayer->getY()) //check if teammate is below ballPlayer
+            {
+                
+                    // check if the Y of opponent is within the right Y range
+                    if (opponent->getY() > ballPlayer->getY() && opponent->getY() < teammate->getY())
+                    {
+                        //get the slope of South East direction
+                        double slope = (ballPlayer->getY() - teammate->getY()) / (ballPlayer->getX() - teammate->getX());
+                        
+                        //get '+ b' part of the equation y = mx + b
+                        
+                        double b = getB(slope, teammate->getX(), teammate->getY()); //chose to use the teammates coordinates. Could have also used ballPlayers's
+                        
+                        double resultY = mxPlusbOutput(slope, opponent->getX(), b);
+                        
+                        //check if this resultY is ON the line traced by y = mx + b
+                        
+                        if ( (opponent->getY() <= resultY + RANGE && opponent->getY() >= resultY ) || (opponent->getY() >= resultY - RANGE  && opponent->getY() <= resultY) )
+                                return false;
+
+                    }
+                        
+                    
+            }
+            
+       }
+    }
+   
+    return true;
+    
+    
+}
+
+double Layout::mxPlusbOutput(double slope, int x, int b)
+{
+    // get y = mx + b
+    
+    return ( (slope * x) ) + b;
+    
+}
+
+double Layout::getB(double slope, int x, int y)
+{
+    // y = mx + b
+    
+    // given in arguments are m, x, and y
+    
+    // y - mx = b
+    
+    int b = y - (slope * x);
+    
+    return b;
+    
+}
+// The radius kind
+vector <Player *> Layout::getAvailablePlayers2(Player * ballPlayer, int RANGE)
+{
+
+    Team * defendingTeam = getDefendingTeam();
+    Team * attackingTeam = getAttackingTeam();
+    
+    vector <Player *> availableTeammates;
+    
+    
+    for (std::map<string,Player*>::iterator it=attackingTeam->getPlayers()->begin(); it!=attackingTeam->getPlayers()->end(); ++it )
+    {
+        Player * teammate = it->second;
+        bool available = true;
+        
+        
+        for (std::map<string,Player*>::iterator it=defendingTeam->getPlayers()->begin(); it!=defendingTeam->getPlayers()->end(); ++it )
+        {
+            Player * opponent = it->second;
+            
+            if (ballPlayer->getX() == teammate->getX()) //check if vertical pass
+            {
+                if (ballPlayer->getY() > teammate->getY()) //check if up is going straight UP
+                {
+                    // teammate
+                    //  ^
+                    //  |
+                    //  |
+                    //  |
+                    // ballPlayer
+                    if (distance(teammate, opponent) <= RANGE)
+                    {
+                        if (opponent->getY() > teammate->getY())
+                            available = false;
+                     }
+                }
+                else// *STRAIGHT DOWN PASS*
+                {
+                    if (distance(teammate, opponent) <= RANGE)
+                    {
+                        if (opponent->getY() < teammate->getY())
+                            available = false;
+                    }
+                }
+            
+            }
+            if (ballPlayer->getY() == teammate->getY()) //check if pass is horizontal
+            {
+                
+                if (ballPlayer->getX() < teammate->getX()) //check if pass is straight to the right
+                {
+                    //ballPlayer --------------> teammate
+                    
+                    if (distance(teammate, opponent) <= RANGE)
+                    {
+                        if (opponent->getX() < teammate->getX())
+                            available = false;
+                    }
+                        
+                    
+                }
+                else //pass is the left
+                {
+                     //teammate <-------------- ballPlayer
+                    if (distance(teammate, opponent) <= RANGE)
+                    {
+                        if (opponent->getX() > teammate->getX())
+                            available = false;
+                    }
+                }
+            }
+                
+            // Now with slopes (difficult part)
+                
+            
+                
+            if (ballPlayer->getX() < teammate->getX()) //ballPlayer ------------> teammate
+            {
+                if (teammate->getY() < ballPlayer->getY())
+                {
+                    //                  tammate
+                    //                 ^
+                    //                *
+                    //               *
+                    //              *
+                    // ballPlayer  *
+                    int slope =  getSlope(teammate->getY(), ballPlayer->getY(), teammate->getX(), ballPlayer->getX());
+                    int b = getB(slope, teammate->getX(), teammate->getY());
+                    // need to slope negative
+                    slope *= -1;
+                    
+                    if (distance(opponent, teammate) <= RANGE) //check if opponent is within the circle at all
+                    {
+                        //check if opponennt is below the line descibled by y = mx + b
+                        
+                        int resultY = mxPlusbOutput(slope, opponent->getX(), b);
+                        if (opponent->getY() > resultY)
+                            available = false;
+                    }
+                }
+                // ballPlayer *
+                //              *
+                //                *
+                //                 > teammate
+                //
+                else
+                {
+                    int slope = getSlope(teammate->getY(), ballPlayer->getY(), teammate->getX(), ballPlayer->getX());
+                    int b = getB(slope, teammate->getX(), teammate->getY());
+                    
+                    slope *= -1;
+                    
+                    if (distance(opponent, teammate) <= RANGE)
+                    {
+                        int resultY = mxPlusbOutput(slope, opponent->getX(), b);
+                        if (opponent->getY() < resultY)
+                            available = false;
+                    }
+                        
+                }
+                
+                
+            }
+            
+            if (available == true)
+                availableTeammates.push_back(teammate);
+                
+             
+            }
+            
+    }
+    
+    return availableTeammates;
+}
+
+double Layout::getSlope(int y1, int y2, int x1, int x2)
+{
+    int deltaY = y2 - y1;
+    int deltaX = x2 - x1;
+    
+    return deltaY/deltaX;
+    
+}
 
 vector <Player *> Layout::getAvailablePlayers(Player * p)
 {
@@ -313,9 +723,10 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
     vector<Player*> players;
     
     if(team == "homeTeam") {
-        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
-             it!=homeTeam->getPlayers()->end(); ++it ) {
+        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin(); it!=homeTeam->getPlayers()->end(); ++it )
+        {
             Player * p1 = it->second;
+            cout << "p1: " << p1->getName() << endl;
             
             if (p1->getName() == p->getName())
                 continue;
@@ -327,16 +738,10 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
                 Player * p2 = it->second;
                 
                 if(distance(p1, p2) < 80){
-                    cout << " <><> " << ( (p->getY() - p1->getY()) ) + p1->getX() << endl;
-                    if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() )
+                    cout << p2->getName()  << "<><> " <<  p->getY() - p1->getY() << endl;
+                    if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / ( p->getY() - p1->getY()) ) + p1->getX() )
                         available = false;
                 }
-                
-                
-//                if(){}
-                
-                   
-                   
             }
             if(available)
                 players.push_back(p1);
@@ -346,10 +751,6 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
         for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
              it!=awayTeam->getPlayers()->end(); ++it ){
             Player * p1 = it->second;
-            
-            if (p1->getName() == p->getName())
-                continue;
-            
             bool available = true;
             
             for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
@@ -396,78 +797,11 @@ double Layout::getDistanceBall(Player * p)
 
 double Layout::distanceBetweenPlayers(Player * p1, Player * p2)
 {
-<<<<<<< Updated upstream
     int x = p1->getX();
     int y = p1->getY();
     int p2X = p2->getX();
     int p2Y = p2->getY();
     return sqrt(  ((x - p2X) * (x - p2X)) +  ((y - p2Y) * (y - p2Y)) );
-=======
-    int x = p->getX();
-    int y = p->getY();
-    
-    if(p->getTeamName() == "homeTeam"){
-        if(p->getX() >= 1005){
-            if(getShootingAngle(p) > 30){
-                //int l = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
-                
-                //shoot
-            }
-        }
-    }
-    if(p->getTeamName() == "awayTeam"){
-        if(p->getX() <= 100){
-            if(getShootingAngle(p) > 30){
-                
-                //shoot
-            }
-            
-        }
-        
-    }
-    
-    
-    
-    
-    
-    vector<Player *> listOfCloseTeamMates = getTeamMatesWithin(p, 80);
-    
-    for (int k = 0; k < listOfCloseTeamMates.size(); k++)
-        cout << ">> " << listOfCloseTeamMates.at(k)->getName() << endl;
-    
-    vector<Player *> listOfAvailableTeamMates;
-    
-    srand(time (NULL));
-    
-    int result = countTeammatesInFront(p);
-    
-    if (result == 0)
-    {
-        listOfAvailableTeamMates = getAvailablePlayers(p);
-        
-        //for (int k = 0; k < listOfAvailableTeamMates.size(); k++)
-        //cout << ">> " << listOfAvailableTeamMates.at(k)->getName() << endl;
-        
-        
-        for(int i = 0; i < listOfCloseTeamMates.size(); i++)
-        {
-            listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
-        }
-        
-        
-        
-        unsigned long range = listOfAvailableTeamMates.size();
-        int random = rand() % range;
-        
-        Player * destinationPlayer = listOfAvailableTeamMates.at(random);
-        
-        pass(destinationPlayer);
-        
-        cout << "*****<><><>" << endl;
-        
-    }
-    
->>>>>>> Stashed changes
 }
 
 
@@ -498,7 +832,7 @@ double Layout::getShootingAngle(Player * p){
     
     /*
      int l =    sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
-     
+
      */
     
     
@@ -564,20 +898,46 @@ int Layout::countTeammatesInFront(Player *p)
     
 }
 
-Team * Layout::getDefendingTeam()
+Player * Layout:: getClosestDefenderToBall()
 {
-    if (teamWhoHasBall == "awayTeam")
-        return homeTeam;
-    else
-        return awayTeam;
+    Player * closest = nullptr;
+    Team * team = getDefendingTeam();
+    map <string, Player *> listOfPlayers = *team->getPlayers();
     
+    unsigned int minDistance = 10000000; //infinity
+    for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it)
+    {
+        
+       Player * p = it->second;
+        
+        if (p->getName() == "Casillas" || p->getName() == "Terstegen")
+            continue;
+        
+        if (getDistanceBall(p) < minDistance)
+        {
+            minDistance = getDistanceBall(p);
+            closest = p;
+        }
+    }
+    
+    
+    return closest;
 }
 
 Team * Layout::getAttackingTeam()
 {
     
-    
     if (teamWhoHasBall == "homeTeam")
+        return homeTeam;
+    else
+        return awayTeam;
+}
+
+
+
+Team * Layout::getDefendingTeam()
+{
+    if (teamWhoHasBall == "awayTeam")
         return homeTeam;
     else
         return awayTeam;

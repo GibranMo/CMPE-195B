@@ -52,19 +52,15 @@ private:
     void defend(Player * p);
     void defend2(Player * p);
     
-    
-    
+
+
     
 public:
     GamePlay(Layout * l, GLuint ft);
     void DrawSprite(bool playing);
     void NextMove();
     void setUpThreads();
-    void move();
-    bool checkCollision(Ball * ball, Player * player);
-    void setPointToPlayer(Player *p, Player *p2);
-
-    
+    void setPointToBall(Player * p);
     
     void move();
     bool checkCollision(Ball * ball, Player * player);
