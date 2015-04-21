@@ -82,9 +82,14 @@ void Layout::hasBall(Player * p)
         playerHasBall = NULL;
         return;
     }
+<<<<<<< Updated upstream
     
     playerHasBall = p;
+=======
+>>>>>>> Stashed changes
     
+    playerHasBall = p;
+
     /*   A player having possession of the ball implies a certain position for the ball on the screen(At the tip of the player).
      */
     
@@ -115,7 +120,11 @@ void Layout::hasBall(Player * p)
     {
         newBallX = x + w + 1;
         newBallY = y + (h/2);
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
     }
     else if (s == "W")
     {
@@ -134,8 +143,24 @@ void Layout::hasBall(Player * p)
     }
     else if (s == "NE")
     {
+<<<<<<< Updated upstream
         newBallX = x + w + 1;
         newBallY = y - bh - 1;
+=======
+<<<<<<< HEAD
+        
+        if (team == "awayTeam")
+        {
+            newBallX = x+11;
+            newBallY = y-3;
+        }
+        else
+        {
+            newBallX = x+14;
+            newBallY = y-3;
+        }
+      
+>>>>>>> Stashed changes
     }
     else if (s == "NW")
     {
@@ -150,7 +175,21 @@ void Layout::hasBall(Player * p)
 string Layout::getTeamWhoHasBall()
 {
     
+<<<<<<< Updated upstream
     return teamWhoHasBall;
+=======
+=======
+        newBallX = x + w + 1;
+        newBallY = y - bh - 1;
+    }
+    else if (s == "NW")
+    {
+        newBallX = x - bw - 1;
+        newBallY = y - bh - 1;
+    }
+    ball->setPos(newBallX, newBallY);
+>>>>>>> Gibran1
+>>>>>>> Stashed changes
 }
 
 
@@ -174,6 +213,12 @@ Player * Layout::hasBall(){
     return playerHasBall;
 }
 
+<<<<<<< Updated upstream
+=======
+/* Do not care is opposing players are obstructing the teammate. Just scanning for
+ a teammate within specified radius
+ */
+>>>>>>> Stashed changes
 vector <Player *> Layout::getTeamMatesWithin(Player * p, int range) {
     string team = p->getTeamName();
     vector<Player*> players;
@@ -208,8 +253,12 @@ vector <Player *> Layout::getTeamMatesWithin(Player * p, int range) {
     return players;
 }
 
+<<<<<<< Updated upstream
 bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2)
 {
+=======
+bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2) {
+>>>>>>> Stashed changes
     
     int p1x = p->getX();
     int p1y = p->getY();
@@ -264,8 +313,8 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
     vector<Player*> players;
     
     if(team == "homeTeam") {
-        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin(); it!=homeTeam->getPlayers()->end(); ++it )
-        {
+        for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
+             it!=homeTeam->getPlayers()->end(); ++it ) {
             Player * p1 = it->second;
             
             if (p1->getName() == p->getName())
@@ -282,6 +331,12 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
                     if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / (p->getY() - p1->getY()) ) + p1->getX() )
                         available = false;
                 }
+                
+                
+//                if(){}
+                
+                   
+                   
             }
             if(available)
                 players.push_back(p1);
@@ -291,6 +346,10 @@ vector <Player *> Layout::getAvailablePlayers(Player * p)
         for (std::map<string,Player*>::iterator it=awayTeam->getPlayers()->begin();
              it!=awayTeam->getPlayers()->end(); ++it ){
             Player * p1 = it->second;
+            
+            if (p1->getName() == p->getName())
+                continue;
+            
             bool available = true;
             
             for (std::map<string,Player*>::iterator it=homeTeam->getPlayers()->begin();
@@ -337,11 +396,78 @@ double Layout::getDistanceBall(Player * p)
 
 double Layout::distanceBetweenPlayers(Player * p1, Player * p2)
 {
+<<<<<<< Updated upstream
     int x = p1->getX();
     int y = p1->getY();
     int p2X = p2->getX();
     int p2Y = p2->getY();
     return sqrt(  ((x - p2X) * (x - p2X)) +  ((y - p2Y) * (y - p2Y)) );
+=======
+    int x = p->getX();
+    int y = p->getY();
+    
+    if(p->getTeamName() == "homeTeam"){
+        if(p->getX() >= 1005){
+            if(getShootingAngle(p) > 30){
+                //int l = sqrt( (abs ((x - archX) * (x - archX)) + abs( ((y - archTopY) * (y - archTopY)))));
+                
+                //shoot
+            }
+        }
+    }
+    if(p->getTeamName() == "awayTeam"){
+        if(p->getX() <= 100){
+            if(getShootingAngle(p) > 30){
+                
+                //shoot
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    vector<Player *> listOfCloseTeamMates = getTeamMatesWithin(p, 80);
+    
+    for (int k = 0; k < listOfCloseTeamMates.size(); k++)
+        cout << ">> " << listOfCloseTeamMates.at(k)->getName() << endl;
+    
+    vector<Player *> listOfAvailableTeamMates;
+    
+    srand(time (NULL));
+    
+    int result = countTeammatesInFront(p);
+    
+    if (result == 0)
+    {
+        listOfAvailableTeamMates = getAvailablePlayers(p);
+        
+        //for (int k = 0; k < listOfAvailableTeamMates.size(); k++)
+        //cout << ">> " << listOfAvailableTeamMates.at(k)->getName() << endl;
+        
+        
+        for(int i = 0; i < listOfCloseTeamMates.size(); i++)
+        {
+            listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
+        }
+        
+        
+        
+        unsigned long range = listOfAvailableTeamMates.size();
+        int random = rand() % range;
+        
+        Player * destinationPlayer = listOfAvailableTeamMates.at(random);
+        
+        pass(destinationPlayer);
+        
+        cout << "*****<><><>" << endl;
+        
+    }
+    
+>>>>>>> Stashed changes
 }
 
 

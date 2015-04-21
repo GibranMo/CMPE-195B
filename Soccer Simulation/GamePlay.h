@@ -60,7 +60,11 @@ public:
     void DrawSprite(bool playing);
     void NextMove();
     void setUpThreads();
-    void setPointToBall(Player * p);
+    void move();
+    bool checkCollision(Ball * ball, Player * player);
+    void setPointToPlayer(Player *p, Player *p2);
+
+    
     
     void move();
     bool checkCollision(Ball * ball, Player * player);

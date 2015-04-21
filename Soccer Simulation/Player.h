@@ -39,8 +39,8 @@ private:
     int posY1; //upper most
     int posY2; //lower most
     
-    double x;
-    double y;
+    int x;
+    int y;
     int w;
     int h;
     int velX;
@@ -64,8 +64,13 @@ private:
     
 public:
     //constructor
+<<<<<<< Updated upstream
     Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamN, string faceAngle,
            int PAC, int SHO, int PAS, int DRI, int PHY, int DEF, int OVR);
+=======
+    Player(string n, int xp, int yp, int wp, int hp, const char* image, string teamName, string faceAngle,
+           int PAC, int SHO, int PAS, int DRI, int DEF, int PHY, int OVER);
+>>>>>>> Stashed changes
     //getters / setters
     int getY();
     int getX();
@@ -79,9 +84,14 @@ public:
     void setVelY(int vy);
     void setPos(int xp, int yp);
     vector <int> getPosArea();
+<<<<<<< HEAD
     
     void incrementCounter();
     int getCounter();
+=======
+    string getTeamName();
+
+>>>>>>> Gibran1
     
     
     //actions
@@ -100,7 +110,6 @@ public:
     void runBackwards();
     void stop();
     
-    string getTeamName();
     void setFacingAngle(facingAngle); //change the direction a player points
     void setFaceAngle(string direction); //change the direction a player points (alternative)
     string getAngle();

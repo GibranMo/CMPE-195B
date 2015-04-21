@@ -35,8 +35,11 @@ private:
     void pass(Player * receivingPlayer);
     
     bool isRectangleAreaInFrontClear(Player * p, Player * p2);
+<<<<<<< Updated upstream
     
     string teamWhoHasBall;
+=======
+>>>>>>> Stashed changes
     
     
 public:

@@ -1,4 +1,4 @@
-//
+ //
 //  GamePlay.cpp
 //  Soccer1
 //
@@ -19,15 +19,10 @@
 #include <string.h>
 #include <assert.h>
 #include <pthread.h>
-
 #include <chrono>
 #include <thread>
 
-#include <unistd.h>
-
 //using namespace std;
-
-
 
 /*  Experimenting with the behavior of a globally declared Layout variable.
  Reason for this is that I cannot access the member variable 'layout' from inside
@@ -47,6 +42,175 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
     expFieldTex = ft;
     //***************
 }
+<<<<<<< Updated upstream
+=======
+/*
+<<<<<<< HEAD
+void GamePlay::setUpThreads ()
+{
+    
+    map <string, Player *> listOfPlayers = *layout->getHomeTeam()->getPlayers();
+    
+    vector <Player *> list;
+    int r = 1;
+    for (std::map<string,Player*>::iterator it2=listOfPlayers.begin(); it2!=listOfPlayers.end(); ++it2){
+        //glDrawSprite(it2->second->getTex(), it2->second->getX(), it2->second->getY(), 20, 20);
+        //cout << "r" << r << endl;
+        list.push_back(it2->second);
+        r++;
+        
+    }
+    
+    for (int i = 0; i <=1; i++)
+    {
+        //int index = i--; //
+        pthread_attr_t playerAttr;
+        pthread_attr_init(&playerAttr);
+        //cout << "main() : creating thread, " << i << endl;
+        cout << ">>: " <<list.at(i)->getName() << endl;
+        int rc = pthread_create(&playerThreads[i], &playerAttr, player_t, list.at(i));
+        if (rc){
+            cout << "Error:unable to create thread," << rc << endl;
+            //exit(-1);
+        }
+        //it++;
+        
+    }
+    
+    pthread_attr_t drawAttr;
+    pthread_attr_init(&drawAttr);
+    pthread_t drawThread;
+    
+    //int t = pthread_create(&drawThread, &drawAttr, draw_t, &fieldTex);
+    
+    // if (t){
+    //   cout << "TError:unable to create thread," << t << endl;
+    //exit(-1);
+    // }
+    
+    
+    
+}
+
+*/
+=======
+ void GamePlay :: playerAction(Player * p)
+ {
+ cout << "UP HERE" << endl;
+ cout << layout->hasBall()->getName();
+ 
+ }
+ 
+ */
+>>>>>>> Gibran1
+
+void GamePlay::testFoo(GLuint gl, Player * pl)
+{
+    cout << "QRS" << endl;
+    glDrawSprite(gl, pl->getX(), pl->getY(), 20, 20);
+    
+}
+void * GamePlay :: player_t(void * param)
+{
+    Player * p = (Player *) param;
+    
+    string name = p->getName();
+    
+    //cout << ">>" << name << endl;
+    //
+    if(name == "A")
+        cout << "*}" << endl;
+    
+    
+    
+    cout << expLayout->testInt() << endl;
+    
+    int t = p->getX();
+    
+    cout << name << "'s current x pos is: " << t << endl;
+    
+    int i = 0;
+    
+    while (true)
+    {
+        //glDrawSprite3(player->getTex(), player->getX(), player->getY(), 20, 20);
+        //glDrawSprite(p->getTex(), i, p->getY(), 20, 20);
+        GLuint textr = glTexImageTGAFile("images/1.tga");
+        cout << t << endl;
+        testFoo(textr, p);
+        
+        //i++;
+    }
+    
+    //string n = p->getName();
+    //cout << ">" << n << endl;
+    
+    /*
+     map <string, Player *> listOfPlayers = *expLayout->getHomeTeam()->getPlayers();
+     for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
+     glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
+     
+     }
+     */
+    
+    //GamePlay::drawingTest();
+    
+    
+    
+    
+    //Layout * l  = layout;
+    return NULL;
+}
+
+
+
+void GamePlay::setUpThreads ()
+{
+    
+    map <string, Player *> listOfPlayers = *layout->getHomeTeam()->getPlayers();
+    
+    vector <Player *> list;
+    int r = 1;
+    for (std::map<string,Player*>::iterator it2=listOfPlayers.begin(); it2!=listOfPlayers.end(); ++it2){
+        //glDrawSprite(it2->second->getTex(), it2->second->getX(), it2->second->getY(), 20, 20);
+        //cout << "r" << r << endl;
+        list.push_back(it2->second);
+        r++;
+        
+    }
+    
+    for (int i = 0; i <=1; i++)
+    {
+        //int index = i--; //
+        pthread_attr_t playerAttr;
+        pthread_attr_init(&playerAttr);
+        //cout << "main() : creating thread, " << i << endl;
+        cout << ">>: " <<list.at(i)->getName() << endl;
+        int rc = pthread_create(&playerThreads[i], &playerAttr, player_t, list.at(i));
+        if (rc){
+            cout << "Error:unable to create thread," << rc << endl;
+            //exit(-1);
+        }
+        //it++;
+        
+    }
+    
+    pthread_attr_t drawAttr;
+    pthread_attr_init(&drawAttr);
+    pthread_t drawThread;
+    
+    //int t = pthread_create(&drawThread, &drawAttr, draw_t, &fieldTex);
+    
+    // if (t){
+    //   cout << "TError:unable to create thread," << t << endl;
+    //exit(-1);
+    // }
+    
+    
+    
+}
+
+>>>>>>> Stashed changes
 
 
 void GamePlay::DrawSprite(bool playing)
@@ -71,10 +235,10 @@ void GamePlay::DrawSprite(bool playing)
         }
         for (std::map<string,Player*>::iterator it=listOfPlayers2.begin(); it!=listOfPlayers2.end(); ++it){
             
-            glDrawSprite2(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
+            glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
         }
         
-        glDrawSprite2(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
+        glDrawSprite(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
         
         
         GLuint testTex = glTexImageTGAFile("images/1.tga");
@@ -90,6 +254,7 @@ void GamePlay::DrawSprite(bool playing)
     }
 }
 
+<<<<<<< HEAD
 void GamePlay::setPointToBall(Player *p)
 {
     int ballX = layout->getBall()->getX();
@@ -273,12 +438,28 @@ void GamePlay::defend(Player *p)
      int ballY = layout->getBall()->getY();
      */
     
+<<<<<<< Updated upstream
     int ballX = layout->getBall()->getX();
     int ballY = layout->getBall()->getY();
     
     
     
     
+=======
+    int ballX = layout->hasBall()->getX();
+    int ballY = layout->hasBall()->getY();
+=======
+void GamePlay::moveTowardsBall(Player *p)
+{
+    int ballX = layout->getBall()->getX();
+    int ballY = layout->getBall()->getY();
+>>>>>>> Gibran1
+    
+    
+<<<<<<< HEAD
+
+
+>>>>>>> Stashed changes
     
     
     // *RIGHT/LEFT* //
@@ -359,16 +540,27 @@ void GamePlay::moveTowardsBall(Player *p)
     cout << "RATIO:  " << ratio << endl;
     
     // *RIGHT/LEFT* //
+=======
+>>>>>>> Gibran1
     if (ballX >= p->getX())
     {
-        p->setXPos(p->getX() + ratio );
+        xdir = "right";
+        p->setXPos(p->getX()+ 0.1 + (p->getPace()/1000));
+        
     }
     else
     {
-        p->setXPos(p->getX() - ratio );
+        xdir = "left";
+        p->setXPos(p->getX() - 0.1 + (p->getPace()/1000) );
+        
     }
     
+<<<<<<< Updated upstream
     
+=======
+<<<<<<< HEAD
+   
+>>>>>>> Stashed changes
     // *UP/DOWN* //
     //int deltaY2 = abs ( (p->getY() -  layout->getBall()->getY() ) );
     
@@ -388,6 +580,7 @@ void GamePlay::moveTowardsBall(Player *p)
     
     cout << "deltaY: " << deltaY << endl;
     /*
+<<<<<<< Updated upstream
      if (ratio > 1 || ratio2 > 1)
      {
      int max = 0;
@@ -405,11 +598,36 @@ void GamePlay::moveTowardsBall(Player *p)
      }
      */
     
+=======
+    if (ratio > 1 || ratio2 > 1)
+    {
+        int max = 0;
+        if (ratio > ratio2)
+            max = ratio;
+        else
+            max = ratio2;
+        
+        max *=30000;
+        
+        //max -= (2500 * p->getPace() );
+        cout << "HERE1 " << p->getName() << "  sleep time: " << max <<  endl;
+        usleep(max);
+        
+    }
+    */
+        
+=======
+>>>>>>> Gibran1
+>>>>>>> Stashed changes
     if (ballY >= p->getY())
     {
-        p->setYPos(p->getY() + ratio2) ;
+        
+        ydir = "down";
+        p->setYPos(p->getY() + 0.1 + (p->getPace()/1000) );
+        
     }
     else
+<<<<<<< HEAD
         p->setYPos(p->getY() - ratio2) ;
     
     
@@ -428,6 +646,14 @@ void GamePlay::moveTowardsBall(Player *p)
      */
     
     cout << "******" << endl;
+=======
+    {
+        
+        ydir = "up";
+        p->setYPos(p->getY() -  0.1 + (p->getPace()/1000)) ;
+        
+    }
+>>>>>>> Gibran1
     
 }
 
@@ -443,12 +669,21 @@ void GamePlay::MovePlayers()
     for (std::map<string,Player*>::iterator it = defendingPlayers.begin(); it!= defendingPlayers.end(); ++it)
     {
         Player * p = it->second;
+<<<<<<< HEAD
         if (p->getName() == "Casillas")
             continue;
         cout << ">> " << p->getName() << " p->getName(): " <<  p->getName() << " D:  " << layout->getDistanceBall(p);
         cout << " x: " << p->getX() << " y: " << p->getY() << endl;
         if (layout->getDistanceBall(p) <= 900 && ( p->getName() == "Bale" || p->getName() == "Ronaldo") )
         {
+=======
+        
+        if (layout->getDistanceBall(p) <= 170)
+        {
+            
+            moveTowardsBall(p);
+            cout << "defending" << endl;
+>>>>>>> Gibran1
             
             
             cout << "Name: " << p->getName() << " x: " << p->getX() << " y: " << p->getY() << endl;
@@ -474,16 +709,65 @@ void GamePlay::NextMove()
         cout << "no one has the ball" << endl;
         //Example: ball is travelling
     }
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    else
+    {
+        GamePlay::MovePlayers();
+        //cout << "next move" << endl;
+=======
+>>>>>>> Stashed changes
     else {
         cout << "next move" << endl;
         cout << player->getName() + " has the ball" << endl;
         vector<Player *> listOfCloseTeamMates;
         vector<Player *> listOfAvailableTeamMates;
+<<<<<<< Updated upstream
+=======
+>>>>>>> Gibran1
+>>>>>>> Stashed changes
         
         bool kickoff = false;
         if(x == 568 && y == 361){
             kickoff = true;
         }
+<<<<<<< Updated upstream
+=======
+        
+        //someone has the ball
+        if(player != NULL){
+            if(kickoff){
+                listOfCloseTeamMates = layout->getTeamMatesWithin(player, 80);
+                Player * player2 = listOfCloseTeamMates[0];
+                setPointToPlayer(player, player2);
+                layout->hasBall(player);
+                int speed = (100 - player2->getPace()) / 3;
+                layout->getBall()->kick(speed, player2->getX() + (player2->getW()/2), player2->getY() + (player2->getH()/2));
+                cout << "<<<kicked to: " + player2->getName()  << endl;
+                layout->hasBall(NULL);
+            }
+            else {
+                listOfCloseTeamMates = layout->getTeamMatesWithin(player, 100);
+                listOfAvailableTeamMates = layout->getAvailablePlayers(player);
+                for(int i = 0; i < listOfCloseTeamMates.size(); i++){
+                    listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
+                }
+
+                //choose one teammate from list of available teammates
+                srand(time(NULL));
+                int r = rand() % listOfAvailableTeamMates.size();
+                Player * player2 = listOfAvailableTeamMates[r];
+                setPointToPlayer(player, player2);
+                layout->hasBall(player);
+                int speed = (100 - player2->getPace()) / 3;
+                layout->getBall()->kick(speed, player2->getX(), player2->getY());
+                cout << "<<<kicked to: " + player2->getName()  << endl;
+                layout->hasBall(NULL);
+            }
+        }
+        //take care of other player
+>>>>>>> Stashed changes
         
         //someone has the ball
         if(player != NULL){
@@ -545,7 +829,11 @@ void GamePlay::setPointToPlayer(Player *p, Player *p2)
             p->setFaceAngle("N");
         }
         
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
     }
     else if (ballY > p->getY() )
     {
@@ -572,6 +860,11 @@ void GamePlay::setPointToPlayer(Player *p, Player *p2)
             p->setFaceAngle("E");
     }
     
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
     
 }
 
@@ -609,6 +902,10 @@ bool GamePlay::checkCollision(Ball * ball, Player * player)
     }
     
     return false;
+<<<<<<< Updated upstream
+=======
+>>>>>>> Gibran1
+>>>>>>> Stashed changes
 }
 
 void GamePlay::move(){
@@ -616,7 +913,10 @@ void GamePlay::move(){
     //move ball
     Ball * ball = layout->getBall();
     ball->updatePos();
+<<<<<<< Updated upstream
     cout << "xx: " << ball->getX() << " yy: " << ball->getY() << endl;
+=======
+>>>>>>> Stashed changes
     
     //move players
     for (std::map<string,Player*>::iterator it=layout->getHomeTeam()->getPlayers()->begin(); it!=layout->getHomeTeam()->getPlayers()->end(); ++it ){
@@ -627,6 +927,9 @@ void GamePlay::move(){
             cout << "<<<Got ball: " + player->getName()  << endl;
         }
     }
+<<<<<<< Updated upstream
     
     GamePlay::MovePlayers();
+=======
+>>>>>>> Stashed changes
 }
