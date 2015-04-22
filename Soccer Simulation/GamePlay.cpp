@@ -499,7 +499,7 @@ void GamePlay::NextMove()
                 Player * player2 = listOfCloseTeamMates[0];
                 setPointToPlayer(player, player2);
                 layout->hasBall(player);
-                int speed = (100 - player2->getPace()) / 3;
+                int speed = (100 - player2->getPace()) / 5;
                 layout->getBall()->kick(speed, player2->getX() + (player2->getW()/2), player2->getY() + (player2->getH()/2));
                 cout << "<<<kicked to: " + player2->getName()  << endl;
                 layout->hasBall(NULL);
@@ -517,7 +517,7 @@ void GamePlay::NextMove()
                 Player * player2 = listOfAvailableTeamMates[r];
                 setPointToPlayer(player, player2);
                 layout->hasBall(player);
-                int speed = (100 - player2->getPace()) / 12;
+                int speed = (100 - player2->getPace()) / 5;
                 layout->getBall()->kick(speed, player2->getX(), player2->getY());
                 cout << "<<<kicked to2: " + player2->getName()  << endl;
                 layout->hasBall(NULL);
@@ -627,6 +627,14 @@ void GamePlay::move(){
     
     //move players
     for (std::map<string,Player*>::iterator it=layout->getHomeTeam()->getPlayers()->begin(); it!=layout->getHomeTeam()->getPlayers()->end(); ++it ){
+        Player * player = it->second;
+        if(checkCollision(ball, player)){
+            ball->resetDest(0, 0);
+            layout->hasBall(player);
+            cout << "<<<Got ball: " + player->getName()  << endl;
+        }
+    }
+    for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
         Player * player = it->second;
         if(checkCollision(ball, player)){
             ball->resetDest(0, 0);
