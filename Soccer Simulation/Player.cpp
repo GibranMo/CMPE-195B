@@ -30,7 +30,8 @@ Player::Player(string n, int xp, int yp, int wp, int hp, const char* image, stri
     physical = PHY;
     defending = DEF;
     overall = OVR;
-    
+    destX = 0;
+    destY = 0;
     
     Player::setFaceAngle(faceAngle);
     
@@ -248,6 +249,52 @@ int Player::getPhy()
 int Player::getOverall()
 {
     return overall;
+    
+}
+
+void Player::dribble(int xp, int yp){
+    destX = xp;
+    destY = yp;
+}
+
+void Player::stop(){
+    destX = 0;
+    destY = 0;
+}
+
+void Player::updatePos(){
+    
+    if(destX == 0 && destY == 0)
+        return;
+    
+    int vel = 0;
+//    if(n % speed == 0){
+        vel = 1;
+//    }
+//    else {
+//        vel = 0;
+//    }
+//    n++;
+    
+    if(x == destX)
+        setVelX(0);
+    else if(x > destX)
+        setVelX(-vel);
+    else if(x < destX)
+        setVelX(vel);
+    if(y == destY)
+        setVelY(0);
+    if(y > destY)
+        setVelY(-vel);
+    else if(y < destY)
+        setVelY(vel);
+    
+    x += velX;
+    y += velY;
+    
+    if(x == destX && y == destY){
+        stop();
+    }
     
 }
 

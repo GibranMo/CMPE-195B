@@ -254,13 +254,13 @@ vector <Player *> Layout::getTeamMatesWithin(Player * p, int range) {
     return players;
 }
 
-bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2)
+bool Layout::isRectangleAreaInFrontClear(Player * p, int x, int y)
 {
     
     int p1x = p->getX();
     int p1y = p->getY();
-    int p2x = p2->getX();
-    int p2y = p2->getY();
+    int p2x = x;
+    int p2y = y;
     
     map<string, Player*> * players;
     if (p->getTeamName() == "homeTeam")
@@ -296,10 +296,7 @@ bool Layout::isRectangleAreaInFrontClear(Player * p, Player * p2)
             }
         }
     }
-    
     return true;
-    
-    
 }
 
 bool Layout::isRectangleAreaInFrontClear2(Player * ballPlayer, Player * teammate)
@@ -749,6 +746,9 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
                 if(p->getY() != p1->getY()){
                     if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / ( p->getY() - p1->getY()) ) + p1->getX() )
                         available = false;
+                    if(!isRectangleAreaInFrontClear(p, p1->getX(), p1->getY())){
+                        available = false;
+                    }
                     
                 }
                 else {

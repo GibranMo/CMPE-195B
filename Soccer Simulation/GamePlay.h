@@ -51,6 +51,7 @@ private:
     int getAdjustSpeed(int speed);
     void defend(Player * p);
     void defend2(Player * p);
+    bool dribble(Player * p);
     
 
 

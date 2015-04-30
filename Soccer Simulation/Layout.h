@@ -34,12 +34,12 @@ private:
     
     void pass(Player * receivingPlayer);
     
-    bool isRectangleAreaInFrontClear(Player * p, Player * p2);
     
     string teamWhoHasBall;
     
     
 public:
+    bool isRectangleAreaInFrontClear(Player * p, int x, int y);
     Player * hasBall();
     Layout(Team * homeT, Team * awayT, Ball * b);
     void initialSetUp433();

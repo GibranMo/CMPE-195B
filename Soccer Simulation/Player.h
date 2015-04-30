@@ -46,6 +46,9 @@ private:
     int velX;
     int velY;
     GLuint tex;
+    int destX;
+    int destY;
+    
     
     int counter;
     
@@ -125,6 +128,8 @@ public:
     int getPhy();
     int getOverall();
     
+    void dribble(int xp, int yp);
+    void updatePos();
     
 };
 
