@@ -278,18 +278,18 @@ bool Layout::isRectangleAreaInFrontClear(Player * p, int x, int y)
         if(opx > p1x && opx < p2x) {
             
             if(p1y >= p2y){ //player1 below player2 (teammates) p1 has the ball
-                if (opy > p2y - 10 && opy < p1y + 10) {
+                if (opy > p2y - 20 && opy < p1y + 20) {
                     int ypt = ( ( (p2y - p1y)/(p2x - p1x) ) * (opx - p1x) ) + p1y;
-                    if(opy >ypt - 10 && opy < ypt + 10){
+                    if(opy >ypt - 20 && opy < ypt + 20){
                         return false;
                     }
                 }
             }
             //player2 below player1
             else {
-                if (opy > p1y - 10 && opy < p2y + 10) {
+                if (opy > p1y - 20 && opy < p2y + 20) {
                     int ypt = ( ( (p2y - p1y)/(p2x - p1x) ) * (opx - p1x) ) + p1y;
-                    if(opy >ypt - 10 && opy < ypt + 10){
+                    if(opy >ypt - 20 && opy < ypt + 20){
                         return false;
                     }
                 }
@@ -749,7 +749,7 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
                 if(p->getY() != p1->getY()){
                     if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / ( p->getY() - p1->getY()) ) + p1->getX() )
                         available = false;
-                    if(!isRectangleAreaInFrontClear2(p, p1))
+                    if(!isRectangleAreaInFrontClear(p, p1->getX(), p1->getY()))
                        available = false;
                     
                 }

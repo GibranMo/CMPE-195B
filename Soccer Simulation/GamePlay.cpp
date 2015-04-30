@@ -502,49 +502,42 @@ void GamePlay::NextMove()
                 layout->hasBall(NULL);
             }
             else {
-                if(!dribble(player)){
-                listOfCloseTeamMates = layout->getTeamMatesWithin(player, 100);
                 listOfAvailableTeamMates = layout->getAvailablePlayers(player);
-                for(int i = 0; i < listOfCloseTeamMates.size(); i++){
-                    listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
-                }
                 
-                
-//                listOfAvailableTeamMates = rectangleFilter(player);
-//                //For Debugging for now
-//                if (listOfAvailableTeamMates.size() == 0)
-//                {
-//                    cout << "<><><><><>" << endl;
-//                  
-//                    return;
-//                    
-//                }
+                //                listOfAvailableTeamMates = rectangleFilter(player);
+                //                //For Debugging for now
+                //                if (listOfAvailableTeamMates.size() == 0)
+                //                {
+                //                    cout << "<><><><><>" << endl;
+                //                    return;
+                //                }
                 
                 
                 //choose one teammate from list of available teammates
-                srand(time(NULL));
-                int r = rand() % listOfAvailableTeamMates.size();
-                Player * player2 = listOfAvailableTeamMates[r];
-                cout << "chose to pass to: " << player2->getName() << endl;
-                setPointToPlayer(player, player2);
-                layout->hasBall(player);
-                int speed = (100 - player2->getPace()) / 5;
-                //int speed = 50;
-                cout << "speed: " << speed << endl;
-                layout->getBall()->kick(2, player2->getX(), player2->getY());
-                cout << "<<<kicked to2: " + player2->getName()  << endl;
-                layout->hasBall(NULL);
+                if(listOfAvailableTeamMates.size() > 6 || !dribble(player)){
+                    srand(time(NULL));
+                    int r = rand() % listOfAvailableTeamMates.size();
+                    Player * player2 = listOfAvailableTeamMates[r];
+                    cout << "chose to pass to: " << player2->getName() << endl;
+                    setPointToPlayer(player, player2);
+                    layout->hasBall(player);
+                    int speed = (100 - player2->getPace()) / 5;
+                    //int speed = 50;
+                    cout << "speed: " << speed << endl;
+                    layout->getBall()->kick(2, player2->getX(), player2->getY());
+                    cout << "<<<kicked to2: " + player2->getName()  << endl;
+                    layout->hasBall(NULL);
                 }
                 else
                     layout->hasBall(player);
             }
         }
-        //take care of other player
-        
-        //GamePlay::MovePlayers();
-        
-        
-        
+    //take care of other player
+    
+    //GamePlay::MovePlayers();
+    
+    
+    
     
 }
 
@@ -623,6 +616,9 @@ void GamePlay::setPointToPlayer(Player *p, Player *p2)
 
 bool GamePlay::dribble(Player * p){
     
+    if(p->getDestX() != 0 && p->getDestY() != 0)
+        return true;
+    
     bool openSpace = true;
     int x = 0;
     int y = 0;
@@ -667,6 +663,7 @@ bool GamePlay::dribble(Player * p){
     
     if(openSpace){
         p->dribble(x, y);
+        cout << p->getName() << "is dribbling" <<endl;
     }
     
     return openSpace;
@@ -717,25 +714,46 @@ void GamePlay::move(){
     cout << "xx: " << ball->getX() << " yy: " << ball->getY() << endl;
     
     //move players
-    for (std::map<string,Player*>::iterator it=layout->getHomeTeam()->getPlayers()->begin(); it!=layout->getHomeTeam()->getPlayers()->end(); ++it ){
-        Player * player = it->second;
-        if(checkCollision(ball, player)){
-            ball->resetDest(0, 0);
-            layout->hasBall(player);
-            cout << "<<<Got ball: " + player->getName()  << endl;
+    Player * player = layout->hasBall();
+    Team * team;
+    
+    if(player != NULL){
+        if(player->getTeamName() == "awayTeam")
+            team = layout->getHomeTeam();
+        else
+            team = layout->getAwayTeam();
+        for (std::map<string,Player*>::iterator it=team->getPlayers()->begin(); it!=team->getPlayers()->end(); ++it ){
+            Player * player = it->second;
+            if(checkCollision(ball, player)){
+                ball->resetDest(0, 0);
+                layout->hasBall(player);
+                cout << "<<<Got ball: " + player->getName()  << endl;
+            }
         }
     }
-    for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
-        Player * player = it->second;
-        if(checkCollision(ball, player)){
-            ball->resetDest(0, 0);
-            layout->hasBall(player);
-            cout << "<<<Got ball: " + player->getName()  << endl;
+    else {
+        for (std::map<string,Player*>::iterator it=layout->getHomeTeam()->getPlayers()->begin(); it!=layout->getHomeTeam()->getPlayers()->end(); ++it ){
+            Player * player = it->second;
+            if(checkCollision(ball, player)){
+                ball->resetDest(0, 0);
+                layout->hasBall(player);
+                cout << "<<<Got ball: " + player->getName()  << endl;
+            }
+        }
+        
+        for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
+            Player * player = it->second;
+            if(checkCollision(ball, player)){
+                ball->resetDest(0, 0);
+                layout->hasBall(player);
+                cout << "<<<Got ball: " + player->getName()  << endl;
+            }
         }
     }
     
-    if(layout->hasBall() != NULL){
-        layout->hasBall()->updatePos();
+    
+    if(player != NULL){
+        player->updatePos();
     }
     
     //move defenders (they go after ball)

@@ -252,6 +252,16 @@ int Player::getOverall()
     
 }
 
+int Player::getDestX(){
+    return destX;
+}
+
+int Player::getDestY(){
+    return destY;
+}
+
+
+
 void Player::dribble(int xp, int yp){
     destX = xp;
     destY = yp;

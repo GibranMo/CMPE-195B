@@ -127,6 +127,8 @@ public:
     int getDef();
     int getPhy();
     int getOverall();
+    int getDestX();
+    int getDestY();
     
     void dribble(int xp, int yp);
     void updatePos();
