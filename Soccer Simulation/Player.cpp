@@ -1,4 +1,4 @@
-  //
+//
 //  SPlayer.cpp
 //  Soccer1
 //
@@ -132,8 +132,8 @@ void Player::setFaceAngle(string direction)
     {
         cout << "something went wrong!" << endl;
     }
-
-
+    
+    
 }
 
 void Player::setXPos(int newX)
@@ -149,11 +149,11 @@ void Player::setYPos(int newY)
 void Player::setAreaPosition(int x1, int x2, int y1, int y2)
 {
     
-        cout << "NAME: " << name << endl;
-        posX1 = x1;
-        posX2 = x2;
-        posY1 = y1;
-        posY2 = y2;
+    cout << "NAME: " << name << endl;
+    posX1 = x1;
+    posX2 = x2;
+    posY1 = y1;
+    posY2 = y2;
 }
 
 vector <int> Player:: getPosArea()
@@ -268,13 +268,13 @@ void Player::updatePos(){
         return;
     
     int vel = 0;
-//    if(n % speed == 0){
-        vel = 1;
-//    }
-//    else {
-//        vel = 0;
-//    }
-//    n++;
+    //    if(n % speed == 0){
+    vel = 1;
+    //    }
+    //    else {
+    //        vel = 0;
+    //    }
+    //    n++;
     
     if(x == destX)
         setVelX(0);

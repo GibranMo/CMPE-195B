@@ -110,13 +110,13 @@ void Ball::updatePos(){
         setVelX(0);
     else if(x > destX)
         setVelX(-vel);
-    else
+    else if(x < destX)
         setVelX(vel);
     if(y == destY)
         setVelY(0);
     if(y > destY)
         setVelY(-vel);
-    else
+    else if(y < destY)
         setVelY(vel);
     
     x += velX;

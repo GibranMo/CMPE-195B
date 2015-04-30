@@ -51,8 +51,10 @@ private:
     int getAdjustSpeed(int speed);
     void defend(Player * p);
     void defend2(Player * p);
-    bool dribble(Player * p);
     
+    vector <Player *> rectangleFilter(Player * p);
+    
+    bool dribble(Player * p);
 
 
     
@@ -66,6 +68,8 @@ public:
     void move();
     bool checkCollision(Ball * ball, Player * player);
     void setPointToPlayer(Player * p, Player * p2);
+    void freezeNewOpposingPlayers();
+
     
 };
 

@@ -40,6 +40,7 @@ private:
     
 public:
     bool isRectangleAreaInFrontClear(Player * p, int x, int y);
+
     Player * hasBall();
     Layout(Team * homeT, Team * awayT, Ball * b);
     void initialSetUp433();

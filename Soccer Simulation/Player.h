@@ -26,7 +26,7 @@ private:
     bool isGauging = false;
     string teamName;
     enum facingAngle { E,  NE, N, NW, W, SW, S, SE};
-    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect. 
+    string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect.
     
     /*
      The following set of 4 points represent a rectangular area, which in turn
@@ -52,7 +52,7 @@ private:
     
     int counter;
     
-    //These is the exact positon within the 'square area' each player is assigned. This is their default positions. 
+    //These is the exact positon within the 'square area' each player is assigned. This is their default positions.
     int fieldX;
     int fieldY;
     

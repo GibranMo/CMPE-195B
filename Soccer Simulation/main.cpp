@@ -131,7 +131,7 @@ int main(void)
     Layout layout(&homeTeam, &awayTeam, &ball);
      layout.initialSetUp433();
     
-    layout.hasBall(&p10);
+    layout.hasBall(&p8);
     
     
     

@@ -109,7 +109,7 @@ void GamePlay::setPointToBall(Player *p)
         {
             p->setFaceAngle("N");
         }
-
+        
         
     }
     else if (ballY > p->getY() )
@@ -128,16 +128,16 @@ void GamePlay::setPointToBall(Player *p)
         {
             p->setFaceAngle("S");
         }
-
+        
     }
     else
     {
-            if (ballX > p->getX())
-                p->setFaceAngle("W");
-            else
-                 p->setFaceAngle("E");
+        if (ballX > p->getX())
+            p->setFaceAngle("W");
+        else
+            p->setFaceAngle("E");
     }
-        
+    
     
 }
 
@@ -229,7 +229,7 @@ void GamePlay::MoveDefendingPlayer(Player * p)
                 p->setYPos(p->getY() + Ystep);
                 cout << "inside 1 Y: " << p->getY() << endl;
                 cout << "DDD: " << layout->distanceBetweenPlayers(p, layout->hasBall()) << endl;
-               
+                
             }
             p->setXPos(p->getX() + Xstep );
             cout << "inside 2 X: " << p->getX() << endl;
@@ -244,10 +244,10 @@ void GamePlay::MoveDefendingPlayer(Player * p)
 void GamePlay::defend2(Player *p)
 {
     static unsigned int callCtr = 0;
-   
+    
     callCtr++;
     cout << "CTRdefend2:  " << callCtr << endl;
-
+    
     
     int speed = p->getPace();
     
@@ -256,7 +256,7 @@ void GamePlay::defend2(Player *p)
     
     
     p->incrementCounter();
-   
+    
     if ((p->getCounter()) % 2 == 0)
         defend(p);
     
@@ -278,8 +278,8 @@ void GamePlay::defend(Player *p)
     int ballY = layout->getBall()->getY();
     
     
-
-
+    
+    
     
     
     // *RIGHT/LEFT* //
@@ -294,8 +294,8 @@ void GamePlay::defend(Player *p)
     
     
     // *UP/DOWN* //
-
-
+    
+    
     if (ballY > p->getY())
     {
         p->setYPos(p->getY() + 1) ;
@@ -307,11 +307,11 @@ void GamePlay::defend(Player *p)
     {
         if (ballY > p->getY())
         {
-              p->setYPos(p->getY() + 1) ;
+            p->setYPos(p->getY() + 1) ;
         }
         else if (ballY < p->getY())
             p->setYPos(p->getY() - 1) ;
-          
+        
     }
     //Finally, change the angle of the player
     
@@ -331,20 +331,20 @@ void GamePlay::moveTowardsBall(Player *p)
     static unsigned int functionCallctr = 0;
     functionCallctr++;
     /*
-    int ballX = layout->getBall()->getX();
-    int ballY = layout->getBall()->getY();
-    */
+     int ballX = layout->getBall()->getX();
+     int ballY = layout->getBall()->getY();
+     */
     
     int ballX = layout->hasBall()->getX();
     int ballY = layout->hasBall()->getY();
-
+    
     
     
     
     //if ( functionCallctr % 15 == 0)
-      //   setPointToBall(p);
+    //   setPointToBall(p);
     
-
+    
     
     int deltaY = abs ( (p->getY() -  ballY ) );
     
@@ -359,7 +359,7 @@ void GamePlay::moveTowardsBall(Player *p)
     cout << "deltaX: " << deltaX << endl;
     
     //if (ratio >= 7)
-      //  ratio = 1;
+    //  ratio = 1;
     
     cout << "RATIO:  " << ratio << endl;
     
@@ -373,7 +373,7 @@ void GamePlay::moveTowardsBall(Player *p)
         p->setXPos(p->getX() - ratio );
     }
     
-   
+    
     // *UP/DOWN* //
     //int deltaY2 = abs ( (p->getY() -  layout->getBall()->getY() ) );
     
@@ -387,56 +387,56 @@ void GamePlay::moveTowardsBall(Player *p)
         ratio2 = 1;
     
     //if (ratio2 >= 7)
-        //ratio2 = 1;
-        
+    //ratio2 = 1;
+    
     cout << "RATIO2:  " << ratio2 << endl;
     
     cout << "deltaY: " << deltaY << endl;
     /*
-    if (ratio > 1 || ratio2 > 1)
-    {
-        int max = 0;
-        if (ratio > ratio2)
-            max = ratio;
-        else
-            max = ratio2;
-        
-        max *=30000;
-        
-        //max -= (2500 * p->getPace() );
-        cout << "HERE1 " << p->getName() << "  sleep time: " << max <<  endl;
-        usleep(max);
-        
-    }
-    */
-        
+     if (ratio > 1 || ratio2 > 1)
+     {
+     int max = 0;
+     if (ratio > ratio2)
+     max = ratio;
+     else
+     max = ratio2;
+     
+     max *=30000;
+     
+     //max -= (2500 * p->getPace() );
+     cout << "HERE1 " << p->getName() << "  sleep time: " << max <<  endl;
+     usleep(max);
+     
+     }
+     */
+    
     if (ballY >= p->getY())
     {
         p->setYPos(p->getY() + ratio2) ;
     }
     else
         p->setYPos(p->getY() - ratio2) ;
-        
+    
     
     int sleepTime = getAdjustSpeed(p->getPace());
     
     /*
-    if (ratio == 1 && ratio2 == 1)
+     if (ratio == 1 && ratio2 == 1)
      {
-         sleepTime -= 50000;
-         cout << "HERE2  " << p->getName() << " sleep time: " << sleepTime << endl;
-        
-         //usleep(sleepTime);
-         
+     sleepTime -= 50000;
+     cout << "HERE2  " << p->getName() << " sleep time: " << sleepTime << endl;
+     
+     //usleep(sleepTime);
+     
      }
-    else if (ratio == 0 || ratio2 == 0)
-    */
+     else if (ratio == 0 || ratio2 == 0)
+     */
     
     cout << "******" << endl;
     
 }
 
-
+//For Defensive Players
 void GamePlay::MovePlayers()
 {
     unsigned static int ctr = 0;
@@ -451,18 +451,18 @@ void GamePlay::MovePlayers()
         if (p->getName() == "Casillas")
             continue;
         //cout << ">> " << p->getName() << " p->getName(): " <<  p->getName() << " D:  " << layout->getDistanceBall(p);
-         //cout << " x: " << p->getX() << " y: " << p->getY() << endl;
-        if (layout->getDistanceBall(p) <= 150 || (layout->getClosestDefenderToBall()->getName() == p->getName()))
+        //cout << " x: " << p->getX() << " y: " << p->getY() << endl;
+        if (layout->getDistanceBall(p) <= 80 || (layout->getClosestDefenderToBall()->getName() == p->getName()))
         {
             
             
-                    //cout << "Name: " << p->getName() << " x: " << p->getX() << " y: " << p->getY() << endl;
-                    defend2(p);
-                
-             
-         }
+            //cout << "Name: " << p->getName() << " x: " << p->getX() << " y: " << p->getY() << endl;
+            defend2(p);
+            
+            
+        }
         
-       // p
+        // p
     }
     
 }
@@ -477,61 +477,99 @@ void GamePlay::NextMove()
     int y = layout->getBall()->getY();
     Player * player = layout->hasBall();
     
-    
-    cout << "next move" << endl;
-    vector<Player *> listOfCloseTeamMates;
-    vector<Player *> listOfAvailableTeamMates;
-    
-    bool kickoff = false;
-    if(x == 568 && y == 361){
-        kickoff = true;
-    }
-    
-    //someone has the ball
-    if(player != NULL){
-        cout << player->getName() + " has the ball" << endl;
-        if(kickoff){
-            listOfCloseTeamMates = layout->getTeamMatesWithin(player, 80);
-            Player * player2 = listOfCloseTeamMates[0];
-            setPointToPlayer(player, player2);
-            layout->hasBall(player);
-            int speed = (100 - player2->getPace()) / 5;
-            layout->getBall()->kick(2, player2->getX() + (player2->getW()/2), player2->getY() + (player2->getH()/2));
-            cout << "<<<kicked to: " + player2->getName()  << endl;
-            layout->hasBall(NULL);
+
+        cout << "next move" << endl;
+        vector<Player *> listOfCloseTeamMates;
+        vector<Player *> listOfAvailableTeamMates;
+        
+        bool kickoff = false;
+        if(x == 568 && y == 361){
+            kickoff = true;
         }
-        else {
-            if(!dribble(player)){
+        
+        //someone has the ball
+        if(player != NULL){
+            cout << player->getName() + " has the ball" << endl;
+
+            if(kickoff){
+                listOfCloseTeamMates = layout->getTeamMatesWithin(player, 80);
+                Player * player2 = listOfCloseTeamMates[0];
+                setPointToPlayer(player, player2);
+                layout->hasBall(player);
+                int speed = (100 - player2->getPace()) / 5;
+                layout->getBall()->kick(2, player2->getX() + (player2->getW()/2), player2->getY() + (player2->getH()/2));
+//                cout << "<<<kicked to: " + player2->getName()  << endl;
+                layout->hasBall(NULL);
+            }
+            else {
+                if(!dribble(player)){
                 listOfCloseTeamMates = layout->getTeamMatesWithin(player, 100);
                 listOfAvailableTeamMates = layout->getAvailablePlayers(player);
                 for(int i = 0; i < listOfCloseTeamMates.size(); i++){
                     listOfAvailableTeamMates.push_back(listOfCloseTeamMates[i]);
                 }
                 
+                
+//                listOfAvailableTeamMates = rectangleFilter(player);
+//                //For Debugging for now
+//                if (listOfAvailableTeamMates.size() == 0)
+//                {
+//                    cout << "<><><><><>" << endl;
+//                  
+//                    return;
+//                    
+//                }
+                
+                
                 //choose one teammate from list of available teammates
                 srand(time(NULL));
                 int r = rand() % listOfAvailableTeamMates.size();
                 Player * player2 = listOfAvailableTeamMates[r];
+                cout << "chose to pass to: " << player2->getName() << endl;
                 setPointToPlayer(player, player2);
                 layout->hasBall(player);
                 int speed = (100 - player2->getPace()) / 5;
+                //int speed = 50;
+                cout << "speed: " << speed << endl;
                 layout->getBall()->kick(2, player2->getX(), player2->getY());
                 cout << "<<<kicked to2: " + player2->getName()  << endl;
                 layout->hasBall(NULL);
-            }
-            else{
-                layout->hasBall(player);
+                }
+                else
+                    layout->hasBall(player);
             }
         }
-    }
-    //take care of other player
-    
-    //GamePlay::MovePlayers();
-    
-    
-    //std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+        //take care of other player
+        
+        //GamePlay::MovePlayers();
+        
+        
+        
     
 }
+
+vector<Player *> GamePlay::rectangleFilter(Player * possessBall)
+{
+    vector <Player * > availableTeammate;
+    
+    //iterate through all the teammates
+    for (std::map<string,Player*>::iterator it=layout->getHomeTeam()->getPlayers()->begin(); it!=layout->getHomeTeam()->getPlayers()->end(); ++it )
+    {
+        Player * teammate = it->second;
+        if (possessBall->getName() == teammate->getName())
+            continue;
+        
+        bool isClear = layout->isRectangleAreaInFrontClear2(possessBall, teammate);
+        
+        if (isClear)
+            availableTeammate.push_back(teammate);
+    }
+    
+    return availableTeammate;
+    
+}
+
+
 
 void GamePlay::setPointToPlayer(Player *p, Player *p2)
 {
@@ -695,9 +733,11 @@ void GamePlay::move(){
             cout << "<<<Got ball: " + player->getName()  << endl;
         }
     }
+    
     if(layout->hasBall() != NULL){
         layout->hasBall()->updatePos();
     }
     
+    //move defenders (they go after ball)
     GamePlay::MovePlayers();
 }
