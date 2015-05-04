@@ -86,7 +86,7 @@ int main(void)
     listOfPlayers[p6.getName()] = &p6;
     Player p7("Rakitic", 400 + 185, screenH/2 + 163, 20, 20, filename, "homeTeam", "NW", 69, 82, 87, 81, 55, 67, 83);
     listOfPlayers[p7.getName()] = &p7;
-    Player p8("Busquets", screenW/2, screenH/2 + 200, 20, 20, filename, "homeTeam", "E", 56, 59, 78, 75, 81, 80, 85);
+    Player p8("Busquets",screenW/2, screenH/2, 20, 20, filename, "homeTeam", "E", 56, 59, 78, 75, 81, 80, 85);
     listOfPlayers[p8.getName()] = &p8;
     Player p9("Neymar", ( (1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 20, 20, 20, filename, "homeTeam", "E", 90, 80, 72, 92, 30, 58, 86);
     listOfPlayers[p9.getName()] = &p9;
@@ -139,6 +139,7 @@ int main(void)
     int s = -1;
     //testInt = testInt + 0.5;
     cout <<  "test int: " << testInt/4 << endl;
+    
     //cin >> testInt;
     //EventHandling.cpp
     initEventQueue();

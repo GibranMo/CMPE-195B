@@ -750,7 +750,7 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
                     if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / ( p->getY() - p1->getY()) ) + p1->getX() )
                         available = false;
                     if(!isRectangleAreaInFrontClear(p, p1->getX(), p1->getY()))
-                       available = false;
+                        available = false;
                     
                 }
                 else {
@@ -955,7 +955,7 @@ void Layout::reset(){
     homeTeam->getPlayer("Neymar")->setPos(( (1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 20);
     homeTeam->getPlayer("Messi")->setPos(((1105 - 681)/2) + 681, ((515 - 185) / 2) + 185);
     homeTeam->getPlayer("Suarez")->setPos(( (1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 340);
-
+    
     awayTeam->getPlayer("Casillas")->setPos(screenW - 50, screenH/2);
     awayTeam->getPlayer("Ramos")->setPos(screenW - 258, screenH/2 + 100 - 45 + 15);
     awayTeam->getPlayer("Marcelo")->setPos(screenW - 258, screenH/2 + 200);
@@ -967,10 +967,14 @@ void Layout::reset(){
     awayTeam->getPlayer("Benzema")->setPos(screenW/2 - 363 + 30, screenH/2);
     awayTeam->getPlayer("Ronaldo")->setPos(screenW/2 - 265, screenH/2 + 180);
     awayTeam->getPlayer("Bale")->setPos(screenW/2 - 265, screenH/2 - 180);
-
+    
     initialSetUp433();
     
     hasBall(awayTeam->getPlayer("Busquets"));
-
+    
 }
+
+
+
+
 

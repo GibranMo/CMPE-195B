@@ -79,8 +79,8 @@ public:
     double mxPlusbOutput(double slope, int x, int b);
     
     double getSlope (int y1, int y2, int x1, int x2);
-    void reset();
     
+    void reset();
     
     
 };

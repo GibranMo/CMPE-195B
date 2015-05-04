@@ -24,6 +24,7 @@ private:
     bool isAttacking = false;
     bool isStationary = false;
     bool isGauging = false;
+    bool defending = false;
     string teamName;
     enum facingAngle { E,  NE, N, NW, W, SW, S, SE};
     string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect.
@@ -66,7 +67,7 @@ private:
     int pass;
     int dribbling;
     int physical;
-    int defending;
+    int defense;
     int overall;
     
 public:
@@ -106,6 +107,7 @@ public:
     void tackle();
     void runBackwards();
     void stop();
+    void setIsDefending(bool mode);
     
     string getTeamName();
     void setFacingAngle(facingAngle); //change the direction a player points
@@ -115,6 +117,10 @@ public:
     void setFieldPosition(int x, int y);
     
     bool isWithinArea();
+    bool isDefending();
+    
+    int getDestX();
+    int getDestY();
     
     /*
      get skill attribures methods
@@ -127,11 +133,11 @@ public:
     int getDef();
     int getPhy();
     int getOverall();
-    int getDestX();
-    int getDestY();
     
     void dribble(int xp, int yp);
     void updatePos();
+    
+    
     
 };
 

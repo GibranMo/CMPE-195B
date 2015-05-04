@@ -233,7 +233,7 @@ int Player::getPass()
 
 int Player::getDef()
 {
-    return defending;
+    return defense;
 }
 
 int Player::getDrib()
@@ -306,6 +306,18 @@ void Player::updatePos(){
         stop();
     }
     
+    
+}
+
+void Player::setIsDefending(bool mode)
+{ 
+    defending = mode;
+    
+}
+
+bool Player::isDefending()
+{
+    return defending;
 }
 
 

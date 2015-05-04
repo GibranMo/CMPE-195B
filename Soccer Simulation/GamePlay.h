@@ -43,7 +43,6 @@ private:
     int computePositionScore(int countInFront);
     void MovePlayers();
     void MoveDefendingPlayer(Player *p);
-    
     //Test
     static void testFoo(GLuint gl, Player * pl);
     void drawingTest();
@@ -69,12 +68,17 @@ public:
     bool checkCollision(Ball * ball, Player * player);
     void setPointToPlayer(Player * p, Player * p2);
     void freezeNewOpposingPlayers();
+    
     bool shoot(Player * p);
     vector<GLuint> score;
-
+    
     
     int homeScore;
     int awayScore;
+
+    
+    void goalieGetBack(Player * goalie1, int originalX, int originalY);
+
     
 };
 
