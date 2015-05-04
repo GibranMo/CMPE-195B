@@ -69,7 +69,12 @@ public:
     bool checkCollision(Ball * ball, Player * player);
     void setPointToPlayer(Player * p, Player * p2);
     void freezeNewOpposingPlayers();
+    bool shoot(Player * p);
+    vector<GLuint> score;
 
+    
+    int homeScore;
+    int awayScore;
     
 };
 

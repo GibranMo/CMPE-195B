@@ -72,7 +72,7 @@ int main(void)
     //Setup actors
     const char* filename = "images/dotBlackArrow.tga";
     map <string, Player *> listOfPlayers;
-    Player p1("Terstegen", 50, screenH/2, 20, 20, filename, "homeTeam", "E", 0, 0, 0, 0, 0, 0, 0);
+    Player p1("Terstegen", 250, screenH/2, 20, 20, filename, "homeTeam", "E", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers[p1.getName()] = &p1;
     Player p2("Mathieu", 250, screenH/2 - 100 + 25, 20, 20, filename, "homeTeam", "E", 76, 64, 66, 55, 82, 81, 80);
     listOfPlayers[p2.getName()] = &p2;
@@ -86,7 +86,7 @@ int main(void)
     listOfPlayers[p6.getName()] = &p6;
     Player p7("Rakitic", 400 + 185, screenH/2 + 163, 20, 20, filename, "homeTeam", "NW", 69, 82, 87, 81, 55, 67, 83);
     listOfPlayers[p7.getName()] = &p7;
-    Player p8("Busquets", 400 + 190, screenH/2, 20, 20, filename, "homeTeam", "E", 56, 59, 78, 75, 81, 80, 85);
+    Player p8("Busquets", screenW/2, screenH/2 + 200, 20, 20, filename, "homeTeam", "E", 56, 59, 78, 75, 81, 80, 85);
     listOfPlayers[p8.getName()] = &p8;
     Player p9("Neymar", ( (1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 20, 20, 20, filename, "homeTeam", "E", 90, 80, 72, 92, 30, 58, 86);
     listOfPlayers[p9.getName()] = &p9;
@@ -99,7 +99,7 @@ int main(void)
     filename = "images/madridPlayer.tga";
     
     map <string, Player *> listOfPlayers2;
-    Player p21("Casillas", screenW - 50, screenH/2, 20, 20, filename, "awayTeam", "W", 0, 0, 0, 0, 0, 0, 0);
+    Player p21("Casillas", screenW - 250, screenH/2, 20, 20, filename, "awayTeam", "W", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers2[p21.getName()] = &p21;
     Player p22("Ramos", screenW - 258, screenH/2 + 100 - 45 + 15  , 20, 20, filename, "awayTeam", "W", 79, 60, 71, 66, 87, 82, 87);
     listOfPlayers2[p22.getName()] = &p22;

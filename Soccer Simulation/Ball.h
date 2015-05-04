@@ -24,6 +24,7 @@ private:
     int destX;
     int destY;
     GLuint tex;
+    GLuint texf;
     int speed;
     int n;
     
@@ -37,6 +38,8 @@ public:
     int getVelY();
     int getH();
     int getW();
+    int getDestX();
+    int getDestY();
     void setVel(int xv, int yv);
     void kick(int vel, int xp, int yp);
     
@@ -48,6 +51,7 @@ public:
     void resetDest(int x, int y);
     
     GLuint getTex();
+    GLuint getTexf();
 };
 
 

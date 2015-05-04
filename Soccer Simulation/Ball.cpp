@@ -14,6 +14,7 @@ Ball::Ball(int xb, int yb, int wb, int hb, const char* image){
     w = wb;
     h = hb;
     tex = glTexImageTGAFile(image);
+    texf = glTexImageTGAFile("images/fireball.tga");
     velX = 0;
     velY = 0;
     destX = 0;
@@ -78,6 +79,17 @@ int Ball::getW(){
 
 GLuint Ball::getTex(){
     return tex;
+}
+GLuint Ball::getTexf(){
+    return texf;
+}
+
+int Ball::getDestX(){
+    return destX;
+}
+
+int Ball::getDestY(){
+    return destY;
 }
 
 void Ball::resetDest(int x, int y){

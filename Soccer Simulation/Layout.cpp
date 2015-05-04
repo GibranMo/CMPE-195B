@@ -941,3 +941,36 @@ Team * Layout::getDefendingTeam()
     
 }
 
+void Layout::reset(){
+    
+    //Setup actors
+    homeTeam->getPlayer("Terstegen")->setPos(50, screenH/2);
+    homeTeam->getPlayer("Mathieu")->setPos(250, screenH/2 - 75);
+    homeTeam->getPlayer("Alba")->setPos(250, screenH/2 - 200);
+    homeTeam->getPlayer("Pique")->setPos(250, screenH/2 + 75);
+    homeTeam->getPlayer("Alves")->setPos(250, screenH/2 + 200);
+    homeTeam->getPlayer("Iniesta")->setPos(585, screenH/2 - 100 - 63);
+    homeTeam->getPlayer("Rakitic")->setPos(585, screenH/2 + 163);
+    homeTeam->getPlayer("Busquets")->setPos(screenW/2, screenH/2 + 200);
+    homeTeam->getPlayer("Neymar")->setPos(( (1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 20);
+    homeTeam->getPlayer("Messi")->setPos(((1105 - 681)/2) + 681, ((515 - 185) / 2) + 185);
+    homeTeam->getPlayer("Suarez")->setPos(( (1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 340);
+
+    awayTeam->getPlayer("Casillas")->setPos(screenW - 50, screenH/2);
+    awayTeam->getPlayer("Ramos")->setPos(screenW - 258, screenH/2 + 100 - 45 + 15);
+    awayTeam->getPlayer("Marcelo")->setPos(screenW - 258, screenH/2 + 200);
+    awayTeam->getPlayer("Pepe")->setPos(screenW - 258, screenH/2 - 100 + 45 - 15);
+    awayTeam->getPlayer("Carvajal")->setPos(screenW - 258, screenH/2 - 200);
+    awayTeam->getPlayer("Kroos")->setPos(screenW/2  - 25 , screenH/2 - 160);
+    awayTeam->getPlayer("Modric")->setPos(screenW/2 - 25 , screenH/2 + 160);
+    awayTeam->getPlayer("Rodriguez")->setPos(700 , screenH/2);
+    awayTeam->getPlayer("Benzema")->setPos(screenW/2 - 363 + 30, screenH/2);
+    awayTeam->getPlayer("Ronaldo")->setPos(screenW/2 - 265, screenH/2 + 180);
+    awayTeam->getPlayer("Bale")->setPos(screenW/2 - 265, screenH/2 - 180);
+
+    initialSetUp433();
+    
+    hasBall(awayTeam->getPlayer("Busquets"));
+
+}
+

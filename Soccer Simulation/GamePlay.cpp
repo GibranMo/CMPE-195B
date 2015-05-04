@@ -46,6 +46,24 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
     fieldTex = ft;
     expFieldTex = ft;
     //***************
+    
+    homeScore = 0;
+    awayScore = 0;
+    vector<GLuint> s(12);
+    score = s;
+    
+    score[0] = glTexImageTGAFile("images/1.tga");
+    score[1] = glTexImageTGAFile("images/1.tga");
+    score[2] = glTexImageTGAFile("images/2.tga");
+    score[3] = glTexImageTGAFile("images/3.tga");
+    score[4] = glTexImageTGAFile("images/4.tga");
+    score[5] = glTexImageTGAFile("images/5.tga");
+    score[6] = glTexImageTGAFile("images/6.tga");
+    score[7] = glTexImageTGAFile("images/7.tga");
+    score[8] = glTexImageTGAFile("images/8.tga");
+    score[9] = glTexImageTGAFile("images/9.tga");
+    score[10] = glTexImageTGAFile("images/h.tga");
+    score[11] = glTexImageTGAFile("images/a.tga");
 }
 
 
@@ -62,9 +80,7 @@ void GamePlay::DrawSprite(bool playing)
         //Basically, the way to get players is in the form of a map, which is done using a method call on a Team object.
         //In the following instance, a Team object is obtained by using the getHomeTeam() method on our member variable 'layout'
         map <string, Player *> listOfPlayers = *layout->getHomeTeam()->getPlayers();
-        
         map <string, Player *> listOfPlayers2 = *layout->getAwayTeam()->getPlayers();
-        
         
         for (std::map<string,Player*>::iterator it=listOfPlayers.begin(); it!=listOfPlayers.end(); ++it){
             glDrawSprite(it->second->getTex(), it->second->getX(), it->second->getY(), 20, 20);
@@ -73,20 +89,17 @@ void GamePlay::DrawSprite(bool playing)
             
             glDrawSprite2(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
         }
+        if(layout->getBall()->getDestY() == 350)
+            glDrawSprite2(layout->getBall()->getTexf(), layout->getBall()->getX(), layout->getBall()->getY(), 20, 20);
+
+        else
+            glDrawSprite2(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
         
-        glDrawSprite2(layout->getBall()->getTex(), layout->getBall()->getX(), layout->getBall()->getY(), 10, 8);
-        
-        
-        GLuint testTex = glTexImageTGAFile("images/1.tga");
-        GLuint testTex2 = glTexImageTGAFile("images/3.tga");
-        
-        glDrawSprite(testTex2, 0, -10, 30, 50);
-        glDrawSprite(testTex, 0, 50, 30, 50);
-        
-        
-        //        glDrawLines();
-        //        glDrawPoint();
-        
+        //score
+        glDrawSprite(score[10], 0, 0, 20, 20);
+        glDrawSprite(score[homeScore % 10], 25, 0, 20, 20);
+        glDrawSprite(score[11], 50, 0, 20, 20);
+        glDrawSprite2(score[awayScore % 10], 75, 0, 20, 20);
     }
 }
 
@@ -133,9 +146,9 @@ void GamePlay::setPointToBall(Player *p)
     else
     {
         if (ballX > p->getX())
-            p->setFaceAngle("W");
-        else
             p->setFaceAngle("E");
+        else
+            p->setFaceAngle("W");
     }
     
     
@@ -498,23 +511,24 @@ void GamePlay::NextMove()
                 layout->hasBall(player);
                 int speed = (100 - player2->getPace()) / 5;
                 layout->getBall()->kick(2, player2->getX() + (player2->getW()/2), player2->getY() + (player2->getH()/2));
-//                cout << "<<<kicked to: " + player2->getName()  << endl;
                 layout->hasBall(NULL);
             }
             else {
                 listOfAvailableTeamMates = layout->getAvailablePlayers(player);
-                
-                //                listOfAvailableTeamMates = rectangleFilter(player);
-                //                //For Debugging for now
-                //                if (listOfAvailableTeamMates.size() == 0)
-                //                {
-                //                    cout << "<><><><><>" << endl;
-                //                    return;
-                //                }
-                
-                
+                if(shoot(player)){
+                    string team = player->getTeamName();
+                    int destX;
+                    if(team == "homeTeam")
+                        destX = 1100;
+                    else
+                        destX = 50;
+                    layout->getBall()->kick(1, destX, 350);
+                    player->stop();
+                    layout->hasBall(NULL);
+                    cout << "<<<shot by: " + player->getName()  << endl;
+                }
                 //choose one teammate from list of available teammates
-                if(listOfAvailableTeamMates.size() > 6 || !dribble(player)){
+                else if(listOfAvailableTeamMates.size() > 6 || !dribble(player)){
                     srand(time(NULL));
                     int r = rand() % listOfAvailableTeamMates.size();
                     Player * player2 = listOfAvailableTeamMates[r];
@@ -525,7 +539,7 @@ void GamePlay::NextMove()
                     //int speed = 50;
                     cout << "speed: " << speed << endl;
                     layout->getBall()->kick(2, player2->getX(), player2->getY());
-                    cout << "<<<kicked to2: " + player2->getName()  << endl;
+                    cout << "<<<kicked to: " + player2->getName()  << endl;
                     layout->hasBall(NULL);
                 }
                 else
@@ -606,11 +620,27 @@ void GamePlay::setPointToPlayer(Player *p, Player *p2)
     else
     {
         if (ballX > p->getX())
-            p->setFaceAngle("W");
-        else
             p->setFaceAngle("E");
+        else
+            p->setFaceAngle("W");
     }
     
+    
+}
+
+bool GamePlay::shoot(Player * p){
+    
+//    Ball * ball = layout->getBall();
+    string team = p->getTeamName();
+    
+    if(team == "homeTeam"){
+        if(p->getX() > 1000)
+            return true;
+    }
+    else if(p->getX() < 150)
+        return true;
+    
+    return false;
     
 }
 
@@ -758,4 +788,7 @@ void GamePlay::move(){
     
     //move defenders (they go after ball)
     GamePlay::MovePlayers();
+    
+    if(ball->getY() == 350 && (ball->getX() == 1100|| ball->getX() == 50))
+       layout->reset();
 }

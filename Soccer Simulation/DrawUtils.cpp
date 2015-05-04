@@ -95,6 +95,7 @@ GLuint glTexImageTGAFile(const char* filename, int* outWidth, int* outHeight)
         *outHeight = imageHeight;
     }
     return tex;
+    
 }
 
 // Draw the sprite
@@ -114,6 +115,7 @@ void glDrawSprite(GLuint tex, int x, int y, int w, int h)
         glVertex2i(x, y + h);
     }
     glEnd();
+    
 }
 
 void glDrawSprite3(GLuint tex, int x, int y, int w, int h)
