@@ -91,6 +91,8 @@ public:
     
     void stopDefendersFromChasing(Player * p);
     
+    void resetFaceAngle(Player * p);
+    
     
 };
 
