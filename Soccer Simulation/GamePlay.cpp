@@ -52,6 +52,8 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
     vector<GLuint> s(12);
     score = s;
     
+    distanceKick = 0;
+    
     score[0] = glTexImageTGAFile("images/1.tga");
     score[1] = glTexImageTGAFile("images/1.tga");
     score[2] = glTexImageTGAFile("images/2.tga");
@@ -268,9 +270,6 @@ void GamePlay::defend2(Player *p)
     static unsigned int callCtr = 0;
     
     callCtr++;
-    cout << "CTRdefend2:  " << callCtr << endl;
-    
-    
     int speed = p->getPace();
     
     speed = 100 - speed;
@@ -282,7 +281,6 @@ void GamePlay::defend2(Player *p)
     if ((p->getCounter()) % 2 == 0)
         defend(p);
     
-    cout << "end defend2" << endl;
 }
 
 void GamePlay::defend(Player *p)
@@ -479,7 +477,7 @@ void GamePlay::MovePlayers()
 {
     unsigned static int ctr = 0;
     ctr++;
-    cout << "counter " << ctr << endl;
+   
     Team * defendingTeam = layout->getDefendingTeam();
     map <string, Player *> defendingPlayers = *defendingTeam->getPlayers();
     
@@ -492,9 +490,8 @@ void GamePlay::MovePlayers()
         //cout << ">> " << p->getName() << " p->getName(): " <<  p->getName() << " D:  " << layout->getDistanceBall(p);
         //cout << " x: " << p->getX() << " y: " << p->getY() << endl;
         
-        if (layout->getDistanceBall(p) <= 80 || (layout->getClosestDefenderToBall()->getName() == p->getName()))
+        if ( (layout->getDistanceBall(p) <= 80 || (layout->getClosestDefenderToBall()->getName() == p->getName()) ) && p->getInPassRadius() == false)
         {
-            //cout << "Name: " << p->getName() << " x: " << p->getX() << " y: " << p->getY() << endl;
             defend2(p);
             p->setIsDefending(true);
             
@@ -513,7 +510,7 @@ void GamePlay::NextMove()
     int x = layout->getBall()->getX();
     int y = layout->getBall()->getY();
     Player * player = layout->hasBall();
-    
+    int numOfRecipients = 0;
     
     cout << "next move" << endl;
     vector<Player *> listOfCloseTeamMates;
@@ -523,7 +520,7 @@ void GamePlay::NextMove()
     if(x == 568 && y == 361){
         kickoff = true;
     }
-    
+    //receipi
     //someone has the ball
     if(player != NULL){
         cout << player->getName() + " has the ball" << endl;
@@ -539,7 +536,16 @@ void GamePlay::NextMove()
         }
         else {
             listOfAvailableTeamMates = layout->getAvailablePlayers(player);
-            if(shoot(player)){
+            
+            
+            if (player->getName() == "Casillas" || player->getName() == "Terstegen")
+                numOfRecipients = 1;
+            else
+                numOfRecipients = 6;
+            
+           
+            if(shoot(player))
+            {
                 string team = player->getTeamName();
                 int destX;
                 if(team == "homeTeam")
@@ -552,7 +558,8 @@ void GamePlay::NextMove()
                 cout << "<<<shot by: " + player->getName()  << endl;
             }
             //choose one teammate from list of available teammates
-            else if(listOfAvailableTeamMates.size() > 6 || !dribble(player)){
+            else if(listOfAvailableTeamMates.size() > numOfRecipients || !dribble(player))
+            {
                 srand(time(NULL));
                 int r = rand() % listOfAvailableTeamMates.size();
                 Player * player2 = listOfAvailableTeamMates[r];
@@ -563,6 +570,9 @@ void GamePlay::NextMove()
                 //int speed = 50;
                 cout << "speed: " << speed << endl;
                 layout->getBall()->kick(2, player2->getX(), player2->getY());
+                passSourceX = player->getX();
+                passSourceY = player->getY();
+                checkInPassRadius(player);
                 cout << "<<<kicked to: " + player2->getName()  << endl;
                 layout->hasBall(NULL);
             }
@@ -570,11 +580,32 @@ void GamePlay::NextMove()
                 layout->hasBall(player);
         }
     }
-    //take care of other player
     
-    //GamePlay::MovePlayers();
+    //Its travelling a trajectory
+    calculateKickDistance();
     
     
+}
+
+void GamePlay::checkInPassRadius(Player * passer)
+{
+    
+    Team * defense = layout->getDefendingTeam();
+    for (std::map<string,Player*>::iterator it=defense->getPlayers()->begin(); it!=defense->getPlayers()->end(); ++it )
+    {
+        Player * defender = it->second;
+        
+        if (layout->getDistance(defender->getX(), defender->getY(), passer->getX(), passer->getY()) <= 50)
+        {
+            defender->setInPassRadius(true);
+        }
+    }
+    
+}
+
+void GamePlay::calculateKickDistance()
+{
+    travelledDistance = layout->getDistance(passSourceX, passSourceY, layout->getBall()->getX(), layout->getBall()->getY());
 }
 
 vector<Player *> GamePlay::rectangleFilter(Player * possessBall)
@@ -652,6 +683,31 @@ void GamePlay::setPointToPlayer(Player *p, Player *p2)
 
 bool GamePlay::dribble(Player * p){
     
+    int screenH = 700;
+    int screenW = 1150;
+    
+    if (p->getName() == "Casillas" || p->getName() == "Terstegen")
+    {
+        int casillasX =  screenW - 50;
+        int casillasY = screenH/2;
+        
+        int terstegenX = 50;
+        int terstegenY = screenH/2;
+        
+        if (p->getName() == "Casillas")
+        {
+        
+            if (layout->getDistance(casillasX, casillasY, p->getX(), p->getY()) <= 45)
+                return false;
+        }
+        else
+        {
+            if (layout->getDistance(terstegenX, terstegenY, p->getX(), p->getY()) <= 45) {
+                return false;
+            }
+        }
+        
+    }
     if(p->getDestX() != 0 && p->getDestY() != 0)
         return true;
     
@@ -747,8 +803,6 @@ void GamePlay::move(){
     //move ball
     Ball * ball = layout->getBall();
     ball->updatePos();
-    cout << "xx: " << ball->getX() << " yy: " << ball->getY() << endl;
-    
     //move players
     Player * player = layout->hasBall();
     Team * team;
@@ -763,7 +817,9 @@ void GamePlay::move(){
             if(checkCollision(ball, player)){
                 ball->resetDest(0, 0);
                 layout->hasBall(player);
+                distanceKick = 0;
                 cout << "<<<Got ball: " + player->getName()  << endl;
+                
             }
         }
     }
@@ -773,6 +829,7 @@ void GamePlay::move(){
             if(checkCollision(ball, player)){
                 ball->resetDest(0, 0);
                 layout->hasBall(player);
+                distanceKick = 0;
                 cout << "<<<Got ball: " + player->getName()  << endl;
             }
         }
@@ -782,6 +839,7 @@ void GamePlay::move(){
             if(checkCollision(ball, player)){
                 ball->resetDest(0, 0);
                 layout->hasBall(player);
+                distanceKick = 0;
                 cout << "<<<Got ball: " + player->getName()  << endl;
             }
         }
@@ -818,7 +876,8 @@ void GamePlay::move(){
 
 void GamePlay::goalieGetBack(Player * goalie1, int originalX, int originalY)
 {
-  
+    
+    cout << "GOALIE: " << goalie1->getName() <<  " " << goalie1->isDefending() << endl;
     if (goalie1->isDefending() == false)
     {
         Player * playerHasBall = layout->hasBall();
@@ -827,13 +886,33 @@ void GamePlay::goalieGetBack(Player * goalie1, int originalX, int originalY)
             if (playerHasBall->getName() != goalie1->getName()) //check the player dribbling is not this goalie1
             {
                 goalie1->dribble(originalX, originalY);
+                cout << "&&&&&&&" << endl;
             }
         }
         else //ball is in a trajectory, i.e. no one has possesion of it
         {
             goalie1->dribble(originalX, originalY);
+             cout << "2&&&&&&&" << endl;
         }
     }
     
     
+}
+
+void GamePlay::stopDefendersFromChasing(Player *p)
+{
+    int RANGE = 40;
+    Team * team = layout->getDefendingTeam();
+    
+    for (std::map<string,Player*>::iterator it=team->getPlayers()->begin(); it!=team->getPlayers()->end(); ++it )
+    {
+        Player * opponent = it->second;
+        
+        if (layout->distanceBetweenPlayers(p, opponent) <= RANGE)
+        {
+            opponent->setChase(false);
+        }
+        
+    }
+
 }

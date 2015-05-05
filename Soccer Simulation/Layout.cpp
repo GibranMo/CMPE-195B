@@ -734,7 +734,6 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
     
     for (std::map<string,Player*>::iterator it=t->getPlayers()->begin(); it!=t->getPlayers()->end(); ++it) {
         Player * p1 = it->second;
-        cout << "p1: " << p1->getName() << endl;
         
         if (p1->getName() == p->getName())
             continue;
@@ -745,7 +744,6 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
             Player * p2 = it->second;
             
             if(distance(p1, p2) < 80){
-                cout << p2->getName()  << "<><> " <<  p->getY() - p1->getY() << endl;
                 if(p->getY() != p1->getY()){
                     if(p2->getX() < ( ( (p2->getY() - p1->getY()) * (p1->getX() - p->getX()) ) / ( p->getY() - p1->getY()) ) + p1->getX() )
                         available = false;
@@ -970,7 +968,7 @@ void Layout::reset(){
     
     initialSetUp433();
     
-    hasBall(awayTeam->getPlayer("Busquets"));
+    hasBall(homeTeam->getPlayer("Busquets"));
     
 }
 

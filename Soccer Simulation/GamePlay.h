@@ -51,11 +51,21 @@ private:
     void defend(Player * p);
     void defend2(Player * p);
     
+    int passSourceX = 0;
+    int passSourceY = 0;
+    int travelledDistance = 0;
+    
     vector <Player *> rectangleFilter(Player * p);
     
     bool dribble(Player * p);
-
-
+    
+    int distanceKick; //keeps track of the distance traveled by a pass
+    int getDistanceKick();
+    void calculateKickDistance();
+    
+    void checkInPassRadius(Player * passer);
+    
+    
     
 public:
     GamePlay(Layout * l, GLuint ft);
@@ -78,7 +88,9 @@ public:
 
     
     void goalieGetBack(Player * goalie1, int originalX, int originalY);
-
+    
+    void stopDefendersFromChasing(Player * p);
+    
     
 };
 

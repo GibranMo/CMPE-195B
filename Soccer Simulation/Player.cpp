@@ -320,4 +320,23 @@ bool Player::isDefending()
     return defending;
 }
 
+void Player::setChase(bool mode)
+{
+    chase = mode;
+    
+}
 
+bool Player::isChasing()
+{
+    return chase;
+}
+
+void Player::setInPassRadius(bool mode)
+{
+    inPassRadius = mode;
+}
+
+bool Player::getInPassRadius()
+{
+    return inPassRadius;
+}

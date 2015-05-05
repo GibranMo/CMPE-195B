@@ -25,8 +25,10 @@ private:
     bool isStationary = false;
     bool isGauging = false;
     bool defending = false;
+    bool chase = true;
     string teamName;
     enum facingAngle { E,  NE, N, NW, W, SW, S, SE};
+    
     string angle; // this is alternative to the member 'facingAngle'. 'N' = north, 'NE' = northeast, ect.
     
     /*
@@ -78,6 +80,7 @@ public:
     int getY();
     int getX();
     string getName();
+    
     int getVelX();
     int getVelY();
     int getH();
@@ -118,6 +121,10 @@ public:
     
     bool isWithinArea();
     bool isDefending();
+    bool isChasing();
+    void setChase(bool mode);
+    bool getInPassRadius();
+    void setInPassRadius(bool mode);
     
     int getDestX();
     int getDestY();
@@ -136,6 +143,8 @@ public:
     
     void dribble(int xp, int yp);
     void updatePos();
+    
+    bool inPassRadius = false;
     
     
     
