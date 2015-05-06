@@ -65,7 +65,8 @@ private:
     
     void checkInPassRadius(Player * passer);
     void resetInPassRadius();
-    
+    void attackerMoveTowardsBall(Player * recipient);
+    Player * potentialRecipient;
     
     
 public:
@@ -93,7 +94,8 @@ public:
     void stopDefendersFromChasing(Player * p);
     
     void resetFaceAngle(Player * p);
-    
+    void setPotentialRecipient(Player * p);
+    Player getPotentialRecipient();
     
 };
 

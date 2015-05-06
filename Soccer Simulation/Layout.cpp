@@ -717,7 +717,8 @@ double Layout::getSlope(int y1, int y2, int x1, int x2)
 }
 
 //p = player who has ball, p1 = potential available player, p2 = opposing player
-vector <Player *> Layout::getAvailablePlayers(Player * p) {
+vector <Player *> Layout::getAvailablePlayers(Player * p)
+{
     string team = p->getTeamName();
     vector<Player*> players;
     Team * t;
@@ -736,17 +737,17 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
         Player * p1 = it->second;
         
         bool available = true;
-
+        
         if (p1->getName() == p->getName())
             continue;
-        if(p->getTeamName() == "homeTeam"){
-            if(p->getX() > p1->getX())
-                continue;
-        }
-        else if(p->getTeamName() == "awayTeam"){
-            if(p->getX() < p1->getX())
-                continue;
-        }
+//        if(p->getTeamName() == "homeTeam"){
+//            if(p->getX() > p1->getX())
+//                continue;
+//        }
+//        else if(p->getTeamName() == "awayTeam"){
+//            if(p->getX() < p1->getX())
+//                continue;
+//        }
         
         for (std::map<string,Player*>::iterator it=op->getPlayers()->begin(); it!=op->getPlayers()->end(); ++it) {
             Player * p2 = it->second;
@@ -771,6 +772,7 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
     }
     
     return players;
+
 }
 
 double Layout::getDistance(int x1, int x2, int y1, int y2)
@@ -950,7 +952,7 @@ Team * Layout::getDefendingTeam()
 void Layout::reset(){
     
     //Setup actors
-    homeTeam->getPlayer("Terstegen")->setPos(50, screenH/2);
+    homeTeam->getPlayer("Terstegen")->setPos(51, screenH/2);
     homeTeam->getPlayer("Mathieu")->setPos(250, screenH/2 - 75);
     homeTeam->getPlayer("Alba")->setPos(250, screenH/2 - 200);
     homeTeam->getPlayer("Pique")->setPos(250, screenH/2 + 75);
@@ -962,7 +964,7 @@ void Layout::reset(){
     homeTeam->getPlayer("Messi")->setPos(((1105 - 681)/2) + 681, ((515 - 185) / 2) + 185);
     homeTeam->getPlayer("Suarez")->setPos(( (1105 - 641)/2) + 641 - 45 , ((350 - 20) / 2) + 340);
     
-    awayTeam->getPlayer("Casillas")->setPos(screenW - 50, screenH/2);
+    awayTeam->getPlayer("Casillas")->setPos(screenW - 51, screenH/2);
     awayTeam->getPlayer("Ramos")->setPos(screenW - 258, screenH/2 + 100 - 45 + 15);
     awayTeam->getPlayer("Marcelo")->setPos(screenW - 258, screenH/2 + 200);
     awayTeam->getPlayer("Pepe")->setPos(screenW - 258, screenH/2 - 100 + 45 - 15);

@@ -67,6 +67,7 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
     score[10] = glTexImageTGAFile("images/h.tga");
     score[11] = glTexImageTGAFile("images/a.tga");
     score[12] = glTexImageTGAFile("images/-.tga");
+
 }
 
 
@@ -101,10 +102,10 @@ void GamePlay::DrawSprite(bool playing)
         
         //score
         glDrawSprite(score[10], 0, 0, 20, 20);
-        glDrawSprite2(score[12], 13, 0, 20, 20);
+        glDrawSprite(score[12], 13, 0, 20, 20);
         glDrawSprite(score[homeScore % 10], 25, 0, 20, 20);
         glDrawSprite(score[11], 50, 0, 20, 20);
-        glDrawSprite2(score[12], 63, 0, 20, 20);
+        glDrawSprite(score[12], 63, 0, 20, 20);
         glDrawSprite2(score[awayScore % 10], 75, 0, 20, 20);
     }
 
@@ -284,6 +285,64 @@ void GamePlay::defend2(Player *p)
     
     if ((p->getCounter()) % 2 == 0)
         defend(p);
+    
+}
+
+void GamePlay::attackerMoveTowardsBall(Player * p)
+{
+    
+    cout << "----" << p->getName() << "----" << endl;
+    static unsigned int functionCallctr = 0;
+    functionCallctr++;
+    /*
+     int ballX = layout->getBall()->getX();
+     int ballY = layout->getBall()->getY();
+     */
+    
+    int ballX = layout->getBall()->getX();
+    int ballY = layout->getBall()->getY();
+    
+    
+    
+    
+    
+    
+    // *RIGHT/LEFT* //
+    if (ballX > p->getX())
+    {
+        p->setXPos(p->getX() + 1 );
+    }
+    else if (ballX < p->getX())
+    {
+        p->setXPos(p->getX() - 1 );
+    }
+    
+    
+    // *UP/DOWN* //
+    
+    
+    if (ballY > p->getY())
+    {
+        p->setYPos(p->getY() + 1) ;
+    }
+    else if (ballY < p->getY())
+        p->setYPos(p->getY() - 1) ;
+    
+    if (ballX == p->getX())
+    {
+        if (ballY > p->getY())
+        {
+            p->setYPos(p->getY() + 1) ;
+        }
+        else if (ballY < p->getY())
+            p->setYPos(p->getY() - 1) ;
+        
+    }
+    //Finally, change the angle of the player
+    
+    if (functionCallctr % 40 == 0)
+        setPointToBall(p);
+
     
 }
 
@@ -505,6 +564,21 @@ void GamePlay::MovePlayers()
         
     }
     
+    if (potentialRecipient != NULL)
+    {
+        Team * attacking = layout->getDefendingTeam();
+        map <string, Player *> team = *attacking->getPlayers();
+        for (std::map<string,Player*>::iterator it = defendingPlayers.begin(); it!= defendingPlayers.end(); ++it)
+        {
+            if (layout->getDistanceBall(potentialRecipient) <= 70)
+            {
+                attackerMoveTowardsBall(potentialRecipient);
+            }
+            
+        }
+        
+    }
+    
 }
 
 void GamePlay::resetFaceAngle(Player * player){
@@ -570,6 +644,8 @@ void GamePlay::NextMove()
             layout->hasBall(player);
             int speed = (100 - player2->getPace()) / 5;
             layout->getBall()->kick(2, player2->getX() + (player2->getW()/2), player2->getY() + (player2->getH()/2));
+            potentialRecipient = player2;
+            //attackerMoveTowardsBall(player2);
             checkInPassRadius(player);
             layout->hasBall(NULL);
         }
@@ -580,7 +656,7 @@ void GamePlay::NextMove()
             if (player->getName() == "Casillas" || player->getName() == "Terstegen")
                 numOfRecipients = 1;
             else
-                numOfRecipients = 3;
+                numOfRecipients = 6;
             
            
             if(shoot(player))
@@ -601,8 +677,25 @@ void GamePlay::NextMove()
             else if(listOfAvailableTeamMates.size() > numOfRecipients || !dribble(player))
             {
                 srand(time(NULL));
-                int r = rand() % listOfAvailableTeamMates.size();
+                int r = 0;
+                for(int i = 0; i < listOfAvailableTeamMates.size(); i++){
+                    Player * p1 = listOfAvailableTeamMates[i];
+                    if(player->getTeamName() == "homeTeam"){
+                        if(player->getX() < p1->getX())
+                            r = i;
+                    }
+                    else if(player->getTeamName() == "awayTeam"){
+                        if(player->getX() < p1->getX())
+                            r = i;
+                    }
+                }
+                if(r == 0)
+                    r = rand() % listOfAvailableTeamMates.size();
+                
                 Player * player2 = listOfAvailableTeamMates[r];
+                
+                
+                
                 cout << "chose to pass to: " << player2->getName() << endl;
                 setPointToPlayer(player, player2);
                 layout->hasBall(player);
@@ -614,6 +707,9 @@ void GamePlay::NextMove()
                 passSourceX = player->getX();
                 passSourceY = player->getY();
                 cout << "<<<kicked to: " + player2->getName()  << endl;
+                //attackerMoveTowardsBall(player2);
+                potentialRecipient = player2;
+                cout << "xX: " << player->getX() << " yY:" << player->getY() << endl;
                 layout->hasBall(NULL);
             }
             else
@@ -635,6 +731,8 @@ void GamePlay::checkInPassRadius(Player * passer)
     {
         Player * defender = it->second;
         cout <<  "% " << defender->getName() <<  " " << layout->getDistance(defender->getX(), defender->getY(), passer->getX(), passer->getY()) << endl;
+        
+        cout << "x: " << defender->getX() << " y:" <<defender->getY() << endl;
         if (layout->getDistance(defender->getX(), defender->getY(), passer->getX(), passer->getY()) <= 110)
         {
             
@@ -838,7 +936,7 @@ bool GamePlay::checkCollision(Ball * ball, Player * player)
     //ball left
     if(px >= bx && px <= bx + bw){
         //collision if ball top or bottom is between player top and bottom.
-        if(by > py && by < py + ph){
+        if(by >= py && by <= py + ph){
             return true;
         }
         if(by + bh >= py && by + bh <= py + ph){
@@ -846,9 +944,9 @@ bool GamePlay::checkCollision(Ball * ball, Player * player)
         }
     }
     //ball right between player left side and player right side.
-    if(px < bx && px + pw > bx){
+    if(px <= bx && px + pw >= bx){
         //collision if ball top or bottom  is between player top and bottom.
-        if(by > py && by < py + ph){
+        if(by >= py && by <= py + ph){
             return true;
         }
         if(by + bh >= py && by + bh <= py + ph){
@@ -876,6 +974,7 @@ void GamePlay::move(){
         for (std::map<string,Player*>::iterator it=team->getPlayers()->begin(); it!=team->getPlayers()->end(); ++it ){
             Player * player = it->second;
             if(checkCollision(ball, player)){
+                potentialRecipient = NULL;
                 resetInPassRadius();
                 ball->resetDest(0, 0);
                 layout->hasBall(player);
@@ -889,6 +988,7 @@ void GamePlay::move(){
         for (std::map<string,Player*>::iterator it=layout->getHomeTeam()->getPlayers()->begin(); it!=layout->getHomeTeam()->getPlayers()->end(); ++it ){
             Player * player = it->second;
             if(checkCollision(ball, player)){
+                potentialRecipient = NULL;
                 resetFaceAngle(player);
                 resetInPassRadius();
                 ball->resetDest(0, 0);
@@ -901,6 +1001,7 @@ void GamePlay::move(){
         for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
             Player * player = it->second;
             if(checkCollision(ball, player)){
+                potentialRecipient = NULL;
                 resetFaceAngle(player);
                 resetInPassRadius();
                 ball->resetDest(0, 0);
@@ -920,6 +1021,7 @@ void GamePlay::move(){
     GamePlay::MovePlayers();
     
     
+    /*
     //after moving anyone
     Player * ter = layout->getHomeTeam()->getPlayer("Terstegen");
     
@@ -934,7 +1036,7 @@ void GamePlay::move(){
     originalX = 1150 - 50;
     
     goalieGetBack(casillas, originalX, originalY);
-    
+    */
     if(ball->getY() == 350){
         if(ball->getX() == 1100){
             ball->resetDest(0, 0);
@@ -947,8 +1049,6 @@ void GamePlay::move(){
             layout->reset();
         }
     }
-
-    
 }
 
 void GamePlay::goalieGetBack(Player * goalie1, int originalX, int originalY)

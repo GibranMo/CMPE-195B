@@ -111,7 +111,7 @@ int main(void)
     listOfPlayers2[p25.getName()] = &p25;
     Player p26("Kroos", screenW/2  - 25 , screenH/2 - 160, 20, 20, filename, "awayTeam", "W", 58, 81, 89, 84, 58, 69, 85);
     listOfPlayers2[p26.getName()] = &p26;
-    Player p27("Modric", screenW/2 - 25 , screenH/2 + 160, 20, 20, filename, "awayTeam", "W", 76, 74, 85, 89, 71, 70, 87);
+    Player p27("Modric", 268, 260, 20, 20, filename, "awayTeam", "W", 76, 74, 85, 89, 71, 70, 87);
     listOfPlayers2[p27.getName()] = &p27;
     Player p28("Rodriguez", 700 , screenH/2, 20, 20, filename, "awayTeam", "W", 80, 80, 84, 85, 40, 72, 86);
     listOfPlayers2[p28.getName()] = &p28;
