@@ -72,7 +72,7 @@ int main(void)
     //Setup actors
     const char* filename = "images/dotBlackArrow.tga";
     map <string, Player *> listOfPlayers;
-    Player p1("Terstegen", 50, screenH/2, 20, 20, filename, "homeTeam", "E", 0, 0, 0, 0, 0, 0, 0);
+    Player p1("Terstegen", 51, screenH/2, 20, 20, filename, "homeTeam", "E", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers[p1.getName()] = &p1;
     Player p2("Mathieu", 250, screenH/2 - 100 + 25, 20, 20, filename, "homeTeam", "E", 76, 64, 66, 55, 82, 81, 80);
     listOfPlayers[p2.getName()] = &p2;
@@ -99,7 +99,7 @@ int main(void)
     filename = "images/madridPlayer.tga";
     
     map <string, Player *> listOfPlayers2;
-    Player p21("Casillas", screenW - 50, screenH/2, 20, 20, filename, "awayTeam", "W", 0, 0, 0, 0, 0, 0, 0);
+    Player p21("Casillas", screenW - 51, screenH/2, 20, 20, filename, "awayTeam", "W", 0, 0, 0, 0, 0, 0, 0);
     listOfPlayers2[p21.getName()] = &p21;
     Player p22("Ramos", screenW - 258, screenH/2 + 100 - 45 + 15  , 20, 20, filename, "awayTeam", "W", 79, 60, 71, 66, 87, 82, 87);
     listOfPlayers2[p22.getName()] = &p22;
@@ -131,14 +131,15 @@ int main(void)
     Layout layout(&homeTeam, &awayTeam, &ball);
      layout.initialSetUp433();
     
-    layout.hasBall(&p8);
+    layout.hasBall(&p2);
     
     
     
     int testInt = 0;
     int s = -1;
     //testInt = testInt + 0.5;
-    cout <<  "test int: " << testInt/4 << endl;
+    bool booltest = false;
+    cout <<  "test int: " << booltest << endl;
     
     //cin >> testInt;
     //EventHandling.cpp

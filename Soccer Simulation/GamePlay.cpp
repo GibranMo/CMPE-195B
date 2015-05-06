@@ -91,7 +91,8 @@ void GamePlay::DrawSprite(bool playing)
             
             glDrawSprite2(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
         }
-        if(layout->getBall()->getDestY() == 350)
+        if(layout->getBall()->getDestY() == 350 &&
+           (layout->getBall()->getX() == 1100 || layout->getBall()->getX() == 50))
             glDrawSprite2(layout->getBall()->getTexf(), layout->getBall()->getX(), layout->getBall()->getY(), 20, 20);
         
         else
@@ -488,10 +489,12 @@ void GamePlay::MovePlayers()
         //if (p->getName() == "Casillas" || p->getName() == "Terstegen")
            // continue;
         //cout << ">> " << p->getName() << " p->getName(): " <<  p->getName() << " D:  " << layout->getDistanceBall(p);
-        //cout << " x: " << p->getX() << " y: " << p->getY() << endl;
+        cout << "Potential defend: " << p->getName() << endl;
         
-        if ( (layout->getDistanceBall(p) <= 80  )  && p->getInPassRadius() == false)
+        if ( layout->getDistanceBall(p) <= 80   && p->getInPassRadius() == false)
         {
+            cout << "<<<<>>>>>>" << p->getInPassRadius() << " ";
+            cout << layout->getDistanceBall(p) << endl;
             defend2(p);
             p->setIsDefending(true);
             
@@ -499,6 +502,38 @@ void GamePlay::MovePlayers()
         
     }
     
+}
+
+void GamePlay::resetFaceAngle(Player * player){
+    string t = player->getTeamName();
+    if(t == "homeTeam"){
+        for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
+            Player * op = it->second;
+            if(layout->distance(player, op) < 50){
+                player->setFaceAngle("E");
+                
+                string a = player->getAngle();
+                string ao = op->getAngle();
+                if(player->getX() < op->getX()){
+                    player->setFaceAngle("N");
+                }
+            }
+        }
+    }
+    else{
+        for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
+            Player * op = it->second;
+            if(layout->distance(player, op) < 50){
+                player->setFaceAngle("W");
+                
+                string a = player->getAngle();
+                string ao = op->getAngle();
+                if(player->getX() > op->getX()){
+                    player->setFaceAngle("S");
+                }
+            }
+        }
+    }
 }
 
 
@@ -532,6 +567,7 @@ void GamePlay::NextMove()
             layout->hasBall(player);
             int speed = (100 - player2->getPace()) / 5;
             layout->getBall()->kick(2, player2->getX() + (player2->getW()/2), player2->getY() + (player2->getH()/2));
+            checkInPassRadius(player);
             layout->hasBall(NULL);
         }
         else {
@@ -553,6 +589,7 @@ void GamePlay::NextMove()
                 else
                     destX = 50;
                 layout->getBall()->kick(1, destX, 350);
+                checkInPassRadius(player);
                 player->stop();
                 layout->hasBall(NULL);
                 cout << "<<<shot by: " + player->getName()  << endl;
@@ -570,9 +607,9 @@ void GamePlay::NextMove()
                 //int speed = 50;
                 cout << "speed: " << speed << endl;
                 layout->getBall()->kick(2, player2->getX(), player2->getY());
+                checkInPassRadius(player);
                 passSourceX = player->getX();
                 passSourceY = player->getY();
-                checkInPassRadius(player);
                 cout << "<<<kicked to: " + player2->getName()  << endl;
                 layout->hasBall(NULL);
             }
@@ -589,20 +626,41 @@ void GamePlay::NextMove()
 
 void GamePlay::checkInPassRadius(Player * passer)
 {
-    
+    cout << "HERE" << endl;
     Team * defense = layout->getDefendingTeam();
     for (std::map<string,Player*>::iterator it=defense->getPlayers()->begin(); it!=defense->getPlayers()->end(); ++it )
     {
         Player * defender = it->second;
-        
-        if (layout->getDistance(defender->getX(), defender->getY(), passer->getX(), passer->getY()) <= 50)
+        cout <<  "% " << defender->getName() <<  " " << layout->getDistance(defender->getX(), defender->getY(), passer->getX(), passer->getY()) << endl;
+        if (layout->getDistance(defender->getX(), defender->getY(), passer->getX(), passer->getY()) <= 110)
         {
+            
             defender->setInPassRadius(true);
         }
     }
     
 }
 
+void GamePlay::resetInPassRadius()
+{
+    Team * defense = layout->getDefendingTeam();
+    for (std::map<string,Player*>::iterator it=defense->getPlayers()->begin(); it!=defense->getPlayers()->end(); ++it )
+    {
+        Player * defender = it->second;
+        defender->setInPassRadius(false);
+
+    }
+    
+    //Do the other team just in case
+    Team * attacking = layout->getAttackingTeam();
+    for (std::map<string,Player*>::iterator it=attacking->getPlayers()->begin(); it!=attacking->getPlayers()->end(); ++it )
+    {
+        Player * attacker = it->second;
+        attacker->setInPassRadius(false);
+        
+    }
+  
+}
 void GamePlay::calculateKickDistance()
 {
     travelledDistance = layout->getDistance(passSourceX, passSourceY, layout->getBall()->getX(), layout->getBall()->getY());
@@ -815,8 +873,8 @@ void GamePlay::move(){
         for (std::map<string,Player*>::iterator it=team->getPlayers()->begin(); it!=team->getPlayers()->end(); ++it ){
             Player * player = it->second;
             if(checkCollision(ball, player)){
+                resetInPassRadius();
                 ball->resetDest(0, 0);
-                
                 layout->hasBall(player);
                 distanceKick = 0;
                 cout << "<<<Got ball: " + player->getName()  << endl;
@@ -829,6 +887,7 @@ void GamePlay::move(){
             Player * player = it->second;
             if(checkCollision(ball, player)){
                 resetFaceAngle(player);
+                resetInPassRadius();
                 ball->resetDest(0, 0);
                 layout->hasBall(player);
                 distanceKick = 0;
@@ -840,6 +899,7 @@ void GamePlay::move(){
             Player * player = it->second;
             if(checkCollision(ball, player)){
                 resetFaceAngle(player);
+                resetInPassRadius();
                 ball->resetDest(0, 0);
                 layout->hasBall(player);
                 distanceKick = 0;
@@ -874,14 +934,17 @@ void GamePlay::move(){
     
     if(ball->getY() == 350){
         if(ball->getX() == 1100){
+            ball->resetDest(0, 0);
             homeScore++;
             layout->reset();
         }
         else if(ball->getX() == 50){
+            ball->resetDest(0, 0);
             awayScore++;
             layout->reset();
         }
     }
+
     
 }
 
@@ -926,36 +989,4 @@ void GamePlay::stopDefendersFromChasing(Player *p)
         
     }
 
-}
-
-void GamePlay::resetFaceAngle(Player * player){
-    string t = player->getTeamName();
-    if(t == "homeTeam"){
-        for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
-            Player * op = it->second;
-            if(layout->distance(player, op) < 50){
-                player->setFaceAngle("E");
-
-                string a = player->getAngle();
-                string ao = op->getAngle();
-                if(player->getX() < op->getX()){
-                    player->setFaceAngle("N");
-                }
-            }
-        }
-    }
-    else{
-        for (std::map<string,Player*>::iterator it=layout->getAwayTeam()->getPlayers()->begin(); it!=layout->getAwayTeam()->getPlayers()->end(); ++it ){
-            Player * op = it->second;
-            if(layout->distance(player, op) < 50){
-                player->setFaceAngle("W");
-
-                string a = player->getAngle();
-                string ao = op->getAngle();
-                if(player->getX() > op->getX()){
-                    player->setFaceAngle("S");
-                }
-            }
-        }
-    }
 }

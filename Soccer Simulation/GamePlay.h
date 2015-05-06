@@ -64,6 +64,7 @@ private:
     void calculateKickDistance();
     
     void checkInPassRadius(Player * passer);
+    void resetInPassRadius();
     
     
     
