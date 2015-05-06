@@ -49,7 +49,7 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
     
     homeScore = 0;
     awayScore = 0;
-    vector<GLuint> s(13);
+    vector<GLuint> s(12);
     score = s;
     
     distanceKick = 0;
@@ -66,7 +66,6 @@ GamePlay::GamePlay(Layout * l, GLuint ft)
     score[9] = glTexImageTGAFile("images/9.tga");
     score[10] = glTexImageTGAFile("images/h.tga");
     score[11] = glTexImageTGAFile("images/a.tga");
-    score[12] = glTexImageTGAFile("images/-.tga");
 }
 
 
@@ -93,7 +92,7 @@ void GamePlay::DrawSprite(bool playing)
             glDrawSprite2(it->second->getTex(), it->second->getX(), it->second->getY(), 16, 16);
         }
         if(layout->getBall()->getDestY() == 350 &&
-           (layout->getBall()->getDestX() == 1100 || layout->getBall()->getDestX() == 50))
+           (layout->getBall()->getX() == 1100 || layout->getBall()->getX() == 50))
             glDrawSprite2(layout->getBall()->getTexf(), layout->getBall()->getX(), layout->getBall()->getY(), 20, 20);
         
         else
@@ -101,10 +100,8 @@ void GamePlay::DrawSprite(bool playing)
         
         //score
         glDrawSprite(score[10], 0, 0, 20, 20);
-        glDrawSprite2(score[12], 13, 0, 20, 20);
         glDrawSprite(score[homeScore % 10], 25, 0, 20, 20);
         glDrawSprite(score[11], 50, 0, 20, 20);
-        glDrawSprite2(score[12], 63, 0, 20, 20);
         glDrawSprite2(score[awayScore % 10], 75, 0, 20, 20);
     }
 
@@ -580,7 +577,7 @@ void GamePlay::NextMove()
             if (player->getName() == "Casillas" || player->getName() == "Terstegen")
                 numOfRecipients = 1;
             else
-                numOfRecipients = 3;
+                numOfRecipients = 6;
             
            
             if(shoot(player))
@@ -749,10 +746,10 @@ bool GamePlay::dribble(Player * p){
     
     if (p->getName() == "Casillas" || p->getName() == "Terstegen")
     {
-        int casillasX =  screenW - 51;
+        int casillasX =  screenW - 50;
         int casillasY = screenH/2;
         
-        int terstegenX = 51;
+        int terstegenX = 50;
         int terstegenY = screenH/2;
         
         if (p->getName() == "Casillas")
@@ -836,12 +833,12 @@ bool GamePlay::checkCollision(Ball * ball, Player * player)
     int pw = player->getW();
     
     //ball left
-    if(px >= bx && px <= bx + bw){
+    if(px > bx && px < bx + bw){
         //collision if ball top or bottom is between player top and bottom.
         if(by > py && by < py + ph){
             return true;
         }
-        if(by + bh >= py && by + bh <= py + ph){
+        if(by + bh > py && by + bh < py + ph){
             return true;
         }
     }
@@ -851,7 +848,7 @@ bool GamePlay::checkCollision(Ball * ball, Player * player)
         if(by > py && by < py + ph){
             return true;
         }
-        if(by + bh >= py && by + bh <= py + ph){
+        if(by + bh > py && by + bh < py + ph){
             return true;
         }
     }
