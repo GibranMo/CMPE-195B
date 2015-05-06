@@ -735,10 +735,18 @@ vector <Player *> Layout::getAvailablePlayers(Player * p) {
     for (std::map<string,Player*>::iterator it=t->getPlayers()->begin(); it!=t->getPlayers()->end(); ++it) {
         Player * p1 = it->second;
         
+        bool available = true;
+
         if (p1->getName() == p->getName())
             continue;
-        
-        bool available = true;
+        if(p->getTeamName() == "homeTeam"){
+            if(p->getX() > p1->getX())
+                continue;
+        }
+        else if(p->getTeamName() == "awayTeam"){
+            if(p->getX() < p1->getX())
+                continue;
+        }
         
         for (std::map<string,Player*>::iterator it=op->getPlayers()->begin(); it!=op->getPlayers()->end(); ++it) {
             Player * p2 = it->second;
